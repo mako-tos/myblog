@@ -21,7 +21,6 @@ const Img = ({url, sizes, quality}) => {
             sizes={sizes}
           />
           <img
-            srcSet={srcSetOrigin}
             alt=""
             loading="lazy"
             sizes={sizes}
@@ -42,6 +41,6 @@ Img.propTypes = {
 
 Img.defaultProps = {
   url: false,
-  sizes: "(max-width: 25px) 250px, (max-width: 500px) 500px,(max-width: 1000px) 1000px, (max-width: 1500px) 1500px, 2000px",
+  sizes: "(max-width: 250px) 250px, (max-width: 500px) 500px,(max-width: 1000px) 1000px, (max-width: 1500px) 1500px, 2000px",
   quality: 80
 }

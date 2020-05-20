@@ -31,7 +31,7 @@ const Index = ({ data }) => {
           const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
           const regex = /(<([^>]+)>)/ig
           const planText = body.replace(regex, '')
-          const excerpt = (digest || planText).substr(0, 120)
+          const excerpt = (digest || planText).substr(0, 40)
   
           const path = `${createdAt}-${slug}`
 

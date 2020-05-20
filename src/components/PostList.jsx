@@ -80,10 +80,12 @@ const Image = styled.div`
   left: 0;
   bottom: 0;
   z-index: 1;
-  object-fit: cover;
   border-radius: ${props => props.theme.borderRadius.default};
   img {
     border-radius: ${props => props.theme.borderRadius.default};
+    object-fit: cover;
+    object-position: center center;
+    max-width: none;
   }
   > div {
     position: static !important;

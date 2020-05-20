@@ -15,7 +15,7 @@ const Blog = ({ data }) => {
         const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
         const regex = /(<([^>]+)>)/ig
         const planText = body.replace(regex, '')
-        const excerpt = (digest || planText).substr(0, 120)
+        const excerpt = (digest || planText).substr(0, 80)
 
         const path = `${createdAt}-${slug}`
 
@@ -51,7 +51,7 @@ Blog.propTypes = {
             updatedAt: PropTypes.string.isRequired,
             tags: PropTypes.array,
             body: PropTypes.string.isRequired,
-            digest: PropTypes.string.isRequired,
+            digest: PropTypes.string,
           }),
         }).isRequired
       ),

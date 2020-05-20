@@ -13,9 +13,9 @@ const Blog = ({ data }) => {
       <Header title="Blog Page">Stey by Step</Header>
       {edges.map(({ node }) => {
         const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
-        const div = document.createElement('div')
-        div.innerHTML = body
-        const excerpt = (digest || div.innerText).substr(0, 40)
+        const regex = /(<([^>]+)>)/ig
+        const planText = body.replace(regex, '')
+        const excerpt = (digest || planText).substr(0, 120)
 
         const path = `${createdAt}-${slug}`
 

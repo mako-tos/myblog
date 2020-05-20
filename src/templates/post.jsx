@@ -23,9 +23,9 @@ const Post = ({ data, pageContext }) => {
   const { next, prev } = pageContext;
   const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = data.microcmsBlog;
   const path = `${createdAt}-${slug}`
-  const div = document.createElement('div')
-  div.innerHTML = body
-  const excerpt = (digest || div.innerText).substr(0, 40)
+  const regex = /(<([^>]+)>)/ig
+  const planText = body.replace(regex, '')
+  const excerpt = (digest || planText).substr(0, 120)
 
   const date = updatedAt || createdAt
   const isUpdated = updatedAt === createdAt

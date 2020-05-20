@@ -67,7 +67,7 @@ Index.propTypes = {
             updatedAt: PropTypes.string.isRequired,
             tags: PropTypes.array,
             body: PropTypes.string.isRequired,
-            digest: PropTypes.string.isRequired,
+            digest: PropTypes.string,
           }),
         }).isRequired
       ),

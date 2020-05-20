@@ -5,76 +5,71 @@ exports.createPages = ({ graphql, actions }) => {
 
   return new Promise((resolve, reject) => {
     const postTemplate = path.resolve('src/templates/post.jsx');
-    const tagPage = path.resolve('src/pages/tags.jsx');
+    const tagPage = path.resolve('src/templates/tags.jsx');
     const tagPosts = path.resolve('src/templates/tag.jsx');
 
     resolve(
       graphql(
         `
           query {
-            allMarkdownRemark(
-              sort: { order: ASC, fields: [frontmatter___date] }
-            ) {
+            allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
               edges {
                 node {
-                  frontmatter {
-                    path
+                  blogId
+                  createdAt(formatString: "YYYY-MM-DD")
+                  slug
+                }
+              }
+              group(field: tags___slug) {
+                fieldValue
+                edges {
+                  node {
+                    slug
                     title
-                    tags
+                    createdAt(formatString: "YYYY-MM-DD")
                   }
                 }
               }
             }
-          }
+          }    
         `
       ).then(result => {
         if (result.errors) {
           return reject(result.errors);
         }
 
-        const posts = result.data.allMarkdownRemark.edges;
+        const posts = result.data.allMicrocmsBlog.edges
+        const tags = result.data.allMicrocmsBlog.group
 
-        const postsByTag = {};
-        // create tags page
-        posts.forEach(({ node }) => {
-          if (node.frontmatter.tags) {
-            node.frontmatter.tags.forEach(tag => {
-              if (!postsByTag[tag]) {
-                postsByTag[tag] = [];
-              }
-
-              postsByTag[tag].push(node);
-            });
-          }
-        });
-
-        const tags = Object.keys(postsByTag);
+        const tagSlugs = tags.map(tag => {
+          return { slug: tag.fieldValue, title: tag.fieldValue }
+        } );
 
         createPage({
           path: '/tags',
           component: tagPage,
           context: {
-            tags: tags.sort(),
+            tags: tagSlugs,
           },
         });
 
         //create tags
-        tags.forEach(tagName => {
-          const posts = postsByTag[tagName];
+        tags.forEach(tag => {
+          const posts = tag.edges;
 
           createPage({
-            path: `/tags/${tagName}`,
+            path: `/tags/${tag.fieldValue}`,
             component: tagPosts,
             context: {
               posts,
-              tagName,
+              slug: tag.fieldValue,
             },
           });
         });
 
         //create posts
         posts.forEach(({ node }, index) => {
-          const path = node.frontmatter.path;
+          const path = `${node.createdAt}-${node.slug}`;
           const prev = index === 0 ? null : posts[index - 1].node;
           const next =
             index === posts.length - 1 ? null : posts[index + 1].node;
@@ -82,7 +77,7 @@ exports.createPages = ({ graphql, actions }) => {
             path,
             component: postTemplate,
             context: {
-              pathSlug: path,
+              blogId: node.blogId,
               prev,
               next,
             },

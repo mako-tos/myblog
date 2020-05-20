@@ -27,19 +27,19 @@ const Information = styled.div`
 `;
 
 const Tag = ({ pageContext }) => {
-  const { posts, tagName } = pageContext;
-  const upperTag = tagName.charAt(0).toUpperCase() + tagName.slice(1);
+  const { posts, slug } = pageContext;
+  const upperTag = slug.charAt(0).toUpperCase() + slug.slice(1);
   return (
     <Layout>
-      <Helmet title={`${tagName} | ${config.siteTitle}`} />
+      <Helmet title={`${slug} | ${config.siteTitle}`} />
       <Header title={upperTag}>
         <StyledLink to="/tags">All Tags</StyledLink>
       </Header>
       <Container>
         <Information>
           {posts.map((post, index) => (
-            <Link key={index} to={post.frontmatter.path}>
-              <h3>{post.frontmatter.title}</h3>
+            <Link key={index} to={`${post.node.createdAt}-${post.node.slug}`}>
+              <h3>{post.node.title}</h3>
             </Link>
           ))}
         </Information>

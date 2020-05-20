@@ -21,38 +21,43 @@ const PostSuggestion = styled.div`
 
 const Post = ({ data, pageContext }) => {
   const { next, prev } = pageContext;
-  const {html, frontmatter, excerpt } = data.markdownRemark
-  const {date, title, tags, path, description} = frontmatter
-  const image = frontmatter.cover.childImageSharp.fluid;
+  const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = data.microcmsBlog;
+  const path = `${createdAt}-${slug}`
+  const div = document.createElement('div')
+  div.innerHTML = body
+  const excerpt = (digest || div.innerText).substr(0, 40)
+
+  const date = updatedAt || createdAt
+  const isUpdated = updatedAt === createdAt
 
   return (
     <Layout>
       <SEO
         title={title}
-        description={description || excerpt || ' '}
-        banner={image}
+        description={excerpt || ' '}
+        banner={headImage.src}
         pathname={path}
         article
       />
-      <Header title={title} date={date} cover={image} />
+      <Header title={title} date={date} cover={headImage.url} isUpdated={ isUpdated } />
       <Container>
-        <Content input={html} />
+        <Content input={body} />
         <TagsBlock list={tags || []} />
       </Container>
       <SuggestionBar>
         <PostSuggestion>
           {prev && (
-            <Link to={prev.frontmatter.path}>
+            <Link to={`${prev.createdAt}-${prev.slug}`}>
               Previous
-              <h3>{prev.frontmatter.title}</h3>
+              <h3>{prev.title}</h3>
             </Link>
           )}
         </PostSuggestion>
         <PostSuggestion>
           {next && (
-            <Link to={next.frontmatter.path}>
+            <Link to={`${next.createdAt}-${next.slug}`}>
               Next
-              <h3>{next.frontmatter.title}</h3>
+              <h3>{next.title}</h3>
             </Link>
           )}
         </PostSuggestion>
@@ -68,31 +73,35 @@ Post.propTypes = {
     prev: PropTypes.object,
     next: PropTypes.object,
   }).isRequired,
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    microcmsBlog: PropTypes.shape({
+      body: PropTypes.string.isRequired,
+      digest: PropTypes.string,
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      updatedAt: PropTypes.string.isRequired,
+      headImage: PropTypes.object.isRequired,
+      tags: PropTypes.array,
+    }),
+  }),
 };
 
 export const query = graphql`
-  query($pathSlug: String!) {
-    markdownRemark(frontmatter: { path: { eq: $pathSlug } }) {
-      html
-      frontmatter {
-        date
+  query($blogId: String!) {
+    microcmsBlog(blogId: { eq: $blogId }) {
+      body
+      digest
+      title
+      slug
+      createdAt(formatString: "YYYY-MM-DD")
+      updatedAt(formatString: "YYYY-MM-DD")
+      headImage {
+        url
+      }
+      tags {
+        slug
         title
-        tags
-        cover {
-          childImageSharp {
-            fluid(
-              maxWidth: 1920
-              quality: 90
-              duotone: { highlight: "#386eee", shadow: "#2323be", opacity: 60 }
-            ) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-            resize(width: 1200, quality: 90) {
-              src
-            }
-          }
-        }
       }
     }
   }

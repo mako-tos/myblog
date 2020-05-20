@@ -91,7 +91,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img fluid={cover} />
+          <img src={cover} />
         </Link>
       </Image>
       <Information>
@@ -109,7 +109,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
 export default BlogList;
 
 BlogList.propTypes = {
-  cover: PropTypes.object.isRequired,
+  cover: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   excerpt: PropTypes.string,
   date: PropTypes.string.isRequired,

@@ -6,22 +6,32 @@ import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
 
 const Blog = ({ data }) => {
-  const { edges } = data.allMarkdownRemark;
+  const { edges } = data.allMicrocmsBlog;
   return (
     <Layout>
       <Helmet title={'Blog Page'} />
-      <Header title="Blog Page">Gatsby Tutorial Starter</Header>
-      {edges.map(({ node }) => (
-        <BlogList
-          key={node.id}
-          cover={node.frontmatter.cover.childImageSharp.fluid}
-          path={node.frontmatter.path}
-          title={node.frontmatter.title}
-          date={node.frontmatter.date}
-          tags={node.frontmatter.tags}
-          excerpt={node.excerpt}
-        />
-      ))}
+      <Header title="Blog Page">Stey by Step</Header>
+      {edges.map(({ node }) => {
+        const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
+        const div = document.createElement('div')
+        div.innerHTML = body
+        const excerpt = (digest || div.innerText).substr(0, 40)
+
+        const path = `${createdAt}-${slug}`
+
+        return (
+          <BlogList
+            key={path}
+            cover={headImage.url}
+            path={path}
+            title={title}
+            date={updatedAt || createdAt}
+            tags={tags}
+            excerpt={`${excerpt}...`}
+          />
+        );
+      })}
+
     </Layout>
   );
 };
@@ -30,18 +40,18 @@ export default Blog;
 
 Blog.propTypes = {
   data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
+    allMicrocmsBlog: PropTypes.shape({
       edges: PropTypes.arrayOf(
         PropTypes.shape({
           node: PropTypes.shape({
-            excerpt: PropTypes.string,
-            frontmatter: PropTypes.shape({
-              cover: PropTypes.object.isRequired,
-              path: PropTypes.string.isRequired,
-              title: PropTypes.string.isRequired,
-              date: PropTypes.string.isRequired,
-              tags: PropTypes.array,
-            }),
+            headImage: PropTypes.object.isRequired,
+            slug: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            createdAt: PropTypes.string.isRequired,
+            updatedAt: PropTypes.string.isRequired,
+            tags: PropTypes.array,
+            body: PropTypes.string.isRequired,
+            digest: PropTypes.string.isRequired,
           }),
         }).isRequired
       ),
@@ -51,28 +61,25 @@ Blog.propTypes = {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMicrocmsBlog(
+      sort: { fields: [createdAt], order: DESC }
+      limit: 6
+    ) {
       edges {
         node {
-          id
-          excerpt(pruneLength: 200)
-          frontmatter {
+          slug
+          title
+          createdAt(formatString: "YYYY-MM-DD")
+          updatedAt(formatString: "YYYY-MM-DD")
+          tags {
+            slug
             title
-            path
-            tags
-            date(formatString: "MM.DD.YYYY")
-            cover {
-              childImageSharp {
-                fluid(
-                  maxWidth: 1000
-                  quality: 90
-                  traceSVG: { color: "#2B2B2F" }
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
-              }
-            }
           }
+          headImage {
+            url
+          }
+          digest
+          body
         }
       }
     }

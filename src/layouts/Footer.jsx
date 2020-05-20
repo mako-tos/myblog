@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import config from '../../config/site';
 
 const Wrapper = styled.footer`
   position: relative;
@@ -25,8 +26,7 @@ const Footer = () => (
   <Wrapper>
     <Text>
       <span>
-        Gatsby Tutorial Starter -{' '}
-        <a href="https://justinformentin.com">Justin Formentin</a>
+        © {config.author}
       </span>
     </Text>
   </Wrapper>

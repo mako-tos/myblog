@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 
 const Wrapper = styled.header`
@@ -44,12 +43,40 @@ const Subtitle = styled.p`
   color: ${props => props.theme.colors.white.light};
 `;
 
-const Header = ({ children, title, date, cover }) => (
+const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
-    <Img fluid={cover || {} || [] || ''} />
+    {cover && (
+      <picture>
+        <source type="image/webp" srcSet={`${cover}?w=250&q=80&fm=webp 250w,
+          ${cover}?w=500&q=80&fm=webp 500w,
+          ${cover}?w=1000&&q=80&fm=webp 1000w,
+          ${cover}?w=1500&q=80&fm=webp 1500w`}
+        />
+        <source srcSet={`${cover}?w=250&q=80 250w,
+          ${cover}?w=500&q=80 500w,
+          ${cover}?w=1000&q=80 1000w,
+          ${cover}?w=1500&q=80 1500w`}
+        />
+        <img
+          srcSet={`${cover}?w=250&q=80 250w,
+          ${cover}?w=500&q=80 500w,
+          ${cover}?w=1000&q=80 1000w,
+          ${cover}?w=1500&q=80 1500w`}
+          src={`${cover}?w=1000&q=80`} alt="" loading="lazy"
+        />
+      </picture>
+    )}
     <Text>
       <h1>{title}</h1>
-      <h3>{date}</h3>
+      {date &&
+        <h3>
+          {isUpdated ?
+            <span>更新日：</span> :
+            <span>作成日：</span>
+          }
+          {date}
+        </h3>
+     }
 
       {children && <Subtitle>{children}</Subtitle>}
     </Text>
@@ -60,8 +87,9 @@ export default Header;
 
 Header.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-  cover: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  cover: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  isUpdated: PropTypes.bool,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -74,4 +102,5 @@ Header.defaultProps = {
   cover: false,
   date: false,
   title: false,
+  isUpdated: false
 };

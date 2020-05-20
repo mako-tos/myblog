@@ -1,3 +1,4 @@
+require('dotenv').config()
 const config = require('./config/site');
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 750,
-              quality: 90,
+              quality: 80,
               linkImagesToOriginal: true,
             },
           },
@@ -61,5 +62,13 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.MICRO_CMS_API_KEY,
+        serviceId: process.env.MICRO_CMS_SERVICE_ID,
+        endpoint: process.env.MICRO_CMS_ENDPOINT,
+      },
+    }
   ],
 };

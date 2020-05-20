@@ -28,7 +28,7 @@ const Post = ({ data, pageContext }) => {
   const excerpt = (digest || planText).substr(0, 120)
 
   const date = updatedAt || createdAt
-  const isUpdated = updatedAt === createdAt
+  const isUpdated = updatedAt !== createdAt
 
   return (
     <Layout>

@@ -2,12 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
+import Img from '../components/Img';
 import { TagsBlock } from 'components';
 import { Container } from 'layouts';
 
 const Wrapper = styled.article`
   margin: 0 3rem;
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    margin: 1rem;
+  }
 `;
 
 const Image = styled.div`
@@ -17,6 +20,7 @@ const Image = styled.div`
   transition: ${props => props.theme.transitions.boom.transition};
   border-radius: ${props => props.theme.borderRadius.default};
   min-height: 300px;
+  overflow: hidden;
   img {
     border-radius: ${props => props.theme.borderRadius.default};
   }
@@ -91,7 +95,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <img src={cover} />
+          <Img url={cover} />
         </Link>
       </Image>
       <Information>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import Img from '../components/Img'
 
 const Wrapper = styled.header`
   -webkit-clip-path: polygon(100% 0, 0 0, 0 70%, 50% 100%, 100% 70%);
@@ -46,25 +47,7 @@ const Subtitle = styled.p`
 const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
     {cover && (
-      <picture>
-        <source type="image/webp" srcSet={`${cover}?w=250&q=80&fm=webp 250w,
-          ${cover}?w=500&q=80&fm=webp 500w,
-          ${cover}?w=1000&&q=80&fm=webp 1000w,
-          ${cover}?w=1500&q=80&fm=webp 1500w`}
-        />
-        <source srcSet={`${cover}?w=250&q=80 250w,
-          ${cover}?w=500&q=80 500w,
-          ${cover}?w=1000&q=80 1000w,
-          ${cover}?w=1500&q=80 1500w`}
-        />
-        <img
-          srcSet={`${cover}?w=250&q=80 250w,
-          ${cover}?w=500&q=80 500w,
-          ${cover}?w=1000&q=80 1000w,
-          ${cover}?w=1500&q=80 1500w`}
-          src={`${cover}?w=1000&q=80`} alt="" loading="lazy"
-        />
-      </picture>
+      <Img url={cover} quality={60} />
     )}
     <Text>
       <h1>{title}</h1>

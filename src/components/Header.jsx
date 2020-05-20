@@ -20,6 +20,12 @@ const Wrapper = styled.header`
   }
   position: relative;
   overflow: hidden;
+
+  img {
+    object-fit: cover;
+    object-position: center -500px;
+    max-width: none;
+  }
 `;
 
 const Text = styled.div`

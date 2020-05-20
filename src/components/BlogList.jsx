@@ -23,7 +23,7 @@ const Image = styled.div`
   img {
     border-radius: ${props => props.theme.borderRadius.default};
     object-fit: cover;
-    object-position: center center;
+    object-position: center -100px;
     max-width: none;
   }
   &:hover {
@@ -97,7 +97,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img url={cover} sizes="500px" />
+          <Img url={cover} sizes="1000px" />
         </Link>
       </Image>
       <Information>

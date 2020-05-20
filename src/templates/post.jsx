@@ -30,6 +30,9 @@ const Post = ({ data, pageContext }) => {
   const date = updatedAt || createdAt
   const isUpdated = updatedAt !== createdAt
 
+  const preRegex = /(<code>)/ig
+  const newBody = body.replace(preRegex, '<pre class="language-jsx">')
+
   return (
     <Layout>
       <SEO
@@ -41,7 +44,7 @@ const Post = ({ data, pageContext }) => {
       />
       <Header title={title} date={date} cover={headImage.url} isUpdated={ isUpdated } />
       <Container>
-        <Content input={body} />
+        <Content input={newBody} />
         <TagsBlock list={tags || []} />
       </Container>
       <SuggestionBar>

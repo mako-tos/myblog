@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Img from '../components/Img';
+import { Img } from '../components';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import theme from '../../config/theme';
@@ -108,7 +108,7 @@ const Title = styled.h2`
 const PostList = ({ cover, path, date, title, excerpt }) => (
   <Wrapper>
     <Image>
-      <Img url={cover} />
+      <Img url={cover} sizes="500px" />
     </Image>
     <StyledLink to={path}>
       <Info>

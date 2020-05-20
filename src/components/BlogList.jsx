@@ -2,8 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import Img from '../components/Img';
-import { TagsBlock } from 'components';
+import { TagsBlock, Img } from 'components';
 import { Container } from 'layouts';
 
 const Wrapper = styled.article`
@@ -95,7 +94,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img url={cover} />
+          <Img url={cover} sizes="1000px" />
         </Link>
       </Image>
       <Information>

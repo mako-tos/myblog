@@ -3,8 +3,8 @@ module.exports = {
   title: 'Step by Step', // Navigation and Site Title
   titleAlt: 'my blog for studying GatsbyJS', // Title for JSONLD
   description: 'my blog for studying GatsbyJS',
-  url: 'https://gatsby-tutorial-starter.netlify.com', // Domain of your site. No trailing slash!
-  siteUrl: 'https://gatsby-tutorial-starter.netlify.com', // url + pathPrefix
+  url: 'https://myblog-by-mako-tos.netlify.app', // Domain of your site. No trailing slash!
+  siteUrl: 'https://myblog-by-mako-tos.netlify.app', // url + pathPrefix
   siteLanguage: 'ja', // Language Tag on <html> element
   logo: 'static/logo/logo.png', // Used for SEO
   banner: 'static/logo/banner.png',

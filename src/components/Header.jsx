@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Img from '../components/Img'
+import { Img } from '../components';
 
 const Wrapper = styled.header`
   -webkit-clip-path: polygon(100% 0, 0 0, 0 70%, 50% 100%, 100% 70%);
@@ -46,20 +46,15 @@ const Subtitle = styled.p`
 
 const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
-    {cover && (
-      <Img url={cover} quality={60} />
-    )}
+    {cover && <Img url={cover} quality={60} />}
     <Text>
       <h1>{title}</h1>
-      {date &&
+      {date && (
         <h3>
-          {isUpdated ?
-            <span>更新日：</span> :
-            <span>作成日：</span>
-          }
+          {isUpdated ? <span>更新日：</span> : <span>作成日：</span>}
           {date}
         </h3>
-     }
+      )}
 
       {children && <Subtitle>{children}</Subtitle>}
     </Text>
@@ -85,5 +80,5 @@ Header.defaultProps = {
   cover: false,
   date: false,
   title: false,
-  isUpdated: false
+  isUpdated: false,
 };

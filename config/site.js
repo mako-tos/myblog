@@ -5,7 +5,7 @@ module.exports = {
   description: 'my blog for studying GatsbyJS',
   url: 'https://gatsby-tutorial-starter.netlify.com', // Domain of your site. No trailing slash!
   siteUrl: 'https://gatsby-tutorial-starter.netlify.com', // url + pathPrefix
-  siteLanguage: 'js', // Language Tag on <html> element
+  siteLanguage: 'ja', // Language Tag on <html> element
   logo: 'static/logo/logo.png', // Used for SEO
   banner: 'static/logo/banner.png',
   // JSONLD / Manifest

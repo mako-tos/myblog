@@ -97,7 +97,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img url={cover} sizes="1000px" />
+          <Img url={cover} width={730} height={300} />
         </Link>
       </Image>
       <Information>

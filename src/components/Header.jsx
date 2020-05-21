@@ -22,9 +22,13 @@ const Wrapper = styled.header`
   overflow: hidden;
 
   img {
-    object-fit: cover;
-    object-position: center -500px;
     max-width: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -52,7 +56,7 @@ const Subtitle = styled.p`
 
 const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
-    {cover && <Img url={cover} quality={60} />}
+    {cover && <Img url={cover} width={1488} height={300} />}
     <Text>
       <h1>{title}</h1>
       {date && (

@@ -20,15 +20,9 @@ const Wrapper = styled.header`
   }
   position: relative;
   overflow: hidden;
-
   img {
-    max-width: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    min-height: 100%;
+    min-width: 100vw;
   }
 `;
 
@@ -54,9 +48,16 @@ const Subtitle = styled.p`
   color: ${props => props.theme.colors.white.light};
 `;
 
+const rects = [
+  {width: 240, height: 400},
+  {width: 480, height: 400},
+  {width: 960, height: 400},
+  {width: 1440, height: 400},
+  {width: 1920, height: 400},
+]
 const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
-    {cover && <Img url={cover} width={1488} height={300} />}
+    {cover && <Img url={cover} rects={rects} />}
     <Text>
       <h1>{title}</h1>
       {date && (

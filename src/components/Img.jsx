@@ -1,71 +1,64 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-const Img = ({url, sizes, quality, width, height}) => {
+const WrapperPicture = styled.picture`
+  overflow: none;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: none;
+  }
+`;
+const Img = ({ url, sizes, quality, rects }) => {
   if (!url) {
-    return (<></>)
+    return <></>;
   }
-  if (width && height) {
-    const webp = `${url}?fit=crop&w=${width}&h=${height}&q=${quality}&fm=webp ${width}w`
-    const original = `${url}?fit=crop&w=${width}&h=${height}&q=${quality} ${width}w`
-    const size = `${width}px`
-    return (
-      <picture>
-        <source type="image/webp" srcSet={webp}
-          sizes={size}
-        />
-        <source srcSet={original}
-          sizes={size}
-        />
-        <img
-          src={url}
-          alt=""
-          loading="lazy"
-          sizes={original}
-        />
-      </picture>
-    )
-  }
-  const srcSetWebpArray = [250, 500, 1000, 1500, 2000].map(w => {
-    return `${url}?w=${w}&q=${quality}&fm=webp ${w}w`
-  })
-  const srcSetWebp = srcSetWebpArray.join(',')
-  const srcSetOriginArray = [250, 500, 1000, 1500, 2000].map(w => {
-    return `${url}?w=${w}&q=${quality} ${w}w`
-  })
-  const srcSetOrigin = srcSetOriginArray.join(',')
-  return (
-    <picture>
-      <source type="image/webp" srcSet={srcSetWebp}
-        sizes={sizes}
-      />
-      <source srcSet={srcSetOrigin}
-        sizes={sizes}
-      />
-      <img
-        src={url}
-        alt=""
-        loading="lazy"
-        sizes={sizes}
-      />
-    </picture>
-  )
-}
 
-export default Img
+  const srcSetWebpArray = rects.map(size => {
+    return `${url}?fit=crop&w=${size.width}&h=${size.height}&q=${quality}&fm=webp ${size.width}w`;
+  });
+  const srcSetWebp = srcSetWebpArray.join(',');
+  const srcSetOriginArray = rects.map(size => {
+    return `${url}?fit=crop&w=${size.width}&h=${size.height}&q=${quality} ${size.width}w`;
+  });
+  const srcSetOrigin = srcSetOriginArray.join(',');
+  return (
+    <WrapperPicture>
+      <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
+      <source srcSet={srcSetOrigin} sizes={sizes} />
+      <img src={url} alt="" loading="lazy" sizes={sizes} />
+    </WrapperPicture>
+  );
+};
+
+export default Img;
 
 Img.propTypes = {
   url: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  sizes: PropTypes.string,
+  rects: PropTypes.arrayOf(
+    PropTypes.shape({
+      width: PropTypes.number,
+      height: PropTypes.number,
+    })
+  ),
   quality: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number
 };
 
 Img.defaultProps = {
   url: false,
-  sizes: "(max-width: 250px) 250px, (max-width: 500px) 500px,(max-width: 1000px) 1000px, (max-width: 1500px) 1500px, 2000px",
+  rects: [
+    { width: 240, height: 150 },
+    { width: 480, height: 300 },
+    { width: 960, height: 600 },
+    { width: 1440, height: 900 },
+    { width: 1920, height: 1200 },
+  ],
+  sizes:
+    '(max-width: 240px) 240w, (max-width: 480px) 480w,(max-width: 960px) 960w, (max-width: 1440px) 900w, 1920w',
   quality: 80,
-  width: null,
-  height: null
-}
+};

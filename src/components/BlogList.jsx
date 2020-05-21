@@ -22,10 +22,8 @@ const Image = styled.div`
   overflow: hidden;
   img {
     border-radius: ${props => props.theme.borderRadius.default};
-    object-fit: cover;
-    object-position: center center;
-    max-width: none;
   }
+
   &:hover {
     box-shadow: ${props => props.theme.shadow.feature.small.hover};
     transform: scale(1.04);
@@ -97,7 +95,7 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img url={cover} width={730} height={300} />
+          <Img url={cover} sizes="(max-width: 48px) 480px, 960px" />
         </Link>
       </Image>
       <Information>

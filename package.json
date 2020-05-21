@@ -50,6 +50,7 @@
     "react-dom": "^16.9.0",
     "react-headroom": "^2.2.8",
     "react-helmet": "^5.2.1",
+    "react-lazyload": "^2.6.7",
     "react-typography": "^0.16.19",
     "typeface-candal": "0.0.54",
     "typeface-open-sans": "0.0.54",

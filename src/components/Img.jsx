@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import LazyLoad from 'react-lazyload';
 
 const WrapperPicture = styled.picture`
   overflow: none;
@@ -28,11 +29,13 @@ const Img = ({ url, sizes, quality, rects }) => {
   });
   const srcSetOrigin = srcSetOriginArray.join(',');
   return (
-    <WrapperPicture>
-      <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
-      <source srcSet={srcSetOrigin} sizes={sizes} />
-      <img src={url} alt="" loading="lazy" sizes={sizes} />
-    </WrapperPicture>
+    <LazyLoad once offset={100}>
+      <WrapperPicture>
+        <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
+        <source srcSet={srcSetOrigin} sizes={sizes} />
+        <img src={url} alt="" loading="lazy" sizes={sizes} />
+      </WrapperPicture>
+    </LazyLoad>
   );
 };
 

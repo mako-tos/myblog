@@ -18,6 +18,7 @@ exports.createPages = ({ graphql, actions }) => {
                   blogId
                   createdAt(formatString: "YYYY-MM-DD")
                   slug
+                  title
                 }
               }
               group(field: tags___slug) {

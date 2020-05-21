@@ -30,8 +30,8 @@ const Post = ({ data, pageContext }) => {
   const date = updatedAt || createdAt
   const isUpdated = updatedAt !== createdAt
 
-  const preRegex = /(<code>)/ig
-  const newBody = body.replace(preRegex, '<pre class="language-jsx">')
+  const preRegex = /(<pre><code>)/ig
+  const newBody = body.replace(preRegex, '<pre class="language-jsx"><code class="language-jsx">')
 
   return (
     <Layout>

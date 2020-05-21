@@ -23,7 +23,7 @@ const Image = styled.div`
   img {
     border-radius: ${props => props.theme.borderRadius.default};
     object-fit: cover;
-    object-position: center -100px;
+    object-position: center center;
     max-width: none;
   }
   &:hover {

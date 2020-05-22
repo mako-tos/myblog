@@ -32,6 +32,7 @@
     "@reach/visually-hidden": "^0.10.2",
     "babel-plugin-emotion": "^10.0.17",
     "emotion-theming": "^10.0.17",
+    "encoding": "^0.1.12",
     "gatsby": "^2.15.9",
     "gatsby-image": "^2.2.17",
     "gatsby-plugin-catch-links": "^2.1.8",

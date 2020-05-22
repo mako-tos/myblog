@@ -58,13 +58,13 @@ const Layout = ({ children }) => (
         `}
       />
       <SEO />
+      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
       <NavBar />
       {children}
       <Footer />
     </Fragment>
   </ThemeProvider>
 );
-
 export default Layout;
 
 Layout.propTypes = {

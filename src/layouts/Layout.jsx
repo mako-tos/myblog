@@ -58,7 +58,6 @@ const Layout = ({ children }) => (
           ${headroom}
         `}
       />
-      <SEO />
       <NavBar />
       {children}
       <Footer />

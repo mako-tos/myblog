@@ -19,10 +19,9 @@ const PostSuggestion = styled.div`
   margin: 1rem 3rem 0 3rem;
 `;
 
-const Post = ({ data, pageContext }) => {
+const Post = ({ data, pageContext, location }) => {
   const { next, prev } = pageContext;
   const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = data;
-  const path = `${createdAt}-${slug}`
   const regex = /(<([^>]+)>)/ig
   const planText = body.replace(regex, '')
   const excerpt = (digest || planText).substr(0, 120)
@@ -39,7 +38,7 @@ const Post = ({ data, pageContext }) => {
         title={title}
         description={excerpt || ' '}
         banner={headImage && headImage.src}
-        pathname={path}
+        pathname={location.pathname}
         article
       />
       <Header title={title} date={date} cover={headImage && headImage.url} isUpdated={ isUpdated } />

@@ -103,6 +103,10 @@ const SEO = ({ title, description, banner, pathname, article }) => (
             <meta name="twitter:title" content={seo.title} />
             <meta name="twitter:description" content={seo.description} />
             <meta name="twitter:image" content={seo.image} />
+
+            {pathname === '/' &&
+              <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+            }
           </Helmet>
         </>
       );

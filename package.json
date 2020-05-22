@@ -51,6 +51,7 @@
     "gatsby-source-microcms": "^0.1.0",
     "gatsby-transformer-remark": "^2.6.21",
     "gatsby-transformer-sharp": "^2.2.13",
+    "netlify-identity-widget": "^1.6.0",
     "netlify-lambda": "^1.6.3",
     "node-fetch": "^2.6.0",
     "prismjs": "^1.17.1",

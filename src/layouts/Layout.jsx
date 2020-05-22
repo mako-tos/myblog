@@ -8,7 +8,6 @@ import { SEO } from 'components';
 import { NavBar, Footer } from 'layouts';
 import theme from '../../config/theme';
 import headroom from '../styles/headroom';
-import IdentityModal, { useIdentityContext } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 const Layout = ({ children }) => (

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
+import { SEO } from '../components';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -20,11 +21,11 @@ const PostWrapper = styled.div`
   }
 `;
 
-const Index = ({ data }) => {
+const Index = ({ data, location }) => {
   const { edges } = data.allMicrocmsBlog;
   return (
     <Layout>
-      <Helmet title={'Home Page | Step by Step'} />
+      <SEO title={'Home Page | Step by Step'} pathname={location.pathname} />
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {

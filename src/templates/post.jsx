@@ -3,9 +3,9 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { PostPage } from 'components';
 
-const Post = ({ data, pageContext }) => {
+const Post = ({ data, pageContext, location }) => {
   return (
-    <PostPage data={data.microcmsBlog} pageContext={pageContext} />
+    <PostPage data={data.microcmsBlog} pageContext={pageContext} location={location} />
   );
 };
 

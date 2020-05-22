@@ -36,23 +36,22 @@ class DraftImpl extends Component {
     })
   }
   
-  render() {
+  render({location}) {
     if (!this.state.data) {
       return (<p>waiting data loaded</p>)
     }
     const pageContext = {}
     return (
-      <PostPage data={this.state.data} pageContext={pageContext} />
+      <PostPage data={this.state.data} pageContext={pageContext} location={location} />
     );
   }
 }
 
-const Draft = () => {
+const Draft = ({location}) => {
   const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
-  console.log(identity)
   if (identity && identity.isLoggedIn) {
-    return <DraftImpl />
+    return <DraftImpl location={location} />
   }
   return (
     <>

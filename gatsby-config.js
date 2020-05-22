@@ -78,7 +78,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-netlify-identity`,
       options: {
-        url: config.siteUrl + '/draft' // required!
+        url: config.siteUrl // required!
       }
     }
   ],

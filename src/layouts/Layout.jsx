@@ -61,7 +61,6 @@ const Layout = ({ children }) => (
       />
       <SEO />
       <NavBar />
-      <IdentityModal showDialog={true} onCloseDialog={() => setDialog(false)} />
       {children}
       <Footer />
     </Fragment>

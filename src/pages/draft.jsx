@@ -52,9 +52,19 @@ const Draft = () => {
   if (identity && identity.isLoggedIn) {
     return <DraftImpl />
   }
-  return <div>
-    identity failed
-  </div>
+  return (
+    <>
+      <nav style={{ background: "green" }}>
+        {" "}
+        Login Status:
+        <button className="btn" onClick={() => setDialog(true)}>
+          {isLoggedIn ? `Hello ${name}, Log out here!` : "LOG IN"}
+        </button>
+      </nav>
+      <main>{children}</main>
+      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+    </>
+  )
 }
 
 export default Draft;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { PostPage } from '../components'
 import moment from 'moment'
 import IdentityModal, { useIdentityContext } from "react-netlify-identity-widget"
-
+import "react-netlify-identity-widget/styles.css"
 class DraftImpl extends Component {
   constructor(props){
     super(props);

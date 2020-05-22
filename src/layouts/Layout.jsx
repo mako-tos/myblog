@@ -58,7 +58,6 @@ const Layout = ({ children }) => (
         `}
       />
       <SEO />
-      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
       <NavBar />
       {children}
       <Footer />

@@ -36,13 +36,13 @@ class DraftImpl extends Component {
     })
   }
   
-  render({location}) {
+  render() {
     if (!this.state.data) {
       return (<p>waiting data loaded</p>)
     }
     const pageContext = {}
     return (
-      <PostPage data={this.state.data} pageContext={pageContext} location={location} />
+      <PostPage data={this.state.data} pageContext={pageContext} location={this.props.location} />
     );
   }
 }
@@ -74,4 +74,5 @@ Draft.propTypes = {
     prev: PropTypes.object,
     next: PropTypes.object,
   }).isRequired,
+  location: PropTypes.object,
 };

@@ -50,6 +50,7 @@ class DraftImpl extends Component {
 const Draft = () => {
   const identity = useIdentityContext()
   const [dialog, setDialog] = React.useState(false)
+  console.log(identity)
   if (identity && identity.isLoggedIn) {
     return <DraftImpl />
   }
@@ -62,7 +63,7 @@ const Draft = () => {
           LOG IN
         </button>
       </nav>
-      <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
+      <IdentityModal aria-labelledby={"dialog"} showDialog={dialog} onCloseDialog={() => setDialog(false)} />
     </>
   )
 }

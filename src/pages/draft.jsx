@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PostPage } from '../components'
 import moment from 'moment'
-import { useIdentityContext } from "react-netlify-identity-widget"
+import IdentityModal, { useIdentityContext } from "react-netlify-identity-widget"
 
 class DraftImpl extends Component {
   constructor(props){
@@ -49,6 +49,7 @@ class DraftImpl extends Component {
 
 const Draft = () => {
   const identity = useIdentityContext()
+  const [dialog, setDialog] = React.useState(false)
   if (identity && identity.isLoggedIn) {
     return <DraftImpl />
   }
@@ -58,10 +59,9 @@ const Draft = () => {
         {" "}
         Login Status:
         <button className="btn" onClick={() => setDialog(true)}>
-          {isLoggedIn ? `Hello ${name}, Log out here!` : "LOG IN"}
+          LOG IN
         </button>
       </nav>
-      <main>{children}</main>
       <IdentityModal showDialog={dialog} onCloseDialog={() => setDialog(false)} />
     </>
   )

@@ -1,7 +1,19 @@
 require('dotenv').config()
+var proxy = require("http-proxy-middleware")
 const config = require('./config/site');
 
 module.exports = {
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
+  },
   siteMetadata: {
     ...config,
   },
@@ -62,6 +74,12 @@ module.exports = {
         serviceId: process.env.MICRO_CMS_SERVICE_ID,
         endpoint: process.env.MICRO_CMS_ENDPOINT,
       },
+    },
+    {
+      resolve: `gatsby-plugin-netlify-identity`,
+      options: {
+        url: config.siteUrl // required!
+      }
     }
   ],
 };

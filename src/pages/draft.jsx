@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PostPage } from '../components'
-import moment from 'moment'
+import dayjs from 'dayjs';
+import 'dayjs/locale/ja';
+
 import IdentityModal, { useIdentityContext } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
+
+dayjs.locale('ja');
+
 class DraftImpl extends Component {
   constructor(props){
     super(props);
@@ -28,8 +33,8 @@ class DraftImpl extends Component {
     fetch(`/.netlify/functions/draft?draftKey=${draftKey}&contentId=${contentId}`)
     .then( res => res.json() )
     .then( res => {
-      res.createdAt = moment(res.createdAt).format('YYYY-MM-DD')
-      res.updatedAt = moment(res.updatedAt).format('YYYY-MM-DD')
+      res.createdAt = dayjs(res.createdAt).format('YYYY-MM-DD')
+      res.updatedAt = dayjs(res.updatedAt).format('YYYY-MM-DD')
       this.setState({
         data : res
       });

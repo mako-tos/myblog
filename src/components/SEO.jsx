@@ -41,8 +41,6 @@ const SEO = ({ title, description, banner, pathname, article }) => (
           alternateName: titleAlt || '',
         },
       ];
-
-      console.log(article)
       if (article) {
         schemaOrgJSONLD = [
           {

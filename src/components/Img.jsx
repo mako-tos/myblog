@@ -20,12 +20,37 @@ const Img = ({ url, sizes, quality, rects }) => {
     return <></>;
   }
 
+  const createURL = (size, isWebp) => {
+    const fixedUrl = new URL(url)
+    const params = fixedUrl.searchParams
+    params.append('fit', 'crop')
+    if (size.width) {
+      params.append('w', size.width)
+    }
+    if (size.height) {
+      params.append('h', size.height)
+    }
+    params.append('q', quality)
+    if (isWebp) {
+      params.append('fm', 'webp')
+    }
+    return fixedUrl.href
+  }
+
   const srcSetWebpArray = rects.map(size => {
-    return `${url}?fit=crop&w=${size.width}&h=${size.height}&q=${quality}&fm=webp ${size.width}w`;
+    const ary = [createURL(size, true)]
+    if (size.width) {
+      ary .push(`${size.width}w`)
+    }
+    return ary.join(' ');
   });
   const srcSetWebp = srcSetWebpArray.join(',');
   const srcSetOriginArray = rects.map(size => {
-    return `${url}?fit=crop&w=${size.width}&h=${size.height}&q=${quality} ${size.width}w`;
+    const ary = [createURL(size, false)]
+    if (size.width) {
+      ary.push(`${size.width}w`)
+    }
+    return ary.join(' ');
   });
   const srcSetOrigin = srcSetOriginArray.join(',');
   return (
@@ -55,13 +80,14 @@ Img.propTypes = {
 Img.defaultProps = {
   url: false,
   rects: [
-    { width: 240, height: 150 },
-    { width: 480, height: 300 },
-    { width: 960, height: 600 },
-    { width: 1440, height: 900 },
-    { width: 1920, height: 1200 },
+    { width: 240 },
+    { width: 480 },
+    { width: 720 },
+    { width: 960 },
+    { width: 1440 },
+    { width: 1920 },
   ],
   sizes:
-    '(max-width: 240px) 240w, (max-width: 480px) 480w,(max-width: 960px) 960w, (max-width: 1440px) 900w, 1920w',
+    '(max-width: 240px) 240w, (max-width: 480px) 480w, (max-width: 720px) 720w, (max-width: 960px) 960w, (max-width: 1440px) 900w, 1920w',
   quality: 80,
 };

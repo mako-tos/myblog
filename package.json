@@ -31,6 +31,7 @@
     "@reach/tabs": "^0.10.3",
     "@reach/visually-hidden": "^0.10.2",
     "babel-plugin-emotion": "^10.0.17",
+    "dayjs": "^1.8.27",
     "emotion-theming": "^10.0.17",
     "encoding": "^0.1.12",
     "gatsby": "^2.15.9",
@@ -74,6 +75,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.9",
     "lighthouse": "^3.2.1",
     "prettier": "^1.18.2"
   },

@@ -1,5 +1,5 @@
 require('dotenv').config()
-var proxy = require("http-proxy-middleware")
+const proxy = require("http-proxy-middleware")
 const config = require('./config/site');
 
 module.exports = {
@@ -80,6 +80,12 @@ module.exports = {
       options: {
         url: config.siteUrl // required!
       }
-    }
+    },
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        devMode: true,
+      },
+    },
   ],
 };

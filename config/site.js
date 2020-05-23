@@ -14,5 +14,6 @@ module.exports = {
   author: 'mako-tos', // Author for schemaORGJSONLD
   themeColor: '#3e7bf2',
   backgroundColor: '#d3e0ff',
-  twitter: '@macn_z', // Twitter Username
+  twitter: 'z_macn', // Twitter Username
+  github: 'mako-tos',
 };

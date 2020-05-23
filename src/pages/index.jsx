@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
@@ -25,7 +24,7 @@ const Index = ({ data, location }) => {
   const { edges } = data.allMicrocmsBlog;
   return (
     <Layout>
-      <SEO title={'Home Page | Step by Step'} pathname={location.pathname} />
+      <SEO title={'Home Page'} pathname={location.pathname} />
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {

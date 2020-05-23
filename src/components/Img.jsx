@@ -78,7 +78,7 @@ Img.propTypes = {
 };
 
 Img.defaultProps = {
-  url: false,
+  url: false, 
   rects: [
     { width: 240 },
     { width: 480 },
@@ -88,6 +88,6 @@ Img.defaultProps = {
     { width: 1920 },
   ],
   sizes:
-    '(max-width: 240px) 240w, (max-width: 480px) 480w, (max-width: 720px) 720w, (max-width: 960px) 960w, (max-width: 1440px) 900w, 1920w',
+    '(max-width: 240px) 240px, (max-width: 480px) 480px, (max-width: 720px) 720px, (max-width: 960px) 960px, (max-width: 1440px) 1440px, 1920px',
   quality: 80,
 };

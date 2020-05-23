@@ -107,7 +107,7 @@ const Title = styled.h2`
 const PostList = ({ cover, path, date, title, excerpt }) => (
   <Wrapper>
     <Image>
-      <Img url={cover} sizes="960px" />
+      <Img url={cover} sizes="(max-width: 480px) 480px, 720px" />
     </Image>
     <StyledLink to={path}>
       <Info>

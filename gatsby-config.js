@@ -84,7 +84,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
       options: {
-        devMode: true,
+        devMode: false,
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        reportFilename: 'report.html'
       },
     },
   ],

@@ -21,18 +21,16 @@ exports.createPages = ({ graphql, actions }) => {
                   title
                 }
               }
-              group(field: tags___slug) {
-                fieldValue
-                edges {
-                  node {
-                    slug
-                    title
-                    createdAt(formatString: "YYYY-MM-DD")
-                  }
+            }
+            allMicrocmsTag {
+              edges {
+                node {
+                  slug
+                  title
                 }
               }
             }
-          }    
+          }
         `
       ).then(result => {
         if (result.errors) {
@@ -40,30 +38,24 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const posts = result.data.allMicrocmsBlog.edges
-        const tags = result.data.allMicrocmsBlog.group
-
-        const tagSlugs = tags.map(tag => {
-          return { slug: tag.fieldValue, title: tag.fieldValue }
-        } );
+        const tags = result.data.allMicrocmsTag.edges.map(tag => tag.node)
 
         createPage({
           path: '/tags',
           component: tagPage,
           context: {
-            tags: tagSlugs,
+            tags: tags,
           },
         });
 
         //create tags
         tags.forEach(tag => {
-          const posts = tag.edges;
-
           createPage({
-            path: `/tags/${tag.fieldValue}`,
+            path: `/tags/${tag.slug}`,
             component: tagPosts,
             context: {
-              posts,
-              slug: tag.fieldValue,
+              slug: tag.slug,
+              title: tag.title
             },
           });
         });

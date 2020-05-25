@@ -72,7 +72,15 @@ module.exports = {
       options: {
         apiKey: process.env.MICRO_CMS_API_KEY,
         serviceId: process.env.MICRO_CMS_SERVICE_ID,
-        endpoint: process.env.MICRO_CMS_ENDPOINT,
+        endpoint: 'blog'
+      },
+    },
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.MICRO_CMS_API_KEY,
+        serviceId: process.env.MICRO_CMS_SERVICE_ID,
+        endpoint: 'tag'
       },
     },
     {

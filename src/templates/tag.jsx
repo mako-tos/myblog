@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -26,13 +26,13 @@ const Information = styled.div`
   }
 `;
 
-const Tag = ({ pageContext }) => {
-  const { posts, slug } = pageContext;
-  const upperTag = slug.charAt(0).toUpperCase() + slug.slice(1);
+const Tag = ({ data, pageContext }) => {
+  const { title } = pageContext;
+  const posts = data.allMicrocmsBlog.edges;
   return (
     <Layout>
-      <Helmet title={`${slug} | ${config.siteTitle}`} />
-      <Header title={upperTag}>
+      <Helmet title={`${title} | ${config.siteTitle}`} />
+      <Header title={title}>
         <StyledLink to="/tags">All Tags</StyledLink>
       </Header>
       <Container>
@@ -56,3 +56,19 @@ Tag.propTypes = {
     tagName: PropTypes.string,
   }),
 };
+
+export const query = graphql`
+  query($slug: String!) {
+    allMicrocmsBlog(
+      filter: { tags: { elemMatch: { slug: { in: [$slug] } } } }
+    ) {
+      edges {
+        node {
+          slug
+          title
+          createdAt(formatString: "YYYY-MM-DD")
+        }
+      }
+    }
+  }
+`;

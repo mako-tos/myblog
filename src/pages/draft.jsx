@@ -1,55 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { PostPage } from '../components'
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
-
 import IdentityModal, { useIdentityContext } from "react-netlify-identity-widget"
 import "react-netlify-identity-widget/styles.css"
 
 dayjs.locale('ja');
 
-class DraftImpl extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      data: null
-    };
-  }
-  
-  // 初期値の設定
-  componentWillMount(){
-    this.fetchResponse();
-  }
-  
-  // リストの更新
-  fetchResponse(){
-    const url = new URL('http://localhost:8000/' + this.props.location.search)
-    const draftKey = url.searchParams.get('draftKey')
-    const contentId = url.searchParams.get('contentId')
-    if (!draftKey || !contentId) {
-      return
+const DraftImpl = ({location}) => {
+  const [data, setData] = useState(data)
+  const [message, setMessage] = useState('now fetching data')
+  useEffect(() => {
+    const fetchDraft = async () => {
+      const url = new URL('http://localhost:8000/' + location.search)
+      const draftKey = url.searchParams.get('draftKey')
+      const contentId = url.searchParams.get('contentId')
+      if (!contentId) {
+        setMessage('contentId is undefined')
+      } else {
+        try {
+          const res = await fetch(`/.netlify/functions/draft?draftKey=${draftKey}&contentId=${contentId}`)
+          const json = await res.json()
+          json.createdAt = dayjs(json.createdAt).format('YYYY-MM-DD')
+          json.updatedAt = dayjs(json.updatedAt).format('YYYY-MM-DD')
+          setData(json)
+        } catch (e) {
+          setMessage(e.toString())
+        }
+      }
     }
-    fetch(`/.netlify/functions/draft?draftKey=${draftKey}&contentId=${contentId}`)
-    .then( res => res.json() )
-    .then( res => {
-      res.createdAt = dayjs(res.createdAt).format('YYYY-MM-DD')
-      res.updatedAt = dayjs(res.updatedAt).format('YYYY-MM-DD')
-      this.setState({
-        data : res
-      });
-    })
-  }
-  
-  render() {
-    if (!this.state.data) {
-      return (<p>waiting data loaded</p>)
-    }
-    const pageContext = {}
-    return (
-      <PostPage data={this.state.data} pageContext={pageContext} location={this.props.location} />
-    );
-  }
+    fetchDraft()
+  }, [])
+
+  const pageContext = {}
+
+  return (
+    <>
+      {data ?
+        (<PostPage data={data} pageContext={pageContext} location={location} />) :
+        (<p>{message}</p>)
+      }
+    </>
+  )
 }
 
 const Draft = ({location}) => {

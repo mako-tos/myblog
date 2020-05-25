@@ -21,6 +21,9 @@ exports.createPages = ({ graphql, actions }) => {
                     slug
                     title
                   }
+                  headImage {
+                    url
+                  }
                   slug
                   title
                 }
@@ -77,7 +80,7 @@ exports.createPages = ({ graphql, actions }) => {
               blogId: node.blogId,
               prev,
               next,
-              allPosts: posts.map(post => post.node)
+              allPosts: posts.map(post => post.node),
             },
           });
         });

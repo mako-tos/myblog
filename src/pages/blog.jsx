@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
+import { createPath, excerpt } from '../functions'
 
 const Blog = ({ data }) => {
   const { edges } = data.allMicrocmsBlog;
@@ -12,12 +13,10 @@ const Blog = ({ data }) => {
       <Helmet title={'Blog Page'} />
       <Header title="Blog Page">Stey by Step</Header>
       {edges.map(({ node }) => {
-        const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
-        const regex = /(<([^>]+)>)/ig
-        const planText = body.replace(regex, '')
-        const excerpt = (digest || planText).substr(0, 80)
+        const { headImage, title, tags, createdAt, updatedAt, body, digest } = node;
+        const description = excerpt(digest || body, 80)
 
-        const path = `${createdAt}-${slug}`
+        const path = createPath(node)
 
         return (
           <BlogList
@@ -27,7 +26,7 @@ const Blog = ({ data }) => {
             title={title}
             date={updatedAt || createdAt}
             tags={tags}
-            excerpt={`${excerpt}...`}
+            excerpt={`${description}...`}
           />
         );
       })}

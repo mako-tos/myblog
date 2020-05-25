@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
 import { SEO } from '../components';
+import { createPath, excerpt } from '../functions';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -28,12 +29,18 @@ const Index = ({ data, location }) => {
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {
-          const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = node;
-          const regex = /(<([^>]+)>)/ig
-          const planText = body.replace(regex, '')
-          const excerpt = (digest || planText).substr(0, 40)
-  
-          const path = `${createdAt}-${slug}`
+          const {
+            headImage,
+            title,
+            tags,
+            createdAt,
+            updatedAt,
+            body,
+            digest,
+          } = node;
+          const description = excerpt(digest || body, 40);
+
+          const path = createPath(node);
 
           return (
             <PostList
@@ -43,7 +50,7 @@ const Index = ({ data, location }) => {
               title={title}
               date={updatedAt || createdAt}
               tags={tags}
-              excerpt={`${excerpt}...`}
+              excerpt={`${description}...`}
             />
           );
         })}
@@ -77,10 +84,7 @@ Index.propTypes = {
 
 export const query = graphql`
   query {
-    allMicrocmsBlog(
-      sort: { fields: [createdAt], order: DESC }
-      limit: 6
-    ) {
+    allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }, limit: 6) {
       edges {
         node {
           slug

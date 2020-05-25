@@ -3,7 +3,8 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
-import { TagsBlock, Header, SEO } from 'components';
+import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
+import { createPath, excerpt } from '../functions'
 import '../styles/prism';
 
 const SuggestionBar = styled.div`
@@ -34,14 +35,6 @@ const SideBar = styled.div`
     width: 95%;
   }
 `
-const RelatedPostList = styled.ol`
-  list-style: none;
-  li {
-    a {
-      text-dacoration: none;
-    }
-  }
-`
 const Holly = styled.div`
   @media (min-width: ${props => props.theme.breakpoints.m}) {
     display: flex;
@@ -51,9 +44,7 @@ const Holly = styled.div`
 const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
   const { headImage, title, tags, createdAt, updatedAt, body, digest } = data;
-  const regex = /(<([^>]+)>)/ig
-  const planText = body.replace(regex, '')
-  const excerpt = (digest || planText).substr(0, 120)
+  const description = excerpt(digest || body, 120)
 
   const date = updatedAt || createdAt
   const isUpdated = updatedAt !== createdAt
@@ -65,35 +56,25 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
     <Layout>
       <SEO
         title={title}
-        description={excerpt || ' '}
+        description={description}
         banner={headImage && headImage.url}
         pathname={location.pathname}
         article
       />
       <Header title={title} date={date} cover={headImage && headImage.url} isUpdated={ isUpdated } />
       <Holly>
-        <SideBar />
         <Container>
           <Content input={newBody} />
           <TagsBlock list={tags || []} />
         </Container>
         <SideBar>
-          関連記事
-          <RelatedPostList>
-            {relatedPosts.map((post, index) => (
-              <li key={index}>
-                <Link to={`${post.createdAt}-${post.slug}`}>
-                  {post.title}
-                </Link>
-              </li>
-            ))}
-          </RelatedPostList>
+          <RelatedPosts posts={relatedPosts} />
         </SideBar>
       </Holly>
       <SuggestionBar>
         <PostSuggestion>
           {prev && (
-            <Link to={`${prev.createdAt}-${prev.slug}`}>
+            <Link to={createPath(prev)}>
               Previous
               <h3>{prev.title}</h3>
             </Link>
@@ -101,7 +82,7 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
         </PostSuggestion>
         <PostSuggestion>
           {next && (
-            <Link to={`${next.createdAt}-${next.slug}`}>
+            <Link to={createPath(next)}>
               Next
               <h3>{next.title}</h3>
             </Link>

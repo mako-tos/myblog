@@ -19,9 +19,38 @@ const PostSuggestion = styled.div`
   margin: 1rem 3rem 0 3rem;
 `;
 
-const Post = ({ data, pageContext, location }) => {
+const SideBar = styled.div`
+  width: 20%;
+  flex: 1;
+  padding-top: 3rem;
+
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    width: 90%;
+    margin: auto;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    width: 95%;
+  }
+`
+const RelatedPostList = styled.ol`
+  list-style: none;
+  li {
+    a {
+      text-dacoration: none;
+    }
+  }
+`
+const Holly = styled.div`
+  @media (min-width: ${props => props.theme.breakpoints.m}) {
+    display: flex;
+  }
+`
+
+const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
-  const { headImage, slug, title, tags, createdAt, updatedAt, body, digest } = data;
+  const { headImage, title, tags, createdAt, updatedAt, body, digest } = data;
   const regex = /(<([^>]+)>)/ig
   const planText = body.replace(regex, '')
   const excerpt = (digest || planText).substr(0, 120)
@@ -42,10 +71,25 @@ const Post = ({ data, pageContext, location }) => {
         article
       />
       <Header title={title} date={date} cover={headImage && headImage.url} isUpdated={ isUpdated } />
-      <Container>
-        <Content input={newBody} />
-        <TagsBlock list={tags || []} />
-      </Container>
+      <Holly>
+        <SideBar />
+        <Container>
+          <Content input={newBody} />
+          <TagsBlock list={tags || []} />
+        </Container>
+        <SideBar>
+          関連記事
+          <RelatedPostList>
+            {relatedPosts.map((post, index) => (
+              <li key={index}>
+                <Link to={`${post.createdAt}-${post.slug}`}>
+                  {post.title}
+                </Link>
+              </li>
+            ))}
+          </RelatedPostList>
+        </SideBar>
+      </Holly>
       <SuggestionBar>
         <PostSuggestion>
           {prev && (
@@ -79,10 +123,11 @@ Post.propTypes = {
     body: PropTypes.string.isRequired,
     digest: PropTypes.string,
     title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
     headImage: PropTypes.object,
     tags: PropTypes.array,
   }),
+  location: PropTypes.object.isRequired,
+  relatedPosts: PropTypes.array.isRequired,
 };

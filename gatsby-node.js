@@ -17,6 +17,10 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   blogId
                   createdAt(formatString: "YYYY-MM-DD")
+                  tags {
+                    slug
+                    title
+                  }
                   slug
                   title
                 }
@@ -37,8 +41,8 @@ exports.createPages = ({ graphql, actions }) => {
           return reject(result.errors);
         }
 
-        const posts = result.data.allMicrocmsBlog.edges
-        const tags = result.data.allMicrocmsTag.edges.map(tag => tag.node)
+        const posts = result.data.allMicrocmsBlog.edges;
+        const tags = result.data.allMicrocmsTag.edges.map(tag => tag.node);
 
         createPage({
           path: '/tags',
@@ -55,7 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
             component: tagPosts,
             context: {
               slug: tag.slug,
-              title: tag.title
+              title: tag.title,
             },
           });
         });
@@ -73,6 +77,7 @@ exports.createPages = ({ graphql, actions }) => {
               blogId: node.blogId,
               prev,
               next,
+              allPosts: posts.map(post => post.node)
             },
           });
         });

@@ -38,7 +38,7 @@ const DraftImpl = ({location}) => {
   return (
     <>
       {data ?
-        (<PostPage data={data} pageContext={pageContext} location={location} />) :
+        (<PostPage data={data} pageContext={pageContext} location={location} relatedPosts={[]} />) :
         (<p>{message}</p>)
       }
     </>

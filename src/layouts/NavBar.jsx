@@ -34,7 +34,7 @@ const NavBar = () => (
     itemScope="itemscope"
     itemType="http://schema.org/WPHeader"
   >
-    <StyledLink to="/">
+    <StyledLink to="/" itemProp="url">
       <img src={logo} alt="site Logo" />
     </StyledLink>
     <Nav>

@@ -81,7 +81,8 @@ const SEO = ({ title, description, banner, pathname, article }) => (
       return (
         <>
           <Helmet title={seo.title}>
-            <html lang={siteLanguage} />	
+            <html lang={siteLanguage} />
+            <link rel="preconnect" href="https://images.microcms-assets.io" />
             <link rel="alternate" type="application/rss+xml" href={siteUrl + '/rss.xml'} title="RSS2.0" />
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />

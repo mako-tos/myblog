@@ -31,7 +31,11 @@ const Text = styled.div`
 `;
 
 const Footer = () => (
-  <Wrapper role="contentinfo" itemScope="itemscope" itemType="http://schema.org/WPFooter">
+  <Wrapper
+    role="contentinfo"
+    itemScope="itemscope"
+    itemType="http://schema.org/WPFooter"
+  >
     <Text>
       ©
       <span
@@ -44,13 +48,23 @@ const Footer = () => (
     </Text>
     <Text>
       <FontAwesomeIcon icon={faTwitterSquare} />
-      <a target="_blank" href={`https://twitter.com/${config.twitter}`}>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`https://twitter.com/${config.twitter}`}
+        itemProp="url"
+      >
         {config.twitter}
       </a>
     </Text>
     <Text>
       <FontAwesomeIcon icon={faGithub} />
-      <a target="_blank" href={`https://github.com/${config.github}`}>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`https://github.com/${config.github}`}
+        itemProp="url"
+      >
         {config.github}
       </a>
     </Text>

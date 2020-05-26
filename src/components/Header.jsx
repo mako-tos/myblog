@@ -76,7 +76,7 @@ const Header = ({ children, title, createdAt, updatedAt, cover }) => (
           <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
         }
         <br />
-        {updatedAt &&
+        {createdAt !== updatedAt &&
           <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
         }
       </div>

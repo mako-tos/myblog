@@ -26,12 +26,6 @@ const Wrapper = styled.li`
     width: calc(99.9% - 1rem);
     height: 12rem;
   }
-
-  @media (max-width: 700px) {
-    max-width: 100%;
-    width: 100%;
-    height: 15rem;
-  }
 `;
 
 const StyledLink = styled(Link)`
@@ -106,7 +100,7 @@ const RelatedPosts = ({ posts }) => (
       {posts.map((post, index) => (
         <Wrapper key={index}>
           <Image>
-            <Img url={post.headImage && post.headImage.url} sizes="(max-width: 700px) 720px, (max-width: 1000px) 960px, 480px" />
+            <Img url={post.headImage && post.headImage.url} sizes="(max-width: 900px) 98vw, 25vw" />
           </Image>
           <StyledLink to={createPath(post)}>
             <Info>

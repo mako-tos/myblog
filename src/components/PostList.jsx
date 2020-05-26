@@ -83,6 +83,7 @@ const Image = styled.div`
   border-radius: ${props => props.theme.borderRadius.default};
   img {
     border-radius: ${props => props.theme.borderRadius.default};
+    min-height: 100%;
   }
   > div {
     position: static !important;
@@ -107,7 +108,7 @@ const Title = styled.h2`
 const PostList = ({ cover, path, date, title, excerpt }) => (
   <Wrapper>
     <Image>
-      <Img url={cover} sizes="(max-width: 480px) 480px, 720px" />
+      <Img url={cover} sizes="(max-width: 700px) 95vw, (max-width: 1000px) 55vw, 35vw" />
     </Image>
     <StyledLink to={path}>
       <Info>

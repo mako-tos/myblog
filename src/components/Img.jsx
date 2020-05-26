@@ -75,6 +75,7 @@ Img.propTypes = {
     })
   ),
   quality: PropTypes.number,
+  sizes: PropTypes.string,
 };
 
 Img.defaultProps = {
@@ -88,6 +89,6 @@ Img.defaultProps = {
     { width: 1920 },
   ],
   sizes:
-    '(max-width: 240px) 240px, (max-width: 480px) 480px, (max-width: 720px) 720px, (max-width: 960px) 960px, (max-width: 1440px) 1440px, 1920px',
+    '90vw',
   quality: 80,
 };

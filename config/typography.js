@@ -14,12 +14,8 @@ export const typography = new Typography({
   ],
   googleFonts: [
     {
-      name: 'Kosugi',
-      styles: ['700'],
-    },
-    {
       name: 'Noto Sans JP',
-      styles: ['400'],
+      styles: ['400&display=swap'],
     },
   ],
   headerWeight: 500,

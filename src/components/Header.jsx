@@ -52,33 +52,33 @@ const CreateTime = styled.time`
   &::before {
     content: '作成日：';
   }
-`
+`;
 const UpdateTime = styled.time`
   &::before {
     content: '更新日：';
   }
-`
+`;
 
 const rects = [
-  {width: 240, height: 400},
-  {width: 480, height: 400},
-  {width: 960, height: 400},
-  {width: 1440, height: 400},
-  {width: 1920, height: 400},
-]
+  { width: 240, height: 400 },
+  { width: 480, height: 400 },
+  { width: 960, height: 400 },
+  { width: 1440, height: 400 },
+  { width: 1920, height: 400 },
+];
 const Header = ({ children, title, createdAt, updatedAt, cover }) => (
   <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
     {cover && <Img url={cover} rects={rects} sizes="100vw" alt={title} />}
     <Text>
       <h1 itemProp="headline">{title}</h1>
       <div>
-        {createdAt &&
+        {createdAt && (
           <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
-        }
+        )}
         <br />
-        {createdAt !== updatedAt &&
+        {createdAt !== updatedAt && updatedAt && (
           <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
-        }
+        )}
       </div>
       {children && <Subtitle>{children}</Subtitle>}
     </Text>

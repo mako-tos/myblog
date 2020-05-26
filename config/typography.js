@@ -5,23 +5,26 @@ export const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
-    'Noto Sans JP',
+    '游ゴシック',
     '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Helvetica',
+    'Arial',
+    'sans-serif',
   ],
   bodyFontFamily: [
-    'Noto Sans JP',
+    '游明朝',
     '-apple-system',
-  ],
-  googleFonts: [
-    {
-      name: 'Noto Sans JP',
-      styles: ['400&display=swap'],
-    },
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Roboto',
+    'Helvetica',
+    'Arial',
+    'sans-serif',
   ],
   headerWeight: 500,
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  typography.injectStyles();
-}
 export default typography;

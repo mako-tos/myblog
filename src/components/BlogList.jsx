@@ -90,19 +90,27 @@ const CreateTime = styled.time`
   &::before {
     content: '作成日：';
   }
-`
+`;
 const UpdateTime = styled.time`
   margin-left: 1rem;
   &::before {
     content: '更新日：';
   }
-`
+`;
 
 const Title = styled.h1`
   margin: 0;
 `;
 
-const BlogList = ({ path, cover, title, createdAt, updatedAt, excerpt, tags }) => (
+const BlogList = ({
+  path,
+  cover,
+  title,
+  createdAt,
+  updatedAt,
+  excerpt,
+  tags,
+}) => (
   <Container>
     <Wrapper>
       <Image>
@@ -112,20 +120,18 @@ const BlogList = ({ path, cover, title, createdAt, updatedAt, excerpt, tags }) =
       </Image>
       <Information>
         <DateWrapper>
-          {createdAt &&
+          {createdAt && (
             <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
-          }
-          {createdAt !== updatedAt &&
+          )}
+          {createdAt !== updatedAt && (
             <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
-          }
+          )}
         </DateWrapper>
         <Link to={path}>
           <Title itemProp="name headline">{title}</Title>
         </Link>
         <TagsBlock list={tags} />
-        <div itemProp="description">
-          {excerpt}
-        </div>
+        <div itemProp="description">{excerpt}</div>
       </Information>
     </Wrapper>
   </Container>

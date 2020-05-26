@@ -52,7 +52,7 @@ export const gradient = {
 export const transition = {
   easeInOutCubic: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
   easeOutBack: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-  duration: '0.4s',
+  duration: '0.25s',
 };
 
 export const theme = {
@@ -67,9 +67,9 @@ export const theme = {
   },
   fontFamily: {
     // eslint-disable-next-line
-    body: `'Noto Sans JP',-apple-system`,
+    body: `游明朝,-apple-system`,
     // eslint-disable-next-line
-    heading: `'Noto Sans JP', -apple-system`,
+    heading: `游ゴシック, -apple-system`,
   },
   layout: {
     article: '46rem',

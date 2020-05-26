@@ -38,9 +38,15 @@ const NavBar = () => (
       <img src={logo} alt="site Logo" />
     </StyledLink>
     <Nav>
-      <Link itemProp="url" to="/">Home</Link>
-      <Link itemProp="url" to="/blog">Blog</Link>
-      <Link itemProp="url" to="/about">About</Link>
+      <Link itemProp="url" to="/">
+        Home
+      </Link>
+      <Link itemProp="url" to="/blog">
+        Blog
+      </Link>
+      <Link itemProp="url" to="/about">
+        About
+      </Link>
     </Nav>
   </Headroom>
 );

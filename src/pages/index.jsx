@@ -29,14 +29,7 @@ const Index = ({ data, location }) => {
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {
-          const {
-            headImage,
-            title,
-            tags,
-            createdAt,
-            body,
-            digest,
-          } = node;
+          const { headImage, title, tags, createdAt, body, digest } = node;
           const description = excerpt(digest || body, 40);
 
           const path = createPath(node);

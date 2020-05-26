@@ -83,7 +83,12 @@ const SEO = ({ title, description, banner, pathname, article }) => (
           <Helmet title={seo.title}>
             <html lang={siteLanguage} />
             <link rel="preconnect" href="https://images.microcms-assets.io" />
-            <link rel="alternate" type="application/rss+xml" href={siteUrl + '/rss.xml'} title="RSS2.0" />
+            <link
+              rel="alternate"
+              type="application/rss+xml"
+              href={siteUrl + '/rss.xml'}
+              title="RSS2.0"
+            />
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             <meta name="apple-mobile-web-app-title" content={shortName} />
@@ -106,9 +111,12 @@ const SEO = ({ title, description, banner, pathname, article }) => (
             <meta name="twitter:description" content={seo.description} />
             <meta name="twitter:image" content={seo.image} />
 
-            {pathname === '/' &&
-              <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-            }
+            {pathname === '/' && (
+              <script
+                defer
+                src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+              ></script>
+            )}
           </Helmet>
         </>
       );

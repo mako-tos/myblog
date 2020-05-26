@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
-import { createPath, excerpt } from '../functions'
+import { createPath, excerpt } from '../functions';
 import '../styles/prism';
 
 const SuggestionBar = styled.div`
@@ -34,20 +34,23 @@ const SideBar = styled.aside`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     width: 95%;
   }
-`
+`;
 const Holly = styled.div`
   @media (min-width: ${props => props.theme.breakpoints.m}) {
     display: flex;
   }
-`
+`;
 
 const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
   const { headImage, title, tags, createdAt, updatedAt, body, digest } = data;
-  const description = excerpt(digest || body, 120)
+  const description = excerpt(digest || body, 120);
 
-  const preRegex = /(<pre><code>)/ig
-  const newBody = body.replace(preRegex, '<pre class="language-jsx"><code class="language-jsx">')
+  const preRegex = /(<pre><code>)/gi;
+  const newBody = body.replace(
+    preRegex,
+    '<pre class="language-jsx"><code class="language-jsx">'
+  );
 
   return (
     <Layout>
@@ -58,7 +61,12 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
         pathname={location.pathname}
         article
       />
-      <Header title={title} updatedAt={updatedAt} createdAt={createdAt} cover={headImage && headImage.url} />
+      <Header
+        title={title}
+        updatedAt={updatedAt}
+        createdAt={createdAt}
+        cover={headImage && headImage.url}
+      />
       <Holly>
         <Container>
           <TagsBlock list={tags || []} />

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
-import { createPath, excerpt } from '../functions'
+import { createPath, excerpt } from '../functions';
 
 const Blog = ({ data }) => {
   const { edges } = data.allMicrocmsBlog;
@@ -13,10 +13,18 @@ const Blog = ({ data }) => {
       <Helmet title={'Blog Page'} />
       <Header title="Blog Page">Stey by Step</Header>
       {edges.map(({ node }) => {
-        const { headImage, title, tags, createdAt, updatedAt, body, digest } = node;
-        const description = excerpt(digest || body, 80)
+        const {
+          headImage,
+          title,
+          tags,
+          createdAt,
+          updatedAt,
+          body,
+          digest,
+        } = node;
+        const description = excerpt(digest || body, 80);
 
-        const path = createPath(node)
+        const path = createPath(node);
 
         return (
           <BlogList
@@ -31,7 +39,6 @@ const Blog = ({ data }) => {
           />
         );
       })}
-
     </Layout>
   );
 };
@@ -61,10 +68,7 @@ Blog.propTypes = {
 
 export const query = graphql`
   query {
-    allMicrocmsBlog(
-      sort: { fields: [createdAt], order: DESC }
-      limit: 6
-    ) {
+    allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }, limit: 6) {
       edges {
         node {
           slug

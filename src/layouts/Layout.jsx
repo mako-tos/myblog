@@ -7,7 +7,7 @@ import 'typeface-candal';
 import { NavBar, Footer } from 'layouts';
 import theme from '../../config/theme';
 import headroom from '../styles/headroom';
-import "react-netlify-identity-widget/styles.css"
+import 'react-netlify-identity-widget/styles.css';
 
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>

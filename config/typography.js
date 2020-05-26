@@ -5,26 +5,27 @@ export const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
-    'Candal',
+    'Kosugi',
     '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica',
-    'Arial',
-    'sans-serif',
   ],
   bodyFontFamily: [
-    'Open Sans',
+    'Noto Sans JP',
     '-apple-system',
-    'BlinkMacSystemFont',
-    'Segoe UI',
-    'Roboto',
-    'Helvetica',
-    'Arial',
-    'sans-serif',
+  ],
+  googleFonts: [
+    {
+      name: 'Kosugi',
+      styles: ['700'],
+    },
+    {
+      name: 'Noto Sans JP',
+      styles: ['400'],
+    },
   ],
   headerWeight: 500,
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  typography.injectStyles();
+}
 export default typography;

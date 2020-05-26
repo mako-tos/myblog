@@ -1,6 +1,7 @@
 require('dotenv').config()
 const proxy = require("http-proxy-middleware")
 const config = require('./config/site');
+const { createPath, excerpt } = require('./src/functions')
 
 module.exports = {
   developMiddleware: app => {
@@ -96,6 +97,56 @@ module.exports = {
         analyzerMode: 'static',
         openAnalyzer: false,
         reportFilename: 'report.html'
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMicrocmsBlog } }) => {
+              return allMicrocmsBlog.edges.map(edge => {
+                const url = `${site.siteMetadata.siteUrl}/${createPath(edge.node)}`
+                return Object.assign({}, edge.node, {
+                  description: excerpt(edge.node.body, 120),
+                  date: edge.node.createdAt,
+                  url: url,
+                  guid: url,
+                  custom_elements: [{ "content:encoded": edge.node.body }],
+                })
+              })
+            },
+            query: `
+              {
+                allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
+                  edges {
+                    node {
+                      slug
+                      title
+                      createdAt(formatString: "YYYY-MM-DD")
+                      body
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: `${config.title}'s RSS Feed`,
+            match: "^/blog/",
+          },
+        ],
       },
     },
   ],

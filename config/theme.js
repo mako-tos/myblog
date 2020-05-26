@@ -69,7 +69,7 @@ export const theme = {
     // eslint-disable-next-line
     body: `'Noto Sans JP',-apple-system`,
     // eslint-disable-next-line
-    heading: `Kosugi, -apple-system`,
+    heading: `'Noto Sans JP', -apple-system`,
   },
   layout: {
     article: '46rem',

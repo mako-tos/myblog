@@ -5,7 +5,7 @@ export const typography = new Typography({
   baseFontSize: '18px',
   baseLineHeight: 1.45,
   headerFontFamily: [
-    'Kosugi',
+    'Noto Sans JP',
     '-apple-system',
   ],
   bodyFontFamily: [

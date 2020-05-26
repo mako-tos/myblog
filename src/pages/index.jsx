@@ -34,7 +34,6 @@ const Index = ({ data, location }) => {
             title,
             tags,
             createdAt,
-            updatedAt,
             body,
             digest,
           } = node;
@@ -48,7 +47,7 @@ const Index = ({ data, location }) => {
               cover={headImage.url}
               path={path}
               title={title}
-              date={updatedAt || createdAt}
+              createdAt={createdAt}
               tags={tags}
               excerpt={`${description}...`}
             />

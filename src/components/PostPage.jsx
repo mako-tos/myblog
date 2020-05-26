@@ -20,7 +20,7 @@ const PostSuggestion = styled.div`
   margin: 1rem 3rem 0 3rem;
 `;
 
-const SideBar = styled.div`
+const SideBar = styled.aside`
   width: 20%;
   flex: 1;
   padding-top: 3rem;
@@ -46,9 +46,6 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { headImage, title, tags, createdAt, updatedAt, body, digest } = data;
   const description = excerpt(digest || body, 120)
 
-  const date = updatedAt || createdAt
-  const isUpdated = updatedAt !== createdAt
-
   const preRegex = /(<pre><code>)/ig
   const newBody = body.replace(preRegex, '<pre class="language-jsx"><code class="language-jsx">')
 
@@ -61,30 +58,31 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
         pathname={location.pathname}
         article
       />
-      <Header title={title} date={date} cover={headImage && headImage.url} isUpdated={ isUpdated } />
+      <Header title={title} updatedAt={updatedAt} createdAt={createdAt} cover={headImage && headImage.url} />
       <Holly>
         <Container>
+          <TagsBlock list={tags || []} />
           <Content input={newBody} />
           <TagsBlock list={tags || []} />
         </Container>
-        <SideBar>
+        <SideBar itemScope="itemscope" itemtype="http://schema.org/WPSideBar">
           <RelatedPosts posts={relatedPosts} />
         </SideBar>
       </Holly>
       <SuggestionBar>
         <PostSuggestion>
           {prev && (
-            <Link to={createPath(prev)}>
+            <Link to={createPath(prev)} itemProp="url" title={prev.title}>
               Previous
-              <h3>{prev.title}</h3>
+              <h3 itemProp="name headline">{prev.title}</h3>
             </Link>
           )}
         </PostSuggestion>
         <PostSuggestion>
           {next && (
-            <Link to={createPath(next)}>
+            <Link to={createPath(next)} itemProp="url" title={next.title}>
               Next
-              <h3>{next.title}</h3>
+              <h3 itemProp="name headline">{next.title}</h3>
             </Link>
           )}
         </PostSuggestion>

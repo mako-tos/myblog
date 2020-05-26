@@ -48,6 +48,17 @@ const Subtitle = styled.p`
   color: ${props => props.theme.colors.white.light};
 `;
 
+const CreateTime = styled.time`
+  &::before {
+    content: '作成日：';
+  }
+`
+const UpdateTime = styled.time`
+  &::before {
+    content: '更新日：';
+  }
+`
+
 const rects = [
   {width: 240, height: 400},
   {width: 480, height: 400},
@@ -55,18 +66,20 @@ const rects = [
   {width: 1440, height: 400},
   {width: 1920, height: 400},
 ]
-const Header = ({ children, title, date, cover, isUpdated }) => (
-  <Wrapper>
+const Header = ({ children, title, createdAt, updatedAt, cover }) => (
+  <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
     {cover && <Img url={cover} rects={rects} sizes="100vw" alt={title} />}
     <Text>
-      <h1>{title}</h1>
-      {date && (
-        <h3>
-          {isUpdated ? <span>更新日：</span> : <span>作成日：</span>}
-          {date}
-        </h3>
-      )}
-
+      <h1 itemProp="headline">{title}</h1>
+      <div>
+        {createdAt &&
+          <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
+        }
+        <br />
+        {updatedAt &&
+          <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
+        }
+      </div>
       {children && <Subtitle>{children}</Subtitle>}
     </Text>
   </Wrapper>
@@ -77,8 +90,8 @@ export default Header;
 Header.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   cover: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  isUpdated: PropTypes.bool,
+  craetedAt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  updatedAt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -89,7 +102,8 @@ Header.propTypes = {
 Header.defaultProps = {
   children: false,
   cover: false,
-  date: false,
+  craetedAt: false,
+  updatedAt: false,
   title: false,
   isUpdated: false,
 };

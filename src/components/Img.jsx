@@ -55,7 +55,7 @@ const Img = ({ url, sizes, quality, rects, alt }) => {
   const srcSetOrigin = srcSetOriginArray.join(',');
   return (
     <LazyLoad once offset={100}>
-      <WrapperPicture>
+      <WrapperPicture itemProp="image">
         <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
         <source srcSet={srcSetOrigin} sizes={sizes} />
         <img src={url} alt={alt} loading="lazy" sizes={sizes} />

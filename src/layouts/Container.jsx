@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-const Wrapper = styled.section`
+const Wrapper = styled.main`
   text-align: ${props => (props.center ? 'center' : '')};
   margin: auto;
   padding: 3rem 1.5rem 1.5rem 1.5rem;
@@ -21,8 +21,21 @@ const Wrapper = styled.section`
 `;
 
 const Container = ({ children, type, className, center }) => (
-  <Wrapper className={className} type={type} center={center}>
-    {children}
+  <Wrapper
+    className={className}
+    type={type}
+    center={center}
+    itemScope="itemscope"
+    itemType="http://schema.org/Blog"
+    itemProp="mainContentOfPage"
+  >
+    <article
+      itemScope="itemscope"
+      itemType="http://schema.org/BlogPosting"
+      itemProp="blogPost"
+    >
+      {children}
+    </article>
   </Wrapper>
 );
 

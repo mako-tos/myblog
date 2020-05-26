@@ -28,14 +28,19 @@ const Nav = styled.nav`
 `;
 
 const NavBar = () => (
-  <Headroom calcHeightOnResize disableInlineStyles>
+  <Headroom
+    calcHeightOnResize
+    disableInlineStyles
+    itemScope="itemscope"
+    itemType="http://schema.org/WPHeader"
+  >
     <StyledLink to="/">
-      <img src={logo} alt="Gatsby Logo" />
+      <img src={logo} alt="site Logo" />
     </StyledLink>
     <Nav>
-      <Link to="/">Home</Link>
-      <Link to="/blog">Blog</Link>
-      <Link to="/about">About</Link>
+      <Link itemProp="url" to="/">Home</Link>
+      <Link itemProp="url" to="/blog">Blog</Link>
+      <Link itemProp="url" to="/about">About</Link>
     </Nav>
   </Headroom>
 );

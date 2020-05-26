@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitterSquare, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitterSquare, faGithub } from '@fortawesome/free-brands-svg-icons';
 import config from '../../config/site';
 
 const Wrapper = styled.footer`
@@ -31,10 +31,15 @@ const Text = styled.div`
 `;
 
 const Footer = () => (
-  <Wrapper>
+  <Wrapper role="contentinfo" itemScope="itemscope" itemType="http://schema.org/WPFooter">
     <Text>
-      <span>
-        © {config.author}
+      ©
+      <span
+        itemProp="author name"
+        itemScope
+        itemType="http://schema.org/Person"
+      >
+        {config.author}
       </span>
     </Text>
     <Text>
@@ -42,7 +47,6 @@ const Footer = () => (
       <a target="_blank" href={`https://twitter.com/${config.twitter}`}>
         {config.twitter}
       </a>
-
     </Text>
     <Text>
       <FontAwesomeIcon icon={faGithub} />

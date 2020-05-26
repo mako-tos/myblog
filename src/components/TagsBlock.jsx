@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTag } from '@fortawesome/free-solid-svg-icons';
 
 const TagsContainer = styled.div`
   margin: 1rem 0;
@@ -9,6 +11,9 @@ const TagsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  svg {
+    margin: 0.6rem 0.5rem 0.5rem 0;
+  }
   a {
     margin: 0 1rem 1rem 0;
     color: ${props => props.theme.colors.black.blue};
@@ -25,10 +30,11 @@ const TagsContainer = styled.div`
 
 const TagsBlock = ({ list }) => (
   <TagsContainer>
+    <FontAwesomeIcon icon={faTag} />
     {list &&
       list.map(tag => {
         return (
-          <Link key={tag.slug} to={`/tags/${tag.slug}`} role="tag">
+          <Link key={tag.slug} to={`/tags/${tag.slug}`} rel="tag">
             <span>{tag.title}</span>
           </Link>
         );

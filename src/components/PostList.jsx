@@ -105,7 +105,7 @@ const Title = styled.h2`
   margin-bottom: 0.6rem;
 `;
 
-const PostList = ({ cover, path, date, title, excerpt }) => (
+const PostList = ({ cover, path, createdAt, title, excerpt }) => (
   <Wrapper>
     <Image>
       <Img
@@ -114,11 +114,11 @@ const PostList = ({ cover, path, date, title, excerpt }) => (
         sizes="(max-width: 700px) 95vw, (max-width: 1000px) 55vw, 35vw"
       />
     </Image>
-    <StyledLink to={path}>
+    <StyledLink to={path} itemProp="url" title={title}>
       <Info>
-        <span>{date}</span>
-        <Title>{title}</Title>
-        <span>{excerpt}</span>
+        <time itemProp="datePublished">{createdAt}</time>
+        <Title itemProp="name headline">{title}</Title>
+        <span itemProp="description">{excerpt}</span>
       </Info>
     </StyledLink>
   </Wrapper>
@@ -130,6 +130,6 @@ PostList.propTypes = {
   cover: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   excerpt: PropTypes.string,
-  date: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };

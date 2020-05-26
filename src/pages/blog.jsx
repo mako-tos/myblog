@@ -24,7 +24,8 @@ const Blog = ({ data }) => {
             cover={headImage.url}
             path={path}
             title={title}
-            date={updatedAt || createdAt}
+            createdAt={createdAt}
+            updatedAt={updatedAt}
             tags={tags}
             excerpt={`${description}...`}
           />

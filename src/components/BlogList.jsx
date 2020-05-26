@@ -81,16 +81,28 @@ const Information = styled.div`
   }
 `;
 
-const Date = styled.div`
+const DateWrapper = styled.div`
   margin-top: 1rem;
   color: ${props => props.theme.colors.black.lighter};
 `;
+
+const CreateTime = styled.time`
+  &::before {
+    content: '作成日：';
+  }
+`
+const UpdateTime = styled.time`
+  margin-left: 1rem;
+  &::before {
+    content: '更新日：';
+  }
+`
 
 const Title = styled.h1`
   margin: 0;
 `;
 
-const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
+const BlogList = ({ path, cover, title, createdAt, updatedAt, excerpt, tags }) => (
   <Container>
     <Wrapper>
       <Image>
@@ -99,12 +111,21 @@ const BlogList = ({ path, cover, title, date, excerpt, tags }) => (
         </Link>
       </Image>
       <Information>
-        <Date>{date}</Date>
+        <DateWrapper>
+          {createdAt &&
+            <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
+          }
+          {createdAt !== updatedAt &&
+            <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
+          }
+        </DateWrapper>
         <Link to={path}>
-          <Title>{title}</Title>
+          <Title itemProp="name headline">{title}</Title>
         </Link>
         <TagsBlock list={tags} />
-        {excerpt}
+        <div itemProp="description">
+          {excerpt}
+        </div>
       </Information>
     </Wrapper>
   </Container>
@@ -115,8 +136,9 @@ export default BlogList;
 BlogList.propTypes = {
   cover: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  excerpt: PropTypes.string,
-  date: PropTypes.string.isRequired,
+  excerpt: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
 };

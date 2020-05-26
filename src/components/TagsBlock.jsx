@@ -28,7 +28,7 @@ const TagsBlock = ({ list }) => (
     {list &&
       list.map(tag => {
         return (
-          <Link key={tag.slug} to={`/tags/${tag.slug}`}>
+          <Link key={tag.slug} to={`/tags/${tag.slug}`} role="tag">
             <span>{tag.title}</span>
           </Link>
         );

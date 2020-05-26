@@ -100,7 +100,7 @@ const RelatedPosts = ({ posts }) => (
       {posts.map((post, index) => (
         <Wrapper key={index}>
           <Image>
-            <Img url={post.headImage && post.headImage.url} sizes="(max-width: 900px) 98vw, 25vw" />
+            <Img alt={post.title} url={post.headImage && post.headImage.url} sizes="(max-width: 900px) 98vw, 25vw" />
           </Image>
           <StyledLink to={createPath(post)}>
             <Info>

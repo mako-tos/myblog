@@ -57,7 +57,7 @@ const rects = [
 ]
 const Header = ({ children, title, date, cover, isUpdated }) => (
   <Wrapper>
-    {cover && <Img url={cover} rects={rects} sizes="100vw" />}
+    {cover && <Img url={cover} rects={rects} sizes="100vw" alt={title} />}
     <Text>
       <h1>{title}</h1>
       {date && (

@@ -15,40 +15,40 @@ const WrapperPicture = styled.picture`
     max-width: none;
   }
 `;
-const Img = ({ url, sizes, quality, rects }) => {
+const Img = ({ url, sizes, quality, rects, alt }) => {
   if (!url) {
     return <></>;
   }
 
   const createURL = (size, isWebp) => {
-    const fixedUrl = new URL(url)
-    const params = fixedUrl.searchParams
-    params.append('fit', 'crop')
+    const fixedUrl = new URL(url);
+    const params = fixedUrl.searchParams;
+    params.append('fit', 'crop');
     if (size.width) {
-      params.append('w', size.width)
+      params.append('w', size.width);
     }
     if (size.height) {
-      params.append('h', size.height)
+      params.append('h', size.height);
     }
-    params.append('q', quality)
+    params.append('q', quality);
     if (isWebp) {
-      params.append('fm', 'webp')
+      params.append('fm', 'webp');
     }
-    return fixedUrl.href
-  }
+    return fixedUrl.href;
+  };
 
   const srcSetWebpArray = rects.map(size => {
-    const ary = [createURL(size, true)]
+    const ary = [createURL(size, true)];
     if (size.width) {
-      ary .push(`${size.width}w`)
+      ary.push(`${size.width}w`);
     }
     return ary.join(' ');
   });
   const srcSetWebp = srcSetWebpArray.join(',');
   const srcSetOriginArray = rects.map(size => {
-    const ary = [createURL(size, false)]
+    const ary = [createURL(size, false)];
     if (size.width) {
-      ary.push(`${size.width}w`)
+      ary.push(`${size.width}w`);
     }
     return ary.join(' ');
   });
@@ -58,7 +58,7 @@ const Img = ({ url, sizes, quality, rects }) => {
       <WrapperPicture>
         <source type="image/webp" srcSet={srcSetWebp} sizes={sizes} />
         <source srcSet={srcSetOrigin} sizes={sizes} />
-        <img src={url} alt="" loading="lazy" sizes={sizes} />
+        <img src={url} alt={alt} loading="lazy" sizes={sizes} />
       </WrapperPicture>
     </LazyLoad>
   );
@@ -76,10 +76,11 @@ Img.propTypes = {
   ),
   quality: PropTypes.number,
   sizes: PropTypes.string,
+  alt: PropTypes.string.isRequired,
 };
 
 Img.defaultProps = {
-  url: false, 
+  url: false,
   rects: [
     { width: 240 },
     { width: 480 },
@@ -88,7 +89,6 @@ Img.defaultProps = {
     { width: 1440 },
     { width: 1920 },
   ],
-  sizes:
-    '90vw',
+  sizes: '90vw',
   quality: 80,
 };

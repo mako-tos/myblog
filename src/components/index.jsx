@@ -6,6 +6,8 @@ import TagsBlock from './TagsBlock';
 import Img from './Img';
 import PostPage from './PostPage';
 import RelatedPosts from './RelatedPosts';
+import FooterGithub from './FooterGithub';
+import FooterTwitter from './FooterTwitter';
 
 export {
   BlogList,
@@ -16,4 +18,6 @@ export {
   Img,
   PostPage,
   RelatedPosts,
+  FooterGithub,
+  FooterTwitter,
 };

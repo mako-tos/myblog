@@ -3,8 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitterSquare, faGithub } from '@fortawesome/free-brands-svg-icons';
 import config from '../../config/site';
-import LazyLoad from 'react-lazyload';
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import { FooterGithub, FooterTwitter } from '../components'
 
 const Wrapper = styled.footer`
   position: relative;
@@ -17,7 +16,9 @@ const Wrapper = styled.footer`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     padding-top: 7rem;
   }
-  display: flex;
+  @media (min-width: ${props => props.theme.breakpoints.m}) {
+    display: flex;
+  }
   justify-content: space-around;
 `;
 
@@ -25,6 +26,7 @@ const Text = styled.div`
   margin: 0;
   padding-bottom: 2rem;
   text-align: center;
+  flex: 1;
   color: ${props => props.theme.colors.white.light};
   a {
     margin-left: 0.5em;
@@ -33,6 +35,7 @@ const Text = styled.div`
 `;
 
 const TwitterPlaceholderWrapper = styled.div`
+  padding: 0 1em;
   color: ${props => props.theme.colors.white.light};
   a {
     margin-left: 0.5em;
@@ -71,24 +74,10 @@ const Footer = () => (
       </span>
     </Text>
     <Text>
-      <FontAwesomeIcon icon={faGithub} />
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`https://github.com/${config.github}`}
-        itemProp="url"
-      >
-        {config.github}
-      </a>
+      <FooterGithub user={config.github} />
     </Text>
     <Text>
-      <LazyLoad once placeholder={<TwitterPlaceholder />}>
-        <TwitterTimelineEmbed
-          sourceType="profile"
-          screenName={config.twitter}
-          options={{ height: 400, lang: 'ja' }}
-        />
-      </LazyLoad>
+      <FooterTwitter user={config.twitter} />
     </Text>
   </Wrapper>
 );

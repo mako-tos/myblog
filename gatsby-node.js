@@ -1,4 +1,6 @@
 const path = require('path');
+const fetch = require('node-fetch');
+const config = require('./config/site');
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -97,3 +99,31 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   });
 };
+
+if (config.github) {
+  /**
+   * Load Github repository data
+   */
+  exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+    const { createNode } = actions
+    // Data can come from anywhere, but for now create it manually
+    const res = await fetch(`https://api.github.com/users/${config.github}/repos`)
+    const json = await res.json()
+    json.forEach(repo => {
+      const nodeContent = JSON.stringify(repo)
+      const nodeMeta = {
+        id: createNodeId(`github-repos-${repo.name}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: `GithubRepos`,
+          mediaType: `text/html`,
+          content: nodeContent,
+          contentDigest: createContentDigest(repo),
+        },
+      }
+      const node = Object.assign({}, repo, nodeMeta)
+      createNode(node)
+    })
+  }
+}

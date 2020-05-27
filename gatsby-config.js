@@ -149,5 +149,18 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_ANALYTICS,
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        exclude: ["/draft/**"],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 100,
+        // Defers execution of google analytics script after page load
+        defer: true,
+      },
+    },
   ],
 };

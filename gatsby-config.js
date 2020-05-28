@@ -1,19 +1,20 @@
-require('dotenv').config()
-const proxy = require("http-proxy-middleware")
+require('dotenv').config();
+const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
-const { createPath, excerpt } = require('./src/functions')
+const { createPath, excerpt } = require('./src/functions');
+const path = require(`path`);
 
 module.exports = {
   developMiddleware: app => {
     app.use(
-      "/.netlify/functions/",
+      '/.netlify/functions/',
       proxy({
-        target: "http://localhost:9000",
+        target: 'http://localhost:9000',
         pathRewrite: {
-          "/.netlify/functions/": "",
+          '/.netlify/functions/': '',
         },
       })
-    )
+    );
   },
   siteMetadata: {
     ...config,
@@ -52,7 +53,6 @@ module.exports = {
         pathToConfigModule: 'config/typography.js',
       },
     },
-    'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -69,11 +69,29 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.join(__dirname, `src`, `images`),
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
       resolve: 'gatsby-source-microcms',
       options: {
         apiKey: process.env.MICRO_CMS_API_KEY,
         serviceId: process.env.MICRO_CMS_SERVICE_ID,
-        endpoint: 'blog'
+        endpoint: 'blog',
+      },
+    },
+    {
+      resolve: 'gatsby-remark-images-microcms',
+      options: {
+        // endpoint or type is required. If both set then type is used
+        // both of them must be equals to gatsby-source-microcms's option
+        endpoint: 'blog', // string
+        field: 'headImage', // string
       },
     },
     {
@@ -81,22 +99,22 @@ module.exports = {
       options: {
         apiKey: process.env.MICRO_CMS_API_KEY,
         serviceId: process.env.MICRO_CMS_SERVICE_ID,
-        endpoint: 'tag'
+        endpoint: 'tag',
       },
     },
     {
       resolve: `gatsby-plugin-netlify-identity`,
       options: {
-        url: config.siteUrl // required!
-      }
+        url: config.siteUrl, // required!
+      },
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
         devMode: false,
         analyzerMode: 'static',
         openAnalyzer: false,
-        reportFilename: 'report.html'
+        reportFilename: 'report.html',
       },
     },
     {
@@ -118,15 +136,17 @@ module.exports = {
           {
             serialize: ({ query: { site, allMicrocmsBlog } }) => {
               return allMicrocmsBlog.edges.map(edge => {
-                const url = `${site.siteMetadata.siteUrl}/${createPath(edge.node)}`
+                const url = `${site.siteMetadata.siteUrl}/${createPath(
+                  edge.node
+                )}`;
                 return Object.assign({}, edge.node, {
                   description: excerpt(edge.node.body, 120),
                   date: edge.node.createdAt,
                   url: url,
                   guid: url,
-                  custom_elements: [{ "content:encoded": edge.node.body }],
-                })
-              })
+                  custom_elements: [{ 'content:encoded': edge.node.body }],
+                });
+              });
             },
             query: `
               {
@@ -142,9 +162,9 @@ module.exports = {
                 }
               }
             `,
-            output: "/rss.xml",
+            output: '/rss.xml',
             title: `${config.title}'s RSS Feed`,
-            match: "^/blog/",
+            match: '^/blog/',
           },
         ],
       },
@@ -155,7 +175,7 @@ module.exports = {
         trackingId: process.env.GOOGLE_ANALYTICS,
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: false,
-        exclude: ["/draft/**"],
+        exclude: ['/draft/**'],
         // Delays sending pageview hits on route update (in milliseconds)
         pageTransitionDelay: 100,
         // Defers execution of google analytics script after page load

@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { createPath } from '../functions';
-import Img from './Img';
+import Img from 'gatsby-image';
 import theme from '../../config/theme';
 
 const RelatedPostList = styled.ol`
@@ -101,8 +101,7 @@ const RelatedPosts = ({ posts }) => (
           <Image>
             <Img
               alt={post.title}
-              url={post.headImage && post.headImage.url}
-              sizes="(max-width: 900px) 98vw, 25vw"
+              fluid={post.childMicrocmsImage.childFile.childImageSharp.fluid}
             />
           </Image>
           <StyledLink to={createPath(post)}>
@@ -124,7 +123,7 @@ RelatedPosts.propTypes = {
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
-      headImage: PropTypes.object,
+      childMicrocmsImage: PropTypes.object.isRequired,
     })
   ),
 };

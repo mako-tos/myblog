@@ -14,7 +14,7 @@ const getRelationPosts = ({ slug, tags }, allPosts, maxCount) => {
       slug: post.slug,
       title: post.title,
       tagSlugs: post.tags.map(tag => tag.slug),
-      headImage: post.headImage,
+      childMicrocmsImage: post.childMicrocmsImage,
     });
   });
   tags.forEach(tag => {
@@ -68,9 +68,7 @@ Post.propTypes = {
         tags: PropTypes.array,
         createdAt: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
-        headImage: PropTypes.shape({
-          url: PropTypes.string.isRequired,
-        }),
+        childMicrocmsImage: PropTypes.object,
       })
     ),
   }).isRequired,
@@ -82,7 +80,7 @@ Post.propTypes = {
       slug: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       updatedAt: PropTypes.string.isRequired,
-      headImage: PropTypes.object.isRequired,
+      childMicrocmsImage: PropTypes.object,
       tags: PropTypes.array,
     }),
   }),
@@ -97,8 +95,14 @@ export const query = graphql`
       slug
       createdAt(formatString: "YYYY-MM-DD")
       updatedAt(formatString: "YYYY-MM-DD")
-      headImage {
-        url
+      childMicrocmsImage {
+        childFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
       tags {
         slug

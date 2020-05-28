@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { TagsBlock, Img } from 'components';
+import { TagsBlock } from 'components';
 import { Container } from 'layouts';
+import Img from 'gatsby-image';
 
 const Wrapper = styled.article`
   margin: 0 3rem;
@@ -104,7 +105,7 @@ const Title = styled.h1`
 
 const BlogList = ({
   path,
-  cover,
+  fluid,
   title,
   createdAt,
   updatedAt,
@@ -115,7 +116,7 @@ const BlogList = ({
     <Wrapper>
       <Image>
         <Link to={path} title={title}>
-          <Img alt={title} url={cover} sizes="(max-width: 900px) 80vw, 60vw" />
+          <Img alt={title} fluid={fluid} />
         </Link>
       </Image>
       <Information>
@@ -140,7 +141,7 @@ const BlogList = ({
 export default BlogList;
 
 BlogList.propTypes = {
-  cover: PropTypes.string.isRequired,
+  fluid: PropTypes.object.isRequired,
   path: PropTypes.string.isRequired,
   excerpt: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,

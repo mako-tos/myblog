@@ -29,7 +29,7 @@ const Index = ({ data, location }) => {
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {
-          const { headImage, title, tags, createdAt, body, digest } = node;
+          const { childMicrocmsImage, title, tags, createdAt, body, digest } = node;
           const description = excerpt(digest || body, 40);
 
           const path = createPath(node);
@@ -37,7 +37,7 @@ const Index = ({ data, location }) => {
           return (
             <PostList
               key={path}
-              cover={headImage.url}
+              fluid={childMicrocmsImage.childFile.childImageSharp.fluid}
               path={path}
               title={title}
               createdAt={createdAt}
@@ -59,7 +59,7 @@ Index.propTypes = {
       edges: PropTypes.arrayOf(
         PropTypes.shape({
           node: PropTypes.shape({
-            headImage: PropTypes.object.isRequired,
+            childMicrocmsImage: PropTypes.object.isRequired,
             slug: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             createdAt: PropTypes.string.isRequired,
@@ -87,8 +87,14 @@ export const query = graphql`
             slug
             title
           }
-          headImage {
-            url
+          childMicrocmsImage {
+            childFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           digest
           body

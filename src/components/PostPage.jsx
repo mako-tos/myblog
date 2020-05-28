@@ -43,8 +43,9 @@ const Holly = styled.div`
 
 const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
-  const { headImage, title, tags, createdAt, updatedAt, body, digest } = data;
+  const { childMicrocmsImage, title, tags, createdAt, updatedAt, body, digest } = data;
   const description = excerpt(digest || body, 120);
+  const fluid = childMicrocmsImage.childFile.childImageSharp.fluid
 
   const preRegex = /(<pre><code>)/gi;
   const newBody = body.replace(
@@ -57,7 +58,7 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
       <SEO
         title={title}
         description={description}
-        banner={headImage && headImage.url}
+        banner={fluid}
         pathname={location.pathname}
         article
       />
@@ -65,7 +66,7 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
         title={title}
         updatedAt={updatedAt}
         createdAt={createdAt}
-        cover={headImage && headImage.url}
+        fluid={fluid}
       />
       <Holly>
         <Container>
@@ -112,7 +113,7 @@ Post.propTypes = {
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    headImage: PropTypes.object,
+    childMicrocmsImage: PropTypes.object.isRequired,
     tags: PropTypes.array,
   }),
   location: PropTypes.object.isRequired,

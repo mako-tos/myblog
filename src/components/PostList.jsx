@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Img } from '../components';
+import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import theme from '../../config/theme';
@@ -81,10 +81,6 @@ const Image = styled.div`
   bottom: 0;
   z-index: 1;
   border-radius: ${props => props.theme.borderRadius.default};
-  img {
-    border-radius: ${props => props.theme.borderRadius.default};
-    min-height: 100%;
-  }
   > div {
     position: static !important;
   }
@@ -105,13 +101,12 @@ const Title = styled.h2`
   margin-bottom: 0.6rem;
 `;
 
-const PostList = ({ cover, path, createdAt, title, excerpt }) => (
+const PostList = ({ fluid, path, createdAt, title, excerpt }) => (
   <Wrapper>
     <Image>
       <Img
-        url={cover}
+        fluid={fluid}
         alt={title}
-        sizes="(max-width: 700px) 95vw, (max-width: 1000px) 55vw, 35vw"
       />
     </Image>
     <StyledLink to={path} itemProp="url" title={title}>
@@ -127,7 +122,7 @@ const PostList = ({ cover, path, createdAt, title, excerpt }) => (
 export default PostList;
 
 PostList.propTypes = {
-  cover: PropTypes.string.isRequired,
+  fluid: PropTypes.object.isRequired,
   path: PropTypes.string.isRequired,
   excerpt: PropTypes.string,
   createdAt: PropTypes.string.isRequired,

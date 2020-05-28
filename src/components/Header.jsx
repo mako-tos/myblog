@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { Img } from '../components';
+import GatsbyImg from 'gatsby-image';
 
 const Wrapper = styled.header`
   -webkit-clip-path: polygon(100% 0, 0 0, 0 70%, 50% 100%, 100% 70%);
@@ -20,10 +20,6 @@ const Wrapper = styled.header`
   }
   position: relative;
   overflow: hidden;
-  img {
-    min-height: 100%;
-    min-width: 100vw;
-  }
 `;
 
 const Text = styled.div`
@@ -59,16 +55,9 @@ const UpdateTime = styled.time`
   }
 `;
 
-const rects = [
-  { width: 240, height: 400 },
-  { width: 480, height: 400 },
-  { width: 960, height: 400 },
-  { width: 1440, height: 400 },
-  { width: 1920, height: 400 },
-];
-const Header = ({ children, title, createdAt, updatedAt, cover }) => (
+const Header = ({ children, title, createdAt, updatedAt, fluid }) => (
   <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
-    {cover && <Img url={cover} rects={rects} sizes="100vw" alt={title} />}
+    {fluid && <GatsbyImg fluid={fluid} alt={title} />}
     <Text>
       <h1 itemProp="headline">{title}</h1>
       <div>
@@ -89,7 +78,7 @@ export default Header;
 
 Header.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-  cover: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  fluid: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   craetedAt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   updatedAt: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   title: PropTypes.oneOfType([
@@ -101,7 +90,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   children: false,
-  cover: false,
+  fluid: false,
   craetedAt: false,
   updatedAt: false,
   title: false,

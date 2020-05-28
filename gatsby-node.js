@@ -2,92 +2,97 @@ const path = require('path');
 const fetch = require('node-fetch');
 const config = require('./config/site');
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  return new Promise((resolve, reject) => {
-    const postTemplate = path.resolve('src/templates/post.jsx');
-    const tagPage = path.resolve('src/templates/tags.jsx');
-    const tagPosts = path.resolve('src/templates/tag.jsx');
-
-    resolve(
-      graphql(
-        `
-          query {
-            allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
-              edges {
-                node {
-                  blogId
-                  createdAt(formatString: "YYYY-MM-DD")
-                  tags {
-                    slug
-                    title
-                  }
-                  headImage {
-                    url
-                  }
-                  slug
-                  title
-                }
-              }
-            }
-            allMicrocmsTag {
-              edges {
-                node {
-                  slug
-                  title
-                }
+const query = `
+query {
+  allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
+    edges {
+      node {
+        blogId
+        createdAt(formatString: "YYYY-MM-DD")
+        tags {
+          slug
+          title
+        }
+        childMicrocmsImage {
+          childFile {
+            childImageSharp {
+              fluid {
+                base64
+                tracedSVG
+                srcWebp
+                srcSetWebp
+                originalImg
+                originalName
               }
             }
           }
-        `
-      ).then(result => {
-        if (result.errors) {
-          return reject(result.errors);
         }
+        slug
+        title
+      }
+    }
+  }
+  allMicrocmsTag {
+    edges {
+      node {
+        slug
+        title
+      }
+    }
+  }
+}
+`
 
-        const posts = result.data.allMicrocmsBlog.edges;
-        const tags = result.data.allMicrocmsTag.edges.map(tag => tag.node);
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const postTemplate = path.resolve('src/templates/post.jsx');
+  const tagPage = path.resolve('src/templates/tags.jsx');
+  const tagPosts = path.resolve('src/templates/tag.jsx');
 
-        createPage({
-          path: '/tags',
-          component: tagPage,
-          context: {
-            tags: tags,
-          },
-        });
+  const result = await graphql(query);
+  if (result.errors) {
+    throw new Error(result.errors);
+  }
 
-        //create tags
-        tags.forEach(tag => {
-          createPage({
-            path: `/tags/${tag.slug}`,
-            component: tagPosts,
-            context: {
-              slug: tag.slug,
-              title: tag.title,
-            },
-          });
-        });
+  const posts = result.data.allMicrocmsBlog.edges;
+  const tags = result.data.allMicrocmsTag.edges.map(tag => tag.node);
 
-        //create posts
-        posts.forEach(({ node }, index) => {
-          const path = `${node.createdAt}-${node.slug}`;
-          const prev = index === 0 ? null : posts[index - 1].node;
-          const next =
-            index === posts.length - 1 ? null : posts[index + 1].node;
-          createPage({
-            path,
-            component: postTemplate,
-            context: {
-              blogId: node.blogId,
-              prev,
-              next,
-              allPosts: posts.map(post => post.node),
-            },
-          });
-        });
-      })
-    );
+  createPage({
+    path: '/tags',
+    component: tagPage,
+    context: {
+      tags: tags,
+    },
+  });
+
+  //create tags
+  tags.forEach(tag => {
+    createPage({
+      path: `/tags/${tag.slug}`,
+      component: tagPosts,
+      context: {
+        slug: tag.slug,
+        title: tag.title,
+      },
+    });
+  });
+
+  //create posts
+  posts.forEach(({ node }, index) => {
+    const path = `${node.createdAt}-${node.slug}`;
+    const prev = index === 0 ? null : posts[index - 1].node;
+    const next =
+      index === posts.length - 1 ? null : posts[index + 1].node;
+    createPage({
+      path,
+      component: postTemplate,
+      context: {
+        blogId: node.blogId,
+        prev,
+        next,
+        allPosts: posts.map(post => post.node),
+      },
+    });
   });
 };
 

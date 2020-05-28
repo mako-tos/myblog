@@ -14,7 +14,7 @@ const Blog = ({ data }) => {
       <Header title="Blog Page">Stey by Step</Header>
       {edges.map(({ node }) => {
         const {
-          headImage,
+          childMicrocmsImage,
           title,
           tags,
           createdAt,
@@ -29,7 +29,7 @@ const Blog = ({ data }) => {
         return (
           <BlogList
             key={path}
-            cover={headImage.url}
+            fluid={childMicrocmsImage.childFile.childImageSharp.fluid}
             path={path}
             title={title}
             createdAt={createdAt}
@@ -51,7 +51,7 @@ Blog.propTypes = {
       edges: PropTypes.arrayOf(
         PropTypes.shape({
           node: PropTypes.shape({
-            headImage: PropTypes.object.isRequired,
+            childMicrocmsImage: PropTypes.object.isRequired,
             slug: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             createdAt: PropTypes.string.isRequired,
@@ -79,8 +79,14 @@ export const query = graphql`
             slug
             title
           }
-          headImage {
-            url
+          childMicrocmsImage {
+            childFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           digest
           body

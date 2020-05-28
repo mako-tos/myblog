@@ -24,10 +24,11 @@ const SEO = ({ title, description, banner, pathname, article }) => (
         },
       },
     }) => {
+      const imagePath = banner ? siteUrl + banner.src : siteUrl + defaultBanner
       const seo = {
         title: `${title} | ${defaultTitle}`,
         description: description || defaultDescription,
-        image: `${banner || siteUrl + defaultBanner}`,
+        image: `${imagePath}`,
         url: `${siteUrl}${pathname || '/'}`,
       };
       const realPrefix = pathPrefix === '/' ? '' : pathPrefix;
@@ -129,7 +130,7 @@ export default SEO;
 SEO.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  banner: PropTypes.string,
+  banner: PropTypes.object,
   pathname: PropTypes.string,
   article: PropTypes.bool,
 };

@@ -20,7 +20,7 @@ const TwitterPlaceholderWrapper = styled.div`
 
 const TwitterPlaceholder = ({user}) => (
   <TwitterPlaceholderWrapper>
-    <FontAwesomeIcon icon={faTwitterSquare} />
+    <FontAwesomeIcon icon={faTwitterSquare} width="16" height="16" />
     <a
       target="_blank"
       rel="noreferrer"

@@ -102,7 +102,11 @@ const Title = styled.h2`
 `;
 
 const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
-  const sizedFluid = { ...fluid, media: '(max-width: 700px) 95vw, (max-width: 1000px) 55vw, 35vw' }
+  const sizedFluid = {
+    ...fluid,
+    sizes: '(max-width: 700px) 90vw, (max-width: 1000px) 450px, 400px',
+  };
+  console.log(sizedFluid)
   return (
     <Wrapper>
       <Image>

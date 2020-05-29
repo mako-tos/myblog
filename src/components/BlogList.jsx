@@ -129,7 +129,7 @@ const BlogList = ({
   excerpt,
   tags,
 }) => {
-  const sizedFluid = { ...fluid, media: '(max-width: 900px) 80vw, 60vw' }
+  const sizedFluid = { ...fluid, sizes: '(max-width: 900) 80vw, 800px' }
   return (
     <Container>
       <Wrapper>

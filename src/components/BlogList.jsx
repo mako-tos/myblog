@@ -135,7 +135,7 @@ const BlogList = ({
       <Wrapper>
         <Image>
           <Link to={path} title={title}>
-            <Img alt={title} fluid={sizedFluid} />
+            <Img alt={title} fluid={sizedFluid} durationFadeIn={100} />
           </Link>
         </Image>
         <Information>

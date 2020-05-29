@@ -106,11 +106,10 @@ const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
     ...fluid,
     sizes: '(max-width: 700px) 90vw, (max-width: 1000px) 450px, 400px',
   };
-  console.log(sizedFluid)
   return (
     <Wrapper>
       <Image>
-        <Img fluid={sizedFluid} alt={title} />
+        <Img fluid={sizedFluid} alt={title} durationFadeIn={100} />
       </Image>
       <StyledLink to={path} itemProp="url" title={title}>
         <Info>

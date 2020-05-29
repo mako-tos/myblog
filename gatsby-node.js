@@ -1,6 +1,8 @@
 const path = require('path');
 const fetch = require('node-fetch');
 const config = require('./config/site');
+const { paginate } = require(`gatsby-awesome-pagination`)
+
 
 const query = `
 query {
@@ -48,6 +50,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const postTemplate = path.resolve('src/templates/post.jsx');
   const tagPage = path.resolve('src/templates/tags.jsx');
   const tagPosts = path.resolve('src/templates/tag.jsx');
+  const blogTemplate = path.resolve(`./src/templates/blog.jsx`);
 
   const result = await graphql(query);
   if (result.errors) {
@@ -64,6 +67,22 @@ exports.createPages = async ({ graphql, actions }) => {
       tags: tags,
     },
   });
+
+  // Create a page containing all "posts" and paginate.
+  const basePath = '/blog'
+  paginate({
+    createPage,
+    component: blogTemplate,
+    items: posts,
+    itemsPerFirstPage: config.postsPerPage || 6,
+    itemsPerPage: config.postsPerPage || 6,
+    pathPrefix: basePath,
+    context: {
+      basePath: basePath,
+      paginationPath: `/${basePath}`,
+    },
+  })
+  
 
   //create tags
   tags.forEach(tag => {

@@ -16,4 +16,5 @@ module.exports = {
   backgroundColor: '#d3e0ff',
   twitter: 'z_macn', // Twitter Username
   github: 'mako-tos',
+  postsPerPage: 6,
 };

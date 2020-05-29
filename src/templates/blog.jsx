@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
 import { createPath, excerpt } from '../functions';
+import Pagination from '../components/Pagination'
 
-const Blog = ({ data }) => {
+const Blog = ({ data, pageContext }) => {
   const { edges } = data.allMicrocmsBlog;
   return (
     <Layout>
       <Helmet title={'Blog Page'} />
       <Header title="Blog Page">Stey by Step</Header>
+      <Pagination context={pageContext} />
       {edges.map(({ node }) => {
         const {
           childMicrocmsImage,
@@ -39,6 +41,7 @@ const Blog = ({ data }) => {
           />
         );
       })}
+      <Pagination context={pageContext} />
     </Layout>
   );
 };
@@ -67,8 +70,12 @@ Blog.propTypes = {
 };
 
 export const query = graphql`
-  query {
-    allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }, limit: 6) {
+  query($skip: Int!, $limit: Int!) {
+    allMicrocmsBlog(
+      sort: { fields: [createdAt], order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           slug

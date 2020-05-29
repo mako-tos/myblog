@@ -89,8 +89,8 @@ export const query = graphql`
           childMicrocmsImage {
             childFile {
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
+                fluid(quality: 80) {
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

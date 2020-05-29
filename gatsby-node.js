@@ -18,7 +18,7 @@ query {
         childMicrocmsImage {
           childFile {
             childImageSharp {
-              fluid {
+              fluid(quality: 80) {
                 base64
                 tracedSVG
                 srcWebp

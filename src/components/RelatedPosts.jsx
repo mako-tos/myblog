@@ -102,6 +102,7 @@ const RelatedPosts = ({ posts }) => (
             <Img
               alt={post.title}
               fluid={post.childMicrocmsImage.childFile.childImageSharp.fluid}
+              durationFadeIn={100}
             />
           </Image>
           <StyledLink to={createPath(post)}>

@@ -23,10 +23,10 @@
   [headers.values]
     Cache-Control = "public, max-age=60480000"
 [[headers]]
-  for = "*.jpg" # css files too
+  for = "*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=60480000, immutable"
 [[headers]]
-  for = "*.webp" # css files too
+  for = "*.webp"
   [headers.values]
     Cache-Control = "public, max-age=60480000, immutable"

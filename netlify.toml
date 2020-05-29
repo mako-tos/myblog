@@ -17,3 +17,20 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "no-referrer"
     X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "*.js" # js files should be set this way
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.css" # css files too
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "*.jpg" # css files too
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+[[headers]]
+  for = "*.webp" # css files too
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"

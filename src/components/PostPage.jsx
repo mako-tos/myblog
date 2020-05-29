@@ -45,7 +45,7 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
   const { childMicrocmsImage, title, tags, createdAt, updatedAt, body, digest } = data;
   const description = excerpt(digest || body, 120);
-  const fluid = childMicrocmsImage.childFile.childImageSharp.fluid
+  const fluid = childMicrocmsImage ? childMicrocmsImage.childFile.childImageSharp.fluid : null
 
   const preRegex = /(<pre><code>)/gi;
   const newBody = body.replace(

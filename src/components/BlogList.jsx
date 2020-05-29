@@ -3,10 +3,27 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { TagsBlock } from 'components';
-import { Container } from 'layouts';
 import Img from 'gatsby-image';
 
-const Wrapper = styled.article`
+const Container = styled.article`
+  text-align: ${props => (props.center ? 'center' : '')};
+  margin: auto;
+  padding: 3rem 1.5rem 1.5rem 1.5rem;
+  width: 60%;
+  max-width: ${props => props.theme.layout[props.type]};
+  height: 100%;
+  flex: 3;
+
+  @media (max-width: ${props => props.theme.breakpoints.m}) {
+    width: 90%;
+  }
+
+  @media (max-width: ${props => props.theme.breakpoints.s}) {
+    width: 95%;
+  }
+`;
+
+const Wrapper = styled.div`
   margin: 0 3rem;
   @media (max-width: ${props => props.theme.breakpoints.m}) {
     margin: 1rem;
@@ -111,32 +128,35 @@ const BlogList = ({
   updatedAt,
   excerpt,
   tags,
-}) => (
-  <Container>
-    <Wrapper>
-      <Image>
-        <Link to={path} title={title}>
-          <Img alt={title} fluid={fluid} />
-        </Link>
-      </Image>
-      <Information>
-        <DateWrapper>
-          {createdAt && (
-            <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
-          )}
-          {createdAt !== updatedAt && (
-            <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
-          )}
-        </DateWrapper>
-        <Link to={path}>
-          <Title itemProp="name headline">{title}</Title>
-        </Link>
-        <TagsBlock list={tags} />
-        <div itemProp="description">{excerpt}</div>
-      </Information>
-    </Wrapper>
-  </Container>
-);
+}) => {
+  const sizedFluid = { ...fluid, media: '(max-width: 900px) 80vw, 60vw' }
+  return (
+    <Container>
+      <Wrapper>
+        <Image>
+          <Link to={path} title={title}>
+            <Img alt={title} fluid={sizedFluid} />
+          </Link>
+        </Image>
+        <Information>
+          <DateWrapper>
+            {createdAt && (
+              <CreateTime itemProp="datePublished">{createdAt}</CreateTime>
+            )}
+            {createdAt !== updatedAt && (
+              <UpdateTime itemProp="dateModified">{updatedAt}</UpdateTime>
+            )}
+          </DateWrapper>
+          <Link to={path}>
+            <Title itemProp="name headline">{title}</Title>
+          </Link>
+          <TagsBlock list={tags} />
+          <div itemProp="description">{excerpt}</div>
+        </Information>
+      </Wrapper>
+    </Container>
+  );
+};
 
 export default BlogList;
 

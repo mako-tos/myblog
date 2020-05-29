@@ -101,23 +101,23 @@ const Title = styled.h2`
   margin-bottom: 0.6rem;
 `;
 
-const PostList = ({ fluid, path, createdAt, title, excerpt }) => (
-  <Wrapper>
-    <Image>
-      <Img
-        fluid={fluid}
-        alt={title}
-      />
-    </Image>
-    <StyledLink to={path} itemProp="url" title={title}>
-      <Info>
-        <time itemProp="datePublished">{createdAt}</time>
-        <Title itemProp="name headline">{title}</Title>
-        <span itemProp="description">{excerpt}</span>
-      </Info>
-    </StyledLink>
-  </Wrapper>
-);
+const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
+  const sizedFluid = { ...fluid, media: '(max-width: 700px) 95vw, (max-width: 1000px) 55vw, 35vw' }
+  return (
+    <Wrapper>
+      <Image>
+        <Img fluid={sizedFluid} alt={title} />
+      </Image>
+      <StyledLink to={path} itemProp="url" title={title}>
+        <Info>
+          <time itemProp="datePublished">{createdAt}</time>
+          <Title itemProp="name headline">{title}</Title>
+          <span itemProp="description">{excerpt}</span>
+        </Info>
+      </StyledLink>
+    </Wrapper>
+  );
+};
 
 export default PostList;
 

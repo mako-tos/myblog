@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import cheerio from 'cheerio';
+import hljs from 'highlight.js';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
 import { createPath, excerpt } from '../functions';
-import '../styles/prism';
 
 const SuggestionBar = styled.div`
   display: flex;
@@ -43,15 +44,27 @@ const Holly = styled.div`
 
 const Post = ({ data, pageContext, location, relatedPosts }) => {
   const { next, prev } = pageContext;
-  const { childMicrocmsImage, title, tags, createdAt, updatedAt, body, digest } = data;
+  const {
+    childMicrocmsImage,
+    title,
+    tags,
+    createdAt,
+    updatedAt,
+    body,
+    digest,
+  } = data;
   const description = excerpt(digest || body, 120);
-  const fluid = childMicrocmsImage ? childMicrocmsImage.childFile.childImageSharp.fluid : null
+  const fluid = childMicrocmsImage
+    ? childMicrocmsImage.childFile.childImageSharp.fluid
+    : null;
 
-  const preRegex = /(<pre><code>)/gi;
-  const newBody = body.replace(
-    preRegex,
-    '<pre class="language-jsx"><code class="language-jsx">'
-  );
+  const $ = cheerio.load(body);
+  $('pre code').each((_, code) => {
+    const result = hljs.highlightAuto($(code).text());
+    $(code).html(result.value);
+    $(code).addClass('hljs');
+  });
+  const newBody = $.html();
 
   return (
     <Layout>

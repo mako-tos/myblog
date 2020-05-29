@@ -1,3 +1,5 @@
+const cheerio = require('cheerio');
+
 module.exports = {
   /**
    * postからpathを作成する
@@ -14,8 +16,7 @@ module.exports = {
    * @returns {string} short text
    */
   excerpt: (html, length) => {
-    const regex = /(<([^>]+)>)/gi;
-    const planText = html.replace(regex, '');
-    return planText.substr(0, length);
+    const $ = cheerio.load(html)
+    return $.root().text().substr(0, length)
   },
 };

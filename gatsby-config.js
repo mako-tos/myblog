@@ -24,22 +24,6 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 750,
-              quality: 80,
-              linkImagesToOriginal: true,
-            },
-          },
-          'gatsby-remark-prismjs',
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-emotion',
       options: {
         autoLabel: process.env.NODE_ENV !== 'production',

@@ -14,7 +14,7 @@ const TimeLineImpl = ({ sourceType, screenName, options }) => {
     scriptjs(twitterWidgetJs, 'twitter-embed', () => {
       if (!window.twttr) {
         console.error(
-          'Failure to load window.twttr in TwitterTimelineEmbed, aborting load.'
+          'Failure to load window.twttr in TimeLineImpl, aborting load.'
         );
         return;
       }

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitterSquare, faGithub } from '@fortawesome/free-brands-svg-icons';
 import config from '../../config/site';
 import { FooterGithub, FooterTwitter } from '../components'
 
@@ -33,29 +31,6 @@ const Text = styled.div`
     color: ${props => props.theme.colors.white.light};
   }
 `;
-
-const TwitterPlaceholderWrapper = styled.div`
-  padding: 0 1em;
-  color: ${props => props.theme.colors.white.light};
-  a {
-    margin-left: 0.5em;
-    color: ${props => props.theme.colors.white.light};
-  }
-`;
-
-const TwitterPlaceholder = () => (
-  <TwitterPlaceholderWrapper>
-    <FontAwesomeIcon icon={faTwitterSquare} />
-    <a
-      target="_blank"
-      rel="noreferrer"
-      href={`https://twitter.com/${config.twitter}`}
-      itemProp="url"
-    >
-      {config.twitter}
-    </a>
-  </TwitterPlaceholderWrapper>
-);
 
 const Footer = () => (
   <Wrapper

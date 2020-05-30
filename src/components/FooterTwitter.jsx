@@ -2,8 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitterSquare } from '@fortawesome/free-brands-svg-icons';
-import LazyLoad from 'react-lazyload';
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import TimeLine from './TwitterTimeLine';
 
 const Wrapper = styled.div`
   width: 90%;
@@ -34,13 +33,12 @@ const TwitterPlaceholder = ({user}) => (
 
 const FooterTwitter = ({user}) => (
   <Wrapper>
-    <LazyLoad once placeholder={<TwitterPlaceholder user={user} />}>
-      <TwitterTimelineEmbed
-        sourceType="profile"
-        screenName={user}
-        options={{ height: 400, lang: 'ja' }}
-      />
-    </LazyLoad>
+    <TimeLine
+      placeholder={<TwitterPlaceholder user={user} />}
+      sourceType="profile"
+      screenName={user}
+      options={{ height: 400, lang: 'ja' }}
+    />
   </Wrapper>
 );
 export default FooterTwitter;

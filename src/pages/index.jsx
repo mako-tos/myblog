@@ -6,6 +6,7 @@ import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
 import { SEO } from '../components';
 import { createPath } from '../functions';
+import 'react-netlify-identity-widget/styles.css';
 
 const PostWrapper = styled.div`
   display: flex;

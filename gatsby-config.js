@@ -27,17 +27,18 @@ module.exports = {
     ...config,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-catch-links',
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-emotion',
       options: {
+        sourceMap: false,
         autoLabel: process.env.NODE_ENV !== 'production',
         // eslint-disable-next-line
         labelFormat: `[filename]--[local]`,
       },
     },
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-catch-links',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-typography',
       options: {

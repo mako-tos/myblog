@@ -109,6 +109,7 @@ const RelatedPosts = ({ posts }) => (
                 alt={post.title}
                 fluid={sizedFluid}
                 durationFadeIn={100}
+                loading={"lazy"}
               />
             </Image>
             <StyledLink to={createPath(post)}>

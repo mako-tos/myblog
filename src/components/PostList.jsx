@@ -4,6 +4,7 @@ import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import theme from '../../config/theme';
+import LazyLoad from 'react-lazyload'
 
 const Wrapper = styled.article`
   margin-bottom: 2rem;
@@ -109,7 +110,12 @@ const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
   return (
     <Wrapper>
       <Image>
-        <Img fluid={sizedFluid} alt={title} durationFadeIn={100} />
+        <Img
+          fluid={sizedFluid}
+          alt={title}
+          loading={'lazy'}
+          durationFadeIn={100}
+        />
       </Image>
       <StyledLink to={path} itemProp="url" title={title}>
         <Info>

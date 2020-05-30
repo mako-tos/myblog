@@ -129,13 +129,18 @@ const BlogList = ({
   excerpt,
   tags,
 }) => {
-  const sizedFluid = { ...fluid, sizes: '(max-width: 900) 80vw, 800px' }
+  const sizedFluid = { ...fluid, sizes: '(max-width: 900) 80vw, 800px' };
   return (
     <Container>
       <Wrapper>
         <Image>
           <Link to={path} title={title}>
-            <Img alt={title} fluid={sizedFluid} durationFadeIn={100} />
+            <Img
+              alt={title}
+              fluid={sizedFluid}
+              loading={'lazy'}
+              durationFadeIn={100}
+            />
           </Link>
         </Image>
         <Information>

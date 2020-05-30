@@ -53,6 +53,11 @@ const Layout = ({ children }) => (
           h1 {
             font-family: ${theme.fontFamily.heading};
           }
+          img[data-src],
+          img[data-srcset] {
+            min-height: 1px;
+            min-width: 1px; 
+          }
 
           ${headroom}
         `}

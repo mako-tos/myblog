@@ -1,8 +1,15 @@
 require('dotenv').config();
 const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
-const { createPath, excerpt } = require('./src/functions');
+const { createPath } = require('./src/functions');
 const path = require(`path`);
+
+const cheerio = require('cheerio');
+
+const  excerpt = (html, length) => {
+  const $ = cheerio.load(html)
+  return $.root().text().substr(0, length)
+};
 
 module.exports = {
   developMiddleware: app => {

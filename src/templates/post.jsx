@@ -108,6 +108,11 @@ export const query = graphql`
         slug
         title
       }
+      childCheerioHtml {
+        html
+        hljsHtml
+        plainText
+      }
     }
   }
 `;

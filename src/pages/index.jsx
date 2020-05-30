@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
 import { SEO } from '../components';
-import { createPath, excerpt } from '../functions';
+import { createPath } from '../functions';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -29,8 +29,20 @@ const Index = ({ data, location }) => {
       <Header title="Step by Step">Home Page</Header>
       <PostWrapper>
         {edges.map(({ node }) => {
-          const { childMicrocmsImage, title, tags, createdAt, body, digest } = node;
-          const description = excerpt(digest || body, 40);
+          const {
+            childMicrocmsImage,
+            title,
+            tags,
+            createdAt,
+            body,
+            digest,
+            childCheerioHtml,
+          } = node;
+          const description = (
+            digest ||
+            childCheerioHtml.plainText ||
+            body
+          ).substr(0, 40);
 
           const path = createPath(node);
 
@@ -98,6 +110,11 @@ export const query = graphql`
           }
           digest
           body
+          childCheerioHtml {
+            html
+            hljsHtml
+            plainText
+          }
         }
       }
     }

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
-import { createPath, excerpt } from '../functions';
+import { createPath } from '../functions';
 import Pagination from '../components/Pagination'
 
 const Blog = ({ data, pageContext }) => {
@@ -23,8 +23,9 @@ const Blog = ({ data, pageContext }) => {
           updatedAt,
           body,
           digest,
+          childCheerioHtml,
         } = node;
-        const description = excerpt(digest || body, 80);
+        const description = (digest || childCheerioHtml.plainText || body).substr(0, 80);
 
         const path = createPath(node);
 
@@ -97,6 +98,11 @@ export const query = graphql`
           }
           digest
           body
+          childCheerioHtml {
+            html
+            hljsHtml
+            plainText
+          }
         }
       }
     }

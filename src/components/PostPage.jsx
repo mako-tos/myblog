@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import cheerio from 'cheerio';
-import hljs from 'highlight.js';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
-import { createPath, excerpt } from '../functions';
+import { createPath } from '../functions';
 
 const SuggestionBar = styled.div`
   display: flex;
@@ -52,19 +50,14 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
     updatedAt,
     body,
     digest,
+    childCheerioHtml,
   } = data;
-  const description = excerpt(digest || body, 120);
+  const description = (digest || childCheerioHtml.plainText || body).substr(0, 120);
   const fluid = childMicrocmsImage
     ? childMicrocmsImage.childFile.childImageSharp.fluid
     : null;
 
-  const $ = cheerio.load(body);
-  $('pre code').each((_, code) => {
-    const result = hljs.highlightAuto($(code).text());
-    $(code).html(result.value);
-    $(code).addClass('hljs');
-  });
-  const newBody = $.html();
+  const newBody = childCheerioHtml.hljsHtml;
 
   return (
     <Layout>

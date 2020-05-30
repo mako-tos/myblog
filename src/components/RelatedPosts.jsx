@@ -96,22 +96,29 @@ const RelatedPosts = ({ posts }) => (
   <section>
     関連記事
     <RelatedPostList>
-      {posts.map((post, index) => (
-        <Wrapper key={index}>
-          <Image>
-            <Img
-              alt={post.title}
-              fluid={post.childMicrocmsImage.childFile.childImageSharp.fluid}
-              durationFadeIn={100}
-            />
-          </Image>
-          <StyledLink to={createPath(post)}>
-            <Info>
-              <Title>{post.title}</Title>
-            </Info>
-          </StyledLink>
-        </Wrapper>
-      ))}
+      {posts.map((post, index) => {
+        const sizedFluid = {
+          ...post.childMicrocmsImage.childFile.childImageSharp.fluid,
+          sizes: '(max-width: 1000px) 90vw, 350px',
+        };
+
+        return (
+          <Wrapper key={index}>
+            <Image>
+              <Img
+                alt={post.title}
+                fluid={sizedFluid}
+                durationFadeIn={100}
+              />
+            </Image>
+            <StyledLink to={createPath(post)}>
+              <Info>
+                <Title>{post.title}</Title>
+              </Info>
+            </StyledLink>
+          </Wrapper>
+        );
+      })}
     </RelatedPostList>
   </section>
 );

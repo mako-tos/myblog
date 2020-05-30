@@ -2,12 +2,9 @@ import React, { Fragment } from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import { css, Global } from '@emotion/core';
 import PropTypes from 'prop-types';
-import 'typeface-open-sans';
-import 'typeface-candal';
 import { NavBar, Footer } from 'layouts';
 import theme from '../../config/theme';
 import headroom from '../styles/headroom';
-import 'react-netlify-identity-widget/styles.css';
 
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>

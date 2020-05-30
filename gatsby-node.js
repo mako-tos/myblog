@@ -1,8 +1,8 @@
 const path = require('path');
 const fetch = require('node-fetch');
 const config = require('./config/site');
-const { paginate } = require(`gatsby-awesome-pagination`)
-
+const { createPath } = require('./src/functions/');
+const { paginate } = require(`gatsby-awesome-pagination`);
 
 const query = `
 query {
@@ -43,7 +43,7 @@ query {
     }
   }
 }
-`
+`;
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -69,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // Create a page containing all "posts" and paginate.
-  const basePath = '/blog'
+  const basePath = '/blog';
   paginate({
     createPage,
     component: blogTemplate,
@@ -81,8 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
       basePath: basePath,
       paginationPath: `/${basePath}`,
     },
-  })
-  
+  });
 
   //create tags
   tags.forEach(tag => {
@@ -98,10 +97,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   //create posts
   posts.forEach(({ node }, index) => {
-    const path = `${node.createdAt}-${node.slug}`;
+    const path = createPath(node);
     const prev = index === 0 ? null : posts[index - 1].node;
-    const next =
-      index === posts.length - 1 ? null : posts[index + 1].node;
+    const next = index === posts.length - 1 ? null : posts[index + 1].node;
     createPage({
       path,
       component: postTemplate,
@@ -128,13 +126,19 @@ if (config.github) {
   /**
    * Load Github repository data
    */
-  exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-    const { createNode } = actions
+  exports.sourceNodes = async ({
+    actions,
+    createNodeId,
+    createContentDigest,
+  }) => {
+    const { createNode } = actions;
     // Data can come from anywhere, but for now create it manually
-    const res = await fetch(`https://api.github.com/users/${config.github}/repos`)
-    const json = await res.json()
+    const res = await fetch(
+      `https://api.github.com/users/${config.github}/repos`
+    );
+    const json = await res.json();
     json.forEach(repo => {
-      const nodeContent = JSON.stringify(repo)
+      const nodeContent = JSON.stringify(repo);
       const nodeMeta = {
         id: createNodeId(`github-repos-${repo.name}`),
         parent: null,
@@ -145,9 +149,9 @@ if (config.github) {
           content: nodeContent,
           contentDigest: createContentDigest(repo),
         },
-      }
-      const node = Object.assign({}, repo, nodeMeta)
-      createNode(node)
-    })
-  }
+      };
+      const node = Object.assign({}, repo, nodeMeta);
+      createNode(node);
+    });
+  };
 }

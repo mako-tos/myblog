@@ -5,6 +5,6 @@ module.exports = {
    * @returns {string} url
    */
   createPath: post => {
-    return `${post.createdAt}-${post.slug}`;
+    return `post/${post.createdAt}-${post.slug}`;
   },
 };

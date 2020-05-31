@@ -3,27 +3,7 @@ const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
 const { createPath } = require('./src/functions');
 const path = require(`path`);
-
-const picture = require('./src/functions/picture')
-
-const cheerio = require('cheerio');
-
-const  excerpt = (html, length) => {
-  const $ = cheerio.load(html)
-  return $.root().text().substr(0, length)
-};
-
-const htmlPlugin = async (html, options) => {
-  let $ = cheerio.load(html)
-  $('div.gatsby-image-wrapper noscript').each((_, elem) => {
-    const text = elem.children[0].data
-    const parent = $(elem).parent()
-    $(elem).remove()
-    return parent.append(text)
-  })
-  $ = await picture($, options)
-  return $.html()
-}
+const htmlPlugin = require('./src/functions/amp-html-plugin');
 
 module.exports = {
   developMiddleware: app => {
@@ -147,16 +127,17 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMicrocmsBlog } }) => {
-              return allMicrocmsBlog.edges.map(edge => {
+              return allMicrocmsBlog.edges.map(({ node }) => {
                 const url = `${site.siteMetadata.siteUrl}/${createPath(
-                  edge.node
+                  node
                 )}`;
-                return Object.assign({}, edge.node, {
-                  description: excerpt(edge.node.body, 120),
-                  date: edge.node.createdAt,
+
+                return Object.assign({}, node, {
+                  description: (node.digest || node.childCheerioHtml.plainText).substr(0, 120),
+                  date: node.createdAt,
                   url: url,
                   guid: url,
-                  custom_elements: [{ 'content:encoded': edge.node.body }],
+                  custom_elements: [{ 'content:encoded': node.childCheerioHtml.plainText }],
                 });
               });
             },
@@ -168,7 +149,10 @@ module.exports = {
                       slug
                       title
                       createdAt(formatString: "YYYY-MM-DD")
-                      body
+                      digest
+                      childCheerioHtml {
+                        plainText
+                      }            
                     }
                   }
                 }
@@ -202,8 +186,8 @@ module.exports = {
         dist: 'public/amp',
         optimize: true,
         htmlPlugins: [htmlPlugin],
-        cssPlugins: []
-      }
-    }
+        cssPlugins: [],
+      },
+    },
   ],
 };

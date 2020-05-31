@@ -1,4 +1,8 @@
-const utils = require('./utils');
+/**
+ * html2ampから拝借sしたソースを基にしている
+ */
+
+const utils = require('./amp-utils');
 
 const sourceToAmp = async (nodes, options, imgAttr) => {
   const sourcePromises = nodes
@@ -22,7 +26,13 @@ const imgToAmp = async (node, options) => {
   return tag;
 };
 
-const picture = async ($, options = {}) => {
+/**
+ * 画像を判定して良しなにする
+ * @param {Cheerio}} $ 
+ * @param {object} options
+ * @returns {Promise<Cheerio>} 
+ */
+const ampPicture = async ($, options = {}) => {
   const pictureElements = $('picture');
   const promises = pictureElements.map(async (i, node) => {
     const element = $(node);
@@ -45,4 +55,4 @@ const picture = async ($, options = {}) => {
   return $;
 };
 
-module.exports = picture;
+module.exports = { ampPicture };

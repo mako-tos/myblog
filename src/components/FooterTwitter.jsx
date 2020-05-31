@@ -32,7 +32,7 @@ const TwitterPlaceholder = ({user}) => (
 );
 
 const FooterTwitter = ({user}) => (
-  <Wrapper>
+  <Wrapper id="twitter-container">
     <TimeLine
       placeholder={<TwitterPlaceholder user={user} />}
       sourceType="profile"

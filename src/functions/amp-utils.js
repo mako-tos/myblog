@@ -1,3 +1,7 @@
+/**
+ * html2ampから拝借sしたソースを基にしている
+ */
+
 const axios = require('axios')
 const fs = require('fs')
 const path = require('path')

@@ -52,12 +52,13 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
     digest,
     childCheerioHtml,
   } = data;
-  const description = (digest || childCheerioHtml.plainText || body).substr(0, 120);
+  const plain = childCheerioHtml ? childCheerioHtml.plainText : undefined
+  const description = (digest || plain || body).substr(0, 120);
   const fluid = childMicrocmsImage
     ? childMicrocmsImage.childFile.childImageSharp.fluid
     : null;
 
-  const newBody = childCheerioHtml.hljsHtml;
+  const newBody = childCheerioHtml ? childCheerioHtml.hljsHtml : body;
 
   return (
     <Layout>

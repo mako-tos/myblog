@@ -71,12 +71,14 @@ const Image = styled.div`
   border-radius: ${props => props.theme.borderRadius.default};
   img {
     border-radius: ${props => props.theme.borderRadius.default};
+    height: 100%;
+    min-width: 100%;
   }
   > div {
-    position: static !important;
+    position: static;
   }
   > div > div {
-    position: static !important;
+    position: static;
   }
 `;
 
@@ -110,6 +112,11 @@ const RelatedPosts = ({ posts }) => (
                 fluid={sizedFluid}
                 durationFadeIn={100}
                 loading={"lazy"}
+                style={{
+                  width: 'none',
+                  height: '100%',
+                  minWidth: '100%;',
+                }}
               />
             </Image>
             <StyledLink to={createPath(post)}>

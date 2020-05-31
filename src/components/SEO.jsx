@@ -24,7 +24,7 @@ const SEO = ({ title, description, banner, pathname, article }) => (
         },
       },
     }) => {
-      const imagePath = banner ? siteUrl + banner.src : siteUrl + defaultBanner
+      const imagePath = banner ? siteUrl + banner.src : siteUrl + defaultBanner;
       const seo = {
         title: `${title} | ${defaultTitle}`,
         description: description || defaultDescription,
@@ -83,6 +83,10 @@ const SEO = ({ title, description, banner, pathname, article }) => (
         <>
           <Helmet title={seo.title}>
             <html lang={siteLanguage} />
+            {/** canot use <></> in Helmet so have to separete */}
+            {article && <link rel="canonical" href={`${pathname}`} />}
+            {article && <link rel="amphtml" href={`/amp${pathname}`} />}
+
             <link
               rel="alternate"
               type="application/rss+xml"

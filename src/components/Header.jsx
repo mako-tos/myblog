@@ -57,7 +57,17 @@ const UpdateTime = styled.time`
 
 const Header = ({ children, title, createdAt, updatedAt, fluid }) => (
   <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
-    {fluid && <GatsbyImg fluid={fluid} alt={title} durationFadeIn={100} style={{height: '100%'}} />}
+    {fluid && (
+      <GatsbyImg
+        fluid={fluid}
+        alt={title}
+        durationFadeIn={100}
+        style={{
+          width: '100vw',
+          height: 'auto',
+        }}
+      />
+    )}
     <Text>
       <h1 itemProp="headline">{title}</h1>
       <div>

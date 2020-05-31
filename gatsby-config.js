@@ -4,12 +4,26 @@ const config = require('./config/site');
 const { createPath } = require('./src/functions');
 const path = require(`path`);
 
+const picture = require('./src/functions/picture')
+
 const cheerio = require('cheerio');
 
 const  excerpt = (html, length) => {
   const $ = cheerio.load(html)
   return $.root().text().substr(0, length)
 };
+
+const htmlPlugin = async (html, options) => {
+  let $ = cheerio.load(html)
+  $('div.gatsby-image-wrapper noscript').each((_, elem) => {
+    const text = elem.children[0].data
+    const parent = $(elem).parent()
+    $(elem).remove()
+    return parent.append(text)
+  })
+  $ = await picture($, options)
+  return $.html()
+}
 
 module.exports = {
   developMiddleware: app => {
@@ -180,5 +194,16 @@ module.exports = {
         defer: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-html2amp',
+      options: {
+        files: ['post/**/index.html'],
+        publicPath: 'public',
+        dist: 'public/amp',
+        optimize: true,
+        htmlPlugins: [htmlPlugin],
+        cssPlugins: []
+      }
+    }
   ],
 };

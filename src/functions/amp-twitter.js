@@ -15,7 +15,7 @@ const ampTwitter = ($, twitterAccount, targetSelector) => {
   );
   $(targetSelector).html(`
     <amp-twitter
-      timeline-source-type="profile"
+      data-timeline-source-type="profile"
       data-timeline-screen-name="${twitterAccount}"
       width="300"
       height="400"

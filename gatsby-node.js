@@ -20,11 +20,12 @@ query {
             childImageSharp {
               fluid(quality: 80, maxWidth: 700) {
                 base64
-                tracedSVG
                 srcWebp
                 srcSetWebp
-                originalImg
-                originalName
+                aspectRatio
+                sizes
+                src
+                srcSet
               }
             }
           }

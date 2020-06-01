@@ -115,7 +115,7 @@ const RelatedPosts = ({ posts }) => (
                 style={{
                   width: 'none',
                   height: '100%',
-                  minWidth: '100%;',
+                  minWidth: '100%',
                 }}
               />
             </Image>

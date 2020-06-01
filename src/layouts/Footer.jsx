@@ -41,11 +41,11 @@ const Footer = () => (
     <Text>
       ©
       <span
-        itemProp="author name"
+        itemProp="author"
         itemScope
         itemType="http://schema.org/Person"
       >
-        {config.author}
+        <span itemProp="name">{config.author}</span>
       </span>
     </Text>
     <Text>

@@ -40,7 +40,13 @@ const Holly = styled.div`
   }
 `;
 
-const Post = ({ data, pageContext, location, relatedPosts }) => {
+const Post = ({
+  data,
+  pageContext,
+  location,
+  relatedPosts,
+  siteMetadata = {},
+}) => {
   const { next, prev } = pageContext;
   const {
     childMicrocmsImage,
@@ -52,7 +58,7 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
     digest,
     childCheerioHtml,
   } = data;
-  const plain = childCheerioHtml ? childCheerioHtml.plainText : undefined
+  const plain = childCheerioHtml ? childCheerioHtml.plainText : undefined;
   const description = (digest || plain || body).substr(0, 120);
   const fluid = childMicrocmsImage
     ? childMicrocmsImage.childFile.childImageSharp.fluid
@@ -78,7 +84,45 @@ const Post = ({ data, pageContext, location, relatedPosts }) => {
       <Holly>
         <Container>
           <TagsBlock list={tags || []} />
-          <Content input={newBody} />
+          <div itemProp="articleBody">
+            <div style={{ display: 'none' }}>
+              <span
+                itemProp="author"
+                itemScope
+                itemType="http://schema.org/Person"
+              >
+                <span itemProp="name">{siteMetadata.author}</span>
+              </span>
+              <span
+                itemProp="publisher"
+                itemScope
+                itemType="http://schema.org/Organization"
+              >
+                <span itemProp="name">{siteMetadata.author}</span>
+                <a
+                  itemProp="logo"
+                  itemScope
+                  itemType="http://schema.org/ImageObject"
+                  href={siteMetadata.logo}
+                >
+                  <img itemProp="url" src={siteMetadata.logo} />
+                </a>
+              </span>
+              <span itemProp="mainEntityOfPage">{title}</span>
+              <time itemProp="datePublished">{createdAt}</time>
+              <time itemProp="dateModified">{updatedAt}</time>
+              <span itemProp="headline">
+                <meta
+                  itemScope
+                  itemProp="mainEntityOfPage"
+                  itemType="https://schema.org/WebPage"
+                />
+                {title}
+              </span>
+              <span itemProp="image">{fluid.src}</span>
+            </div>
+            <Content input={newBody} />
+          </div>
           <TagsBlock list={tags || []} />
         </Container>
         <SideBar itemScope="itemscope" itemtype="http://schema.org/WPSideBar">
@@ -125,4 +169,5 @@ Post.propTypes = {
   }),
   location: PropTypes.object.isRequired,
   relatedPosts: PropTypes.array.isRequired,
+  author: PropTypes.string,
 };

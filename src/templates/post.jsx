@@ -49,6 +49,7 @@ const Post = ({ data, pageContext, location }) => {
   return (
     <PostPage
       data={data.microcmsBlog}
+      siteMetadata={data.site.siteMetadata}
       pageContext={pageContext}
       location={location}
       relatedPosts={relatedPosts}
@@ -88,6 +89,13 @@ Post.propTypes = {
 
 export const query = graphql`
   query($blogId: String!) {
+    site {
+      siteMetadata {
+        author
+        logo
+        siteUrl
+      }
+    }
     microcmsBlog(blogId: { eq: $blogId }) {
       body
       digest

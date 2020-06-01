@@ -6,7 +6,7 @@ module.exports = {
   url: 'https://myblog-by-mako-tos.netlify.app', // Domain of your site. No trailing slash!
   siteUrl: 'https://myblog-by-mako-tos.netlify.app', // url + pathPrefix
   siteLanguage: 'ja', // Language Tag on <html> element
-  logo: 'static/logo/logo.png', // Used for SEO
+  logo: '/logo/logo.png', // Used for SEO
   banner: 'static/logo/banner.png',
   // JSONLD / Manifest
   favicon: 'static/logo/favicon.png', // Used for manifest favicon generation

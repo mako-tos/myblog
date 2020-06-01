@@ -39,7 +39,51 @@ module.exports = {
         pathToConfigModule: 'config/typography.js',
       },
     },
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        exclude: [
+          '/mail-invite/',
+          '/mail-confirm/',
+          '/welcome/',
+          '/draft/',
+          '/404/',
+        ],
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+        }`,
+        serialize: ({ site, allSitePage }) => {
+          const pages = allSitePage.nodes.map(node => {
+            return {
+              url: `${site.siteMetadata.siteUrl}${node.path}`,
+              changefreq: `daily`,
+              priority: 0.7,
+            };
+          });
+          allSitePage.nodes.forEach(node => {
+            if (!node.path.startsWith('/post/')) {
+              return;
+            }
+            pages.push({
+              url: `${site.siteMetadata.siteUrl}/amp${node.path}`,
+              changefreq: `daily`,
+              priority: 0.7,
+            });
+          });
+          return pages;
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -128,16 +172,18 @@ module.exports = {
           {
             serialize: ({ query: { site, allMicrocmsBlog } }) => {
               return allMicrocmsBlog.edges.map(({ node }) => {
-                const url = `${site.siteMetadata.siteUrl}/${createPath(
-                  node
-                )}`;
+                const url = `${site.siteMetadata.siteUrl}/${createPath(node)}`;
 
                 return Object.assign({}, node, {
-                  description: (node.digest || node.childCheerioHtml.plainText).substr(0, 120),
+                  description: (
+                    node.digest || node.childCheerioHtml.plainText
+                  ).substr(0, 120),
                   date: node.createdAt,
                   url: url,
                   guid: url,
-                  custom_elements: [{ 'content:encoded': node.childCheerioHtml.plainText }],
+                  custom_elements: [
+                    { 'content:encoded': node.childCheerioHtml.plainText },
+                  ],
                 });
               });
             },

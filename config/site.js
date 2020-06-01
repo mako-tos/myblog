@@ -17,4 +17,5 @@ module.exports = {
   twitter: 'z_macn', // Twitter Username
   github: 'mako-tos',
   postsPerPage: 6,
+  searchConsole: 'IIZ6e5tBN6mjWtA5xgD6SZRB2z7UK_Rz5yJkgaG3tJw',
 };

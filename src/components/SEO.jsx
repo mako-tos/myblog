@@ -21,6 +21,7 @@ const SEO = ({ title, description, banner, pathname, article }) => (
           defaultDescription,
           defaultBanner,
           twitter,
+          searchConsole,
         },
       },
     }) => {
@@ -121,10 +122,10 @@ const SEO = ({ title, description, banner, pathname, article }) => (
                 src="https://identity.netlify.com/v1/netlify-identity-widget.js"
               ></script>
             )}
-            {pathname === '/' && (
+            {pathname === '/' && searchConsole && (
               <meta
                 name="google-site-verification"
-                content="IIZ6e5tBN6mjWtA5xgD6SZRB2z7UK_Rz5yJkgaG3tJw"
+                content={searchConsole}
               />
             )}
           </Helmet>
@@ -168,6 +169,7 @@ const query = graphql`
         defaultDescription: description
         defaultBanner: banner
         twitter
+        searchConsole
       }
     }
   }

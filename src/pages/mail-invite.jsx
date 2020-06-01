@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header } from 'components';
@@ -12,7 +11,7 @@ const MailInvite = center => (
     <Header title="ご招待" />
     <Container center={center}>
       <h1>あなたを {config.siteUrl} の運営にご招待致しました</h1>
-      <p>あなたを {config.siteUrl} にご招待いたしました。</p>
+      <p>あなたを {config.siteUrl} にご招待致しました。</p>
       <p><a href="{{ .SiteURL }}/welcome/#invite_token={{ .Token }}">こちら</a>からユーザ登録をお願い致します。</p>
     </Container>
   </Layout>

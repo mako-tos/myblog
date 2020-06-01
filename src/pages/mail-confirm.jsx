@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header } from 'components';
 import { Layout, Container } from 'layouts';
-import config from '../../config/site';
 
 const MailConfirm = center => (
   <Layout>

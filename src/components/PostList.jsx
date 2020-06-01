@@ -114,7 +114,7 @@ const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
           fluid={sizedFluid}
           alt={title}
           loading={'lazy'}
-          durationFadeIn={100}
+          fadeIn={false}
         />
       </Image>
       <StyledLink to={path} itemProp="url" title={title}>

@@ -110,7 +110,7 @@ const RelatedPosts = ({ posts }) => (
               <Img
                 alt={post.title}
                 fluid={sizedFluid}
-                durationFadeIn={100}
+                fadeIn={false}
                 loading={"lazy"}
                 style={{
                   width: 'none',

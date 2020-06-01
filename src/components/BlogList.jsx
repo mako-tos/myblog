@@ -139,7 +139,7 @@ const BlogList = ({
               alt={title}
               fluid={sizedFluid}
               loading={'lazy'}
-              durationFadeIn={100}
+              fadeIn={false}
             />
           </Link>
         </Image>

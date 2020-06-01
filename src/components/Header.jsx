@@ -61,10 +61,11 @@ const Header = ({ children, title, createdAt, updatedAt, fluid }) => (
       <GatsbyImg
         fluid={fluid}
         alt={title}
-        durationFadeIn={100}
+        fadeIn={false}
         style={{
-          width: '100vw',
-          height: 'auto',
+          minWidth: '100vw',
+          width: 'auto',
+          height: '100%',
         }}
       />
     )}

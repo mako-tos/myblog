@@ -121,6 +121,12 @@ const SEO = ({ title, description, banner, pathname, article }) => (
                 src="https://identity.netlify.com/v1/netlify-identity-widget.js"
               ></script>
             )}
+            {pathname === '/' && (
+              <meta
+                name="google-site-verification"
+                content="IIZ6e5tBN6mjWtA5xgD6SZRB2z7UK_Rz5yJkgaG3tJw"
+              />
+            )}
           </Helmet>
         </>
       );

@@ -42,7 +42,7 @@ const Index = ({ data, location }) => {
             digest ||
             childCheerioHtml.plainText ||
             body
-          ).substr(0, 40);
+          ).substr(0, 30);
 
           const path = createPath(node);
 

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
-import { createPath } from '../functions';
+import { createAmpPath } from '../functions';
 import TwitterShare from './TwitterShare';
 
 const SuggestionBar = styled.div`
@@ -134,7 +134,7 @@ const Post = ({
       <SuggestionBar>
         <PostSuggestion>
           {prev && (
-            <Link to={createPath(prev)} itemProp="url" title={prev.title}>
+            <Link to={createAmpPath(prev)} itemProp="url" title={prev.title}>
               Previous
               <h3 itemProp="name headline">{prev.title}</h3>
             </Link>
@@ -142,7 +142,7 @@ const Post = ({
         </PostSuggestion>
         <PostSuggestion>
           {next && (
-            <Link to={createPath(next)} itemProp="url" title={next.title}>
+            <Link to={createAmpPath(next)} itemProp="url" title={next.title}>
               Next
               <h3 itemProp="name headline">{next.title}</h3>
             </Link>

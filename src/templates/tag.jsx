@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import { Layout, Container } from 'layouts';
 import { Header } from 'components';
 import config from '../../config/site';
-import { createPath } from '../functions';
+import { createAmpPath } from '../functions';
 
 const StyledLink = styled(Link)`
   color: ${props => props.theme.colors.white.light};
@@ -39,7 +39,7 @@ const Tag = ({ data, pageContext }) => {
       <Container>
         <Information>
           {posts.map((post, index) => (
-            <Link key={index} to={createPath(post.node)}>
+            <Link key={index} to={createAmpPath(post.node)}>
               <h3>{post.node.title}</h3>
             </Link>
           ))}

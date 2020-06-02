@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header, BlogList } from 'components';
 import { Layout } from 'layouts';
-import { createPath } from '../functions';
+import { createAmpPath } from '../functions';
 import Pagination from '../components/Pagination'
 
 const Blog = ({ data, pageContext }) => {
@@ -27,7 +27,7 @@ const Blog = ({ data, pageContext }) => {
         } = node;
         const description = (digest || childCheerioHtml.plainText || body).substr(0, 80);
 
-        const path = createPath(node);
+        const path = createAmpPath(node);
 
         return (
           <BlogList

@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { createPath } from '../functions';
+import { createAmpPath } from '../functions';
 import Img from 'gatsby-image';
 import theme from '../../config/theme';
 
@@ -119,7 +119,7 @@ const RelatedPosts = ({ posts }) => (
                 }}
               />
             </Image>
-            <StyledLink to={createPath(post)}>
+            <StyledLink to={createAmpPath(post)}>
               <Info>
                 <Title>{post.title}</Title>
               </Info>

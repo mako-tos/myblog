@@ -16,7 +16,18 @@ const pascalCase = str => {
   });
 };
 
-const ShareImpl = ({ post }) => {
+/**
+ * 記事情報からシェアボタンのテキストを作る
+ * @param {object} post
+ * @returns {string}
+ */
+const createText = post => {
+  const tags = post.tags.map(tag => `#${pascalCase(tag.slug)}`).join(' ');
+  const text = `${post.title} ${tags}`;
+  return text
+}
+
+const ShareImpl = ({ text }) => {
   const containerRef = useRef(null);
   useEffect(() => {
     if (!ExecutionEnvironment.canUseDOM) {
@@ -26,16 +37,14 @@ const ShareImpl = ({ post }) => {
     scriptjs(twitterWidgetJs, 'twitter-embed', () => {
       if (!window.twttr) {
         console.error(
-          'Failure to load window.twttr in TimeLineImpl, aborting load.'
+          'Failure to load window.twttr in ShareImpl, aborting load.'
         );
         return;
       }
-      const tags = post.tags.map(tag => `#${pascalCase(tag.slug)}`).join(' ');
-      const text = `${post.title} ${tags}`;
       window.twttr.widgets.createShareButton(
         window.location.href,
         containerRef.current,
-        { text }
+        { text: text }
       );
     });
   }, []);
@@ -43,10 +52,17 @@ const ShareImpl = ({ post }) => {
 };
 
 const ShareButton = ({ post }) => {
+  const text = createText(post)
   return (
-    <LazyLoad once offset={200}>
-      <ShareImpl post={post} />
-    </LazyLoad>
+    <>
+    	<amp-social-share
+        data-param-text={text}
+        type="twitter">
+      </amp-social-share>
+      <LazyLoad once offset={200}>
+        <ShareImpl text={text} />
+      </LazyLoad>
+    </>
   );
 };
 

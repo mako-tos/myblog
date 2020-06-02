@@ -33,13 +33,23 @@ const TimeLineImpl = ({ sourceType, screenName, options }) => {
 
 const TimeLine = ({ placeholder, sourceType, screenName, options }) => {
   return (
-    <LazyLoad placeholder={placeholder} once offset={200}>
-      <TimeLineImpl
-        sourceType={sourceType}
-        screenName={screenName}
-        options={options}
-      />
-    </LazyLoad>
+    <>
+      <amp-twitter
+        data-timeline-source-type="profile"
+        data-timeline-screen-name={screenName}
+        width="300"
+        height="400"
+        sizes="(min-width: 600px) 90vw, 300px"
+        layout="responsive">
+      </amp-twitter>
+      <LazyLoad placeholder={placeholder} once offset={200}>
+        <TimeLineImpl
+          sourceType={sourceType}
+          screenName={screenName}
+          options={options}
+        />
+      </LazyLoad>
+    </>
   );
 };
 

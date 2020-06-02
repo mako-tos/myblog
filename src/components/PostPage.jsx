@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO, RelatedPosts } from 'components';
 import { createPath } from '../functions';
+import TwitterShare from './TwitterShare';
 
 const SuggestionBar = styled.div`
   display: flex;
@@ -126,6 +127,7 @@ const Post = ({
           <TagsBlock list={tags || []} />
         </Container>
         <SideBar itemScope="itemscope" itemtype="http://schema.org/WPSideBar">
+          <TwitterShare post={data} />
           <RelatedPosts posts={relatedPosts} />
         </SideBar>
       </Holly>

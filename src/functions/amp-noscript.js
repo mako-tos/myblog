@@ -4,8 +4,9 @@
  * @returns {Cheerio} $
  */
 const ampNoscript = ($) => {
+  $('div.gatsby-image-wrapper amp-img[src^="data:"]').remove();
   $('div.gatsby-image-wrapper noscript').each((_, elem) => {
-    const text = elem.children[0].data;
+    const text = $(elem).text();
     const parent = $(elem).parent();
     $(elem).remove();
     return parent.append(text);

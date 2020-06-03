@@ -120,7 +120,7 @@ const Post = ({
                 />
                 {title}
               </span>
-              <span itemProp="image">{fluid.src}</span>
+              <span itemProp="image">{fluid && fluid.src}</span>
             </div>
             <Content input={newBody} />
           </div>

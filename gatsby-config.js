@@ -1,7 +1,7 @@
 require('dotenv').config();
 const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
-const { createPath } = require('./src/functions');
+const { createAmpPath } = require('./src/functions');
 const path = require(`path`);
 const htmlPlugin = require('./src/functions/amp-html-plugin');
 
@@ -172,7 +172,7 @@ module.exports = {
           {
             serialize: ({ query: { site, allMicrocmsBlog } }) => {
               return allMicrocmsBlog.edges.map(({ node }) => {
-                const url = `${site.siteMetadata.siteUrl}/${createPath(node)}`;
+                const url = `${site.siteMetadata.siteUrl}/${createAmpPath(node)}`;
 
                 return Object.assign({}, node, {
                   description: (

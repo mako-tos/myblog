@@ -39,7 +39,7 @@ const FooterGithub = ({ user }) => {
         {repos.map(repo => (
           <li key={repo.url}>
             <FontAwesomeIcon icon={faFileAlt} width="16" height="16" />
-            <a href={repo.url} title={repo.full_name} target="_blank" rel="noreferrer" itemProp="url">
+            <a href={repo.html_url} title={repo.full_name} target="_blank" rel="noreferrer" itemProp="url">
               <span>{repo.full_name}</span>
             </a>
           </li>
@@ -56,7 +56,7 @@ export const query = graphql`
       edges {
         node {
           full_name
-          url
+          html_url
         }
       }
     }

@@ -7763,8 +7763,8 @@ gatsby-telemetry@^1.3.9:
     uuid "3.4.0"
 
 "gatsby-transformer-cheerio@https://github.com/mako-tos/gatsby-transformer-cheerio.git":
-  version "0.0.2"
-  resolved "https://github.com/mako-tos/gatsby-transformer-cheerio.git#03d784c5872555d8b0c47524f5965a0e2f8511b5"
+  version "0.0.3"
+  resolved "https://github.com/mako-tos/gatsby-transformer-cheerio.git#53c03dc21281716f7df7e46949fe72882467dd4e"
   dependencies:
     cheerio "^1.0.0-rc.3"
     eslint "^7.1.0"

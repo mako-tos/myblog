@@ -118,7 +118,7 @@ export const query = graphql`
       }
       childCheerioHtml {
         html
-        hljsHtml
+        convertedHtml
         plainText
       }
     }

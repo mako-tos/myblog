@@ -128,6 +128,7 @@ module.exports = {
       options: {
         mediaType: 'MicrocmsBlog', // string
         field: 'body', // string
+        useHljs: true,
       },
     },
     {

@@ -65,7 +65,7 @@ const Post = ({
     ? childMicrocmsImage.childFile.childImageSharp.fluid
     : null;
 
-  const newBody = childCheerioHtml ? childCheerioHtml.hljsHtml : body;
+  const newBody = childCheerioHtml ? childCheerioHtml.convertedHtml : body;
 
   return (
     <Layout>

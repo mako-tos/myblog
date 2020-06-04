@@ -57,15 +57,15 @@ const Post = ({
     updatedAt,
     body,
     digest,
-    childCheerioHtml,
+    childConvertHtml,
   } = data;
-  const plain = childCheerioHtml ? childCheerioHtml.plainText : undefined;
+  const plain = childConvertHtml ? childConvertHtml.plainText : undefined;
   const description = (digest || plain || body).substr(0, 120);
   const fluid = childMicrocmsImage
     ? childMicrocmsImage.childFile.childImageSharp.fluid
     : null;
 
-  const newBody = childCheerioHtml ? childCheerioHtml.convertedHtml : body;
+  const newBody = childConvertHtml ? childConvertHtml.convertedHtml : body;
 
   return (
     <Layout>

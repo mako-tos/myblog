@@ -23,9 +23,9 @@ const Blog = ({ data, pageContext }) => {
           updatedAt,
           body,
           digest,
-          childCheerioHtml,
+          childConvertHtml,
         } = node;
-        const description = (digest || childCheerioHtml.plainText || body).substr(0, 80);
+        const description = (digest || childConvertHtml.plainText || body).substr(0, 80);
 
         const path = createAmpPath(node);
 
@@ -98,7 +98,7 @@ export const query = graphql`
           }
           digest
           body
-          childCheerioHtml {
+          childConvertHtml {
             html
             convertedHtml
             plainText

@@ -116,7 +116,7 @@ export const query = graphql`
         slug
         title
       }
-      childCheerioHtml {
+      childConvertHtml {
         html
         convertedHtml
         plainText

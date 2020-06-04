@@ -36,11 +36,11 @@ const Index = ({ data, location }) => {
             createdAt,
             body,
             digest,
-            childCheerioHtml,
+            childConvertHtml,
           } = node;
           const description = (
             digest ||
-            childCheerioHtml.plainText ||
+            childConvertHtml.plainText ||
             body
           ).substr(0, 30);
 
@@ -110,7 +110,7 @@ export const query = graphql`
           }
           digest
           body
-          childCheerioHtml {
+          childConvertHtml {
             html
             convertedHtml
             plainText

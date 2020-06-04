@@ -124,7 +124,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-cheerio',
+      resolve: '@mako-tos/gatsby-transformer-for-microcms',
       options: {
         mediaType: 'MicrocmsBlog', // string
         field: 'body', // string
@@ -177,13 +177,13 @@ module.exports = {
 
                 return Object.assign({}, node, {
                   description: (
-                    node.digest || node.childCheerioHtml.plainText
+                    node.digest || node.childConvertHtml.plainText
                   ).substr(0, 120),
                   date: node.createdAt,
                   url: url,
                   guid: url,
                   custom_elements: [
-                    { 'content:encoded': node.childCheerioHtml.plainText },
+                    { 'content:encoded': node.childConvertHtml.plainText },
                   ],
                 });
               });
@@ -197,7 +197,7 @@ module.exports = {
                       title
                       createdAt(formatString: "YYYY-MM-DD")
                       digest
-                      childCheerioHtml {
+                      childConvertHtml {
                         plainText
                       }            
                     }

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import { Layout } from 'layouts';
 import { SEO } from '../components';
-import { createAmpPath } from '../functions';
+import { createPath } from '../functions';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const Index = ({ data, location }) => {
             body
           ).substr(0, 30);
 
-          const path = createAmpPath(node);
+          const path = createPath(node);
 
           return (
             <PostList

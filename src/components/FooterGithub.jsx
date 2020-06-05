@@ -37,7 +37,7 @@ const FooterGithub = ({ user }) => {
       </div>
       <ReposWrapper>
         {repos.map(repo => (
-          <li key={repo.url}>
+          <li key={repo.html_url}>
             <FontAwesomeIcon icon={faFileAlt} width="16" height="16" />
             <a href={repo.html_url} title={repo.full_name} target="_blank" rel="noreferrer" itemProp="url">
               <span>{repo.full_name}</span>

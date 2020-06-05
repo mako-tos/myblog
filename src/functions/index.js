@@ -4,16 +4,9 @@
  * @returns {string} url
  */
 const createPath = post => {
-  return `post/${post.createdAt}-${post.slug}`;
-}
-/**
- * postからamp用のpathを作成する
- */
-const createAmpPath = post => {
-  return `amp/${createPath(post)}`;
+  return `/post/${post.createdAt}-${post.slug}`;
 }
 
 module.exports = {
   createPath: createPath,
-  createAmpPath: createAmpPath,
 };

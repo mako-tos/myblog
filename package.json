@@ -31,7 +31,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@mako-tos/gatsby-transformer-for-microcms": "^1.0.5",
+    "@mako-tos/gatsby-transformer-for-microcms": "^1.0.6",
     "@reach/dialog": "^0.10.3",
     "@reach/tabs": "^0.10.3",
     "@reach/visually-hidden": "^0.10.2",

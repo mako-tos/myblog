@@ -5,9 +5,13 @@ import PropTypes from 'prop-types';
 import { NavBar, Footer } from 'layouts';
 import theme from '../../config/theme';
 import headroom from '../styles/headroom';
+import { Helmet } from 'react-helmet';
 
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
+    <Helmet>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise"></script>
+    </Helmet>
     <Fragment>
       <Global
         styles={css`

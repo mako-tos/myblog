@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "babel-preset-gatsby",
+      {
+        "target": {
+          "browsers": [
+            ">0.25%",
+            "not dead",
+            "IE 11"
+          ]
+        }
+      }
+    ]
+   ]
+ }
+ 

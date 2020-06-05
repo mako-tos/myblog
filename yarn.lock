@@ -1944,13 +1944,14 @@
   resolved "https://registry.yarnpkg.com/@kwsites/exec-p/-/exec-p-0.4.0.tgz#ab3765d482849ba6e825721077c248cf9f3323b7"
   integrity sha512-44DWNv5gDR9EwrCTVQ4ZC99yPqVS0VCWrYIBl45qNR8XQy+4lbl0IQG8kBDf6NHwj4Ib4c2z1Fq1IUJOCbkZcw==
 
-"@mako-tos/gatsby-transformer-for-microcms@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-transformer-for-microcms/-/gatsby-transformer-for-microcms-1.0.6.tgz#8d276f8fc4559df6c7aa14f027e2b0153c278153"
-  integrity sha512-jNkols6EL9I8jc7q4JHYka4l7roBv0Th4Dr+avbSiG5F+tojzdOgc/xLpjrb4W2eV+BdYvwiWmJWC51F+mYi9w==
+"@mako-tos/gatsby-transformer-for-microcms@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-transformer-for-microcms/-/gatsby-transformer-for-microcms-1.0.8.tgz#8772e0eaa282be239f12c18b8aab412e7638de7f"
+  integrity sha512-jSRWP7SKVHA8f6e4ym4LYg9FCyJbCKlUA+wmOpV0gVS1nfe/OD/Nmiw/yZByARasGaJqe1ub7QqA/SYztbkZIA==
   dependencies:
     cheerio "^1.0.0-rc.3"
     highlight.js "^10.0.3"
+    node-fetch "^2.6.0"
 
 "@mdx-js/mdx@^1.6.5":
   version "1.6.5"

@@ -112,6 +112,9 @@ module.exports = {
         apiKey: process.env.MICRO_CMS_API_KEY,
         serviceId: process.env.MICRO_CMS_SERVICE_ID,
         endpoint: 'blog',
+        query: {
+          limit: 100,
+        },
       },
     },
     {

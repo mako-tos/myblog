@@ -3,7 +3,6 @@ const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
 const { createPath } = require('./src/functions');
 const path = require(`path`);
-const htmlPlugin = require('./src/functions/amp-html-plugin');
 
 module.exports = {
   developMiddleware: app => {
@@ -105,7 +104,6 @@ module.exports = {
         path: path.join(__dirname, `src`, `images`),
       },
     },
-    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-source-microcms',
       options: {
@@ -118,7 +116,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-images-microcms',
+      resolve: '@mako-tos/gatsby-images-microcms',
       options: {
         mediaType: 'MicrocmsBlog', // string
         field: 'headImage', // string
@@ -224,17 +222,6 @@ module.exports = {
         pageTransitionDelay: 100,
         // Defers execution of google analytics script after page load
         defer: true,
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-html2amp',
-      options: {
-        files: ['post/**/index.html'],
-        publicPath: 'public',
-        dist: 'public/amp',
-        optimize: true,
-        htmlPlugins: [htmlPlugin],
-        cssPlugins: [],
       },
     },
   ],

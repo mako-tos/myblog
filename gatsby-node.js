@@ -80,7 +80,7 @@ exports.createPages = async ({ graphql, actions }) => {
     pathPrefix: basePath,
     context: {
       basePath: basePath,
-      paginationPath: `/${basePath}`,
+      paginationPath: `${basePath}`,
     },
   });
 

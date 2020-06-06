@@ -28,14 +28,8 @@ const DraftImpl = ({ location }) => {
           const json = await res.json();
           json.createdAt = dayjs(json.createdAt).format('YYYY-MM-DD');
           json.updatedAt = dayjs(json.updatedAt).format('YYYY-MM-DD');
-          json.childMicrocmsImage = {
-            childFile: {
-              childImageSharp: {
-                fluid: {
-                  src: json.headImage.url
-                }
-              }
-            }
+          json.childMicrocmsBlogHeadImage = {
+            src: json.headImage.url
           }
           setData(json);
         } catch (e) {

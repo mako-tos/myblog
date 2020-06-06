@@ -15,20 +15,16 @@ query {
           slug
           title
         }
-        childMicrocmsImage {
-          childFile {
-            childImageSharp {
-              fluid(quality: 80, maxWidth: 700) {
-                base64
-                srcWebp
-                srcSetWebp
-                aspectRatio
-                sizes
-                src
-                srcSet
-              }
-            }
-          }
+        childMicrocmsBlogHeadImage {
+          aspectRatio
+          presentationHeight
+          presentationWidth
+          sizes
+          src
+          srcSet
+          srcSetWebp
+          srcWebp
+          type
         }
         slug
         title

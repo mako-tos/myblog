@@ -7701,11 +7701,11 @@ gatsby-image@^2.2.17:
     prop-types "^15.7.2"
 
 "gatsby-images-microcms@https://github.com/mako-tos/gatsby-images-microcms.git":
-  version "0.0.5"
-  resolved "https://github.com/mako-tos/gatsby-images-microcms.git#1ef4894aa4817f9e7eaa3cdd30ef70d41d7f47b7"
+  version "0.0.2"
+  resolved "https://github.com/mako-tos/gatsby-images-microcms.git#4d4e0685ba8f5f2b4e5c3ac1f8edbbbdc244ca84"
   dependencies:
     camelcase "^5.3.1"
-    gatsby-source-filesystem "^2.3.8"
+    node-fetch "^2.6.0"
 
 gatsby-interface@0.0.167:
   version "0.0.167"

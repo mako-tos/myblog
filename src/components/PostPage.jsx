@@ -50,7 +50,7 @@ const Post = ({
 }) => {
   const { next, prev } = pageContext;
   const {
-    childMicrocmsImage,
+    childMicrocmsBlogHeadImage,
     title,
     tags,
     createdAt,
@@ -61,9 +61,6 @@ const Post = ({
   } = data;
   const plain = childConvertHtml ? childConvertHtml.plainText : undefined;
   const description = (digest || plain || body).substr(0, 120);
-  const fluid = childMicrocmsImage
-    ? childMicrocmsImage.childFile.childImageSharp.fluid
-    : null;
 
   const newBody = childConvertHtml ? childConvertHtml.convertedHtml : body;
 
@@ -72,7 +69,7 @@ const Post = ({
       <SEO
         title={title}
         description={description}
-        banner={fluid}
+        banner={childMicrocmsBlogHeadImage}
         pathname={location.pathname}
         article
       />
@@ -80,7 +77,7 @@ const Post = ({
         title={title}
         updatedAt={updatedAt}
         createdAt={createdAt}
-        fluid={fluid}
+        fluid={childMicrocmsBlogHeadImage}
       />
       <Holly>
         <Container>
@@ -120,7 +117,7 @@ const Post = ({
                 />
                 {title}
               </span>
-              <span itemProp="image">{fluid && fluid.src}</span>
+              <span itemProp="image">{childMicrocmsBlogHeadImage && childMicrocmsBlogHeadImage.src}</span>
             </div>
             <Content input={newBody} />
           </div>
@@ -166,7 +163,7 @@ Post.propTypes = {
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    childMicrocmsImage: PropTypes.object.isRequired,
+    childMicrocmsBlogHeadImage: PropTypes.object.isRequired,
     tags: PropTypes.array,
   }),
   location: PropTypes.object.isRequired,

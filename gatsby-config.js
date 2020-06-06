@@ -120,9 +120,7 @@ module.exports = {
     {
       resolve: 'gatsby-images-microcms',
       options: {
-        // endpoint or type is required. If both set then type is used
-        // both of them must be equals to gatsby-source-microcms's option
-        endpoint: 'blog', // string
+        mediaType: 'MicrocmsBlog', // string
         field: 'headImage', // string
       },
     },

@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <Helmet>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise"></script>
+      <script defer src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise"></script>
     </Helmet>
     <Fragment>
       <Global

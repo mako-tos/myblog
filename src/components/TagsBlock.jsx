@@ -30,7 +30,7 @@ const TagsContainer = styled.div`
 
 const TagsBlock = ({ list }) => (
   <TagsContainer>
-    <FontAwesomeIcon icon={faTag} />
+    <FontAwesomeIcon icon={faTag} width={16} height={16} />
     {list &&
       list.map(tag => {
         return (

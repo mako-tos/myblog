@@ -41,6 +41,7 @@ const ShareImpl = ({ text }) => {
         );
         return;
       }
+      window.twttr.widgets.load(containerRef.current)
       window.twttr.widgets.createShareButton(
         window.location.href,
         containerRef.current,

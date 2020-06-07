@@ -18,6 +18,8 @@ const TimeLineImpl = ({ sourceType, screenName, options }) => {
         );
         return;
       }
+      
+      window.twttr.widgets.load(containerRef.current)
       window.twttr.widgets.createTimeline(
         {
           sourceType,

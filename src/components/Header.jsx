@@ -58,47 +58,16 @@ const UpdateTime = styled.time`
 const Header = ({ children, title, createdAt, updatedAt, fluid }) => (
   <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
     {fluid && (
-      <>
-        <amp-img
-          src={fluid.src}
-          srcSet={fluid.srcSetWebp}
-          layout="responsive"
-          height={1}
-          width={fluid.aspectRatio}
-          alt={title}
-          style={{
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        >
-          <amp-img
-            fallback
-            src={fluid.src}
-            srcSet={fluid.srcSet}
-            layout="responsive"
-            height={1}
-            width={fluid.aspectRatio}
-            alt={title}
-            style={{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-          </amp-img>
-        </amp-img>
-        <GatsbyImg
-          fluid={fluid}
-          alt={title}
-          fadeIn={false}
-          style={{
-            minWidth: '100vw',
-            width: 'auto',
-            height: '100%',
-          }}
-        />
-      </>
+      <GatsbyImg
+        fluid={fluid}
+        alt={title}
+        fadeIn={false}
+        style={{
+          minWidth: '100vw',
+          width: 'auto',
+          height: '100%',
+        }}
+      />
     )}
     <Text>
       <h1 itemProp="headline">{title}</h1>

@@ -84,9 +84,6 @@ const SEO = ({ title, description, banner, pathname, article }) => (
         <>
           <Helmet title={seo.title}>
             <html lang={siteLanguage} />
-            {/** canot use <></> in Helmet so have to separete */}
-            {article && <link rel="canonical" href={`${pathname}`} />}
-            {article && <link rel="amphtml" href={`/amp${pathname}`} />}
 
             <link
               rel="alternate"

@@ -62,24 +62,13 @@ module.exports = {
           }
         }`,
         serialize: ({ site, allSitePage }) => {
-          const pages = allSitePage.nodes.map(node => {
+          return allSitePage.nodes.map(node => {
             return {
               url: `${site.siteMetadata.siteUrl}${node.path}`,
               changefreq: `daily`,
               priority: 0.7,
             };
           });
-          allSitePage.nodes.forEach(node => {
-            if (!node.path.startsWith('/post/')) {
-              return;
-            }
-            pages.push({
-              url: `${site.siteMetadata.siteUrl}/amp${node.path}`,
-              changefreq: `daily`,
-              priority: 0.7,
-            });
-          });
-          return pages;
         },
       },
     },

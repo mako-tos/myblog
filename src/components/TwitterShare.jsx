@@ -54,15 +54,9 @@ const ShareImpl = ({ text }) => {
 const ShareButton = ({ post }) => {
   const text = createText(post)
   return (
-    <>
-    	<amp-social-share
-        data-param-text={text}
-        type="twitter">
-      </amp-social-share>
-      <LazyLoad once offset={200}>
-        <ShareImpl text={text} />
-      </LazyLoad>
-    </>
+    <LazyLoad once offset={200}>
+      <ShareImpl text={text} />
+    </LazyLoad>
   );
 };
 

@@ -25,7 +25,7 @@ const SEO = ({ title, description, banner, pathname, article }) => (
         },
       },
     }) => {
-      const imagePath = banner ? siteUrl + banner.src : siteUrl + defaultBanner;
+      const imagePath = banner ? banner.src : siteUrl + defaultBanner;
       const seo = {
         title: `${title} | ${defaultTitle}`,
         description: description || defaultDescription,
@@ -85,6 +85,7 @@ const SEO = ({ title, description, banner, pathname, article }) => (
           <Helmet title={seo.title}>
             <html lang={siteLanguage} />
 
+            <link rel="dns-prefetch" href="//images.microcms-assets.io" />
             <link
               rel="alternate"
               type="application/rss+xml"

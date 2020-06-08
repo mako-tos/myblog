@@ -7984,10 +7984,10 @@ gatsby-source-graphql@^2.5.3:
     node-fetch "^1.7.3"
     uuid "^3.4.0"
 
-gatsby-source-microcms@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/gatsby-source-microcms/-/gatsby-source-microcms-0.1.1.tgz#aeaf2fa4809800496c815ff0477d331cbf89a99c"
-  integrity sha512-cMXaPWMalPuOdDWLzn46MvJuo4X79R8gG+Pqhd6GtMfVQjxUEPA5INNTyZEwVf6ZzrDEOr6ZIEmuH9YMDbudVQ==
+gatsby-source-microcms@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-microcms/-/gatsby-source-microcms-0.2.0.tgz#af4563176ed425e5ee34669414d4e6a2ec311432"
+  integrity sha512-CQhk/ovEYAjaiDILgJccRW9kuCu93TctpiCBrZJlNYEpLi+Xak0mzzHKoMsJbxwRpBG2lh607JAV44pBv+UpHA==
   dependencies:
     "@hapi/joi" "^16.1.7"
     camelcase "^5.3.1"

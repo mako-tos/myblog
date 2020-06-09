@@ -1904,10 +1904,10 @@
     camelcase "^5.3.1"
     node-fetch "^2.6.0"
 
-"@mako-tos/gatsby-transformer-for-microcms@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-transformer-for-microcms/-/gatsby-transformer-for-microcms-1.0.11.tgz#6ff16b93dd7ceb61121d1c0ac91128cd45a8929f"
-  integrity sha512-euXCTb/M+3zofXZuRsSVBUxq2Yfl26ucyvNljloqekpBo8n0a/3CBSC6/wA+d6J4nKA3HWy/cCLmy/yL7TwvbQ==
+"@mako-tos/gatsby-transformer-for-microcms@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-transformer-for-microcms/-/gatsby-transformer-for-microcms-1.1.0.tgz#90b9db5bf29161347e06d9f10ddc81098e0bd872"
+  integrity sha512-SzqsoxX05hsJ92phdDmut9pX1+qAVTYl7uPAiRctYmSkMQNreYGtLcOkGo4IGlDWTs+Vi/CWhUsVvGR2a8tD5w==
   dependencies:
     cheerio "^1.0.0-rc.3"
     highlight.js "^10.0.3"

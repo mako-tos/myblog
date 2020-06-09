@@ -34,6 +34,39 @@ const SideBar = styled.aside`
   @media (max-width: ${props => props.theme.breakpoints.s}) {
     width: 95%;
   }
+
+  ol.listOfContents {
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: #f0f0f0;
+    list-style-type: none;
+
+    li:first-of-type::before {
+      content: 'コンテンツ:';
+      display: block;
+      margin-bottom: 0.5em;
+      border-bottom: 0.5px black solid;
+    }
+    li {
+      a {
+        text-decoration: none;
+      }
+    }
+
+    li.listOfContents--level1 {
+      margin-left: 0em;
+    }
+    li.listOfContents--level2 {
+      margin-left: 1em;
+    }
+    li.listOfContents--level3 {
+      margin-left: 2em;
+    }
+    li.listOfContents--level4 {
+      margin-left: 3em;
+    }
+  }
 `;
 const Holly = styled.div`
   @media (min-width: ${props => props.theme.breakpoints.m}) {
@@ -117,7 +150,9 @@ const Post = ({
                 />
                 {title}
               </span>
-              <span itemProp="image">{childMicrocmsBlogHeadImage && childMicrocmsBlogHeadImage.src}</span>
+              <span itemProp="image">
+                {childMicrocmsBlogHeadImage && childMicrocmsBlogHeadImage.src}
+              </span>
             </div>
             <Content input={newBody} />
           </div>
@@ -125,6 +160,11 @@ const Post = ({
         </Container>
         <SideBar itemScope="itemscope" itemtype="http://schema.org/WPSideBar">
           <TwitterShare post={data} />
+          {childConvertHtml &&
+            <div
+              dangerouslySetInnerHTML={{ __html: childConvertHtml.listOfContents }}
+            />
+          }
           <RelatedPosts posts={relatedPosts} />
         </SideBar>
       </Holly>

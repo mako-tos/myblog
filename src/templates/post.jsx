@@ -120,6 +120,7 @@ export const query = graphql`
       }
       childConvertHtml {
         html
+        listOfContents
         convertedHtml
         plainText
       }

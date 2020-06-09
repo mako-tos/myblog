@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import GatsbyImg from 'gatsby-image';
+import HeroImg from './HeroImg';
 
 const Wrapper = styled.header`
   -webkit-clip-path: polygon(100% 0, 0 0, 0 70%, 50% 100%, 100% 70%);
@@ -58,15 +58,9 @@ const UpdateTime = styled.time`
 const Header = ({ children, title, createdAt, updatedAt, fluid }) => (
   <Wrapper itemScope="itemscope" itemType="http://schema.org/WPHeader">
     {fluid && (
-      <GatsbyImg
-        fluid={fluid}
+      <HeroImg
         alt={title}
-        fadeIn={false}
-        style={{
-          minWidth: '100vw',
-          width: 'auto',
-          height: '100%',
-        }}
+        src={fluid.src}
       />
     )}
     <Text>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { NavBar, Footer } from 'layouts';
 import theme from '../../config/theme';
 import headroom from '../styles/headroom';
+import listOfContents from '../styles/listOfContents';
 import { Helmet } from 'react-helmet';
 
 const Layout = ({ children }) => (
@@ -62,6 +63,8 @@ const Layout = ({ children }) => (
           }
 
           ${headroom}
+
+          ${listOfContents}
         `}
       />
       <NavBar />

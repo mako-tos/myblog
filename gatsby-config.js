@@ -32,7 +32,6 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-typography',
       options: {
@@ -87,13 +86,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: path.join(__dirname, `src`, `images`),
-      },
-    },
     {
       resolve: 'gatsby-source-microcms',
       options: {
@@ -213,6 +205,24 @@ module.exports = {
         pageTransitionDelay: 100,
         // Defers execution of google analytics script after page load
         defer: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-no-javascript',
+      options: {
+        excludePaths: 'draft|welcome|mail\-confirm|mail\-invite',
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-no-javascript-utils',
+      options: {
+        noSourcemaps: true,
+        removeGeneratorTag: true,
+        removeReactHelmetAttrs: true,
+        noInlineStyles: false,
+        removeGatsbyAnnouncer: false,
+        removeFocusWrapper: false,
+        removePreloadLinks: false,
       },
     },
   ],

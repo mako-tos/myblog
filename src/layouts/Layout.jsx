@@ -56,8 +56,7 @@ const Layout = ({ children }) => (
             font-family: ${theme.fontFamily.heading};
           }
           /** avoid chrome lazyload bug */
-          img[data-src],
-          img[data-srcset] {
+          img {
             min-height: 1px;
             min-width: 1px; 
           }

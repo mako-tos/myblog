@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { createPath } from '../functions';
-import Img from 'gatsby-image';
+import Img from './Img';
 import theme from '../../config/theme';
 
 const RelatedPostList = styled.ol`
@@ -69,17 +69,6 @@ const Image = styled.div`
   bottom: 0;
   z-index: 1;
   border-radius: ${props => props.theme.borderRadius.default};
-  img {
-    border-radius: ${props => props.theme.borderRadius.default};
-    height: 100%;
-    min-width: 100%;
-  }
-  > div {
-    position: static;
-  }
-  > div > div {
-    position: static;
-  }
 `;
 
 const Info = styled.div`
@@ -110,13 +99,6 @@ const RelatedPosts = ({ posts }) => (
               <Img
                 alt={post.title}
                 fluid={sizedFluid}
-                fadeIn={false}
-                loading={"lazy"}
-                style={{
-                  width: 'none',
-                  height: '100%',
-                  minWidth: '100%',
-                }}
               />
             </Image>
             <StyledLink to={createPath(post)}>

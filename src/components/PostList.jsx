@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
+import Img from './Img';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import theme from '../../config/theme';
-import LazyLoad from 'react-lazyload'
 
 const Wrapper = styled.article`
   margin-bottom: 2rem;
@@ -17,6 +16,7 @@ const Wrapper = styled.article`
   flex-basis: calc(99.9% * 1 / 3 - 2.5rem);
   max-width: calc(99.9% * 1 / 3 - 2.5rem);
   width: calc(99.9% * 1 / 3 - 2.5rem);
+  overflow: hidden;
 
   &:hover {
     box-shadow: ${props => props.theme.shadow.feature.small.hover};
@@ -73,23 +73,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Image = styled.div`
-  position: absolute;
-  top: 0;
-  overflow: hidden;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  border-radius: ${props => props.theme.borderRadius.default};
-  > div {
-    position: static !important;
-  }
-  > div > div {
-    position: static !important;
-  }
-`;
-
 const Info = styled.div`
   color: ${props => props.theme.colors.white.light};
   margin: 0 1rem 1.25rem 1.25rem;
@@ -109,14 +92,10 @@ const PostList = ({ fluid, path, createdAt, title, excerpt }) => {
   };
   return (
     <Wrapper>
-      <Image>
-        <Img
-          fluid={sizedFluid}
-          alt={title}
-          loading={'lazy'}
-          fadeIn={false}
-        />
-      </Image>
+      <Img
+        fluid={sizedFluid}
+        alt={title}
+      />
       <StyledLink to={path} itemProp="url" title={title}>
         <Info>
           <time itemProp="datePublished">{createdAt}</time>

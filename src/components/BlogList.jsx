@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { TagsBlock } from 'components';
-import Img from 'gatsby-image';
+import Img from './Img';
 
 const Container = styled.article`
   text-align: ${props => (props.center ? 'center' : '')};
@@ -138,8 +138,6 @@ const BlogList = ({
             <Img
               alt={title}
               fluid={sizedFluid}
-              loading={'lazy'}
-              fadeIn={false}
             />
           </Link>
         </Image>

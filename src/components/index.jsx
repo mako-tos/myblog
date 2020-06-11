@@ -5,8 +5,7 @@ import SEO from './SEO';
 import TagsBlock from './TagsBlock';
 import PostPage from './PostPage';
 import RelatedPosts from './RelatedPosts';
-import FooterGithub from './FooterGithub';
-import FooterTwitter from './FooterTwitter';
+import FooterSocial from './FooterSocial';
 
 export {
   BlogList,
@@ -16,6 +15,5 @@ export {
   TagsBlock,
   PostPage,
   RelatedPosts,
-  FooterGithub,
-  FooterTwitter,
+  FooterSocial,
 };

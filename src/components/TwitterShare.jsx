@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import LazyLoad from 'react-lazyload';
-import ExecutionEnvironment from 'exenv';
-
-const twitterWidgetJs = 'https://platform.twitter.com/widgets.js';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 /**
  * パスカルケースへ変換 PampleString
@@ -24,41 +23,27 @@ const pascalCase = str => {
 const createText = post => {
   const tags = post.tags.map(tag => `#${pascalCase(tag.slug)}`).join(' ');
   const text = `${post.title} ${tags}`;
-  return text
-}
-
-const ShareImpl = ({ text }) => {
-  const containerRef = useRef(null);
-  useEffect(() => {
-    if (!ExecutionEnvironment.canUseDOM) {
-      return;
-    }
-    const scriptjs = require('scriptjs');
-    scriptjs(twitterWidgetJs, 'twitter-embed', () => {
-      if (!window.twttr) {
-        console.error(
-          'Failure to load window.twttr in ShareImpl, aborting load.'
-        );
-        return;
-      }
-      window.twttr.widgets.load(containerRef.current)
-      window.twttr.widgets.createShareButton(
-        window.location.href,
-        containerRef.current,
-        { text: text }
-      );
-    });
-  }, []);
-  return <div ref={containerRef} />;
+  return encodeURIComponent(text);
 };
 
-const ShareButton = ({ post }) => {
-  const text = createText(post)
+const TwitterShare = ({ post, location }) => {
+  const text = createText(post);
+  const url = encodeURIComponent(location.href);
+  const twitterURL = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
   return (
-    <LazyLoad once offset={200}>
-      <ShareImpl text={text} />
-    </LazyLoad>
+    <a href={twitterURL} target="_blank" rel="nofollow">
+      <FontAwesomeIcon icon={faTwitter} width="16" height="16" />
+      share
+    </a>
   );
 };
 
-export default ShareButton;
+export default TwitterShare;
+
+TwitterShare.propTypes = {
+  post: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    tags: PropTypes.array,
+  }),
+  location: PropTypes.object.isRequired,
+};

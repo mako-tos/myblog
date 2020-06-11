@@ -1,6 +1,6 @@
-import React from 'react'
-import { navigate, Link } from 'gatsby'
-import styled from '@emotion/styled'
+import React from 'react';
+import { Link } from 'gatsby';
+import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: baseline;
-`
+`;
 
 const Button = styled(Link)`
   background: ${props => props.theme.colors.primary.base};
@@ -28,17 +28,9 @@ const Button = styled(Link)`
   @media (hover: none) {
     background: ${props => props.theme.colors.primary.base} !important;
   }
-`
+`;
 
 const Pagination = props => {
-  function changePage(e) {
-    navigate(
-      e.target.value
-        ? `${props.context.paginationPath}/${e.target.value}`
-        : `${props.context.paginationPath}/`
-    )
-  }
-
   return (
     <>
       {props.context.numberOfPages > 1 && (
@@ -58,7 +50,7 @@ const Pagination = props => {
         </Wrapper>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

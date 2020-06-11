@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import config from '../../config/site';
-import { FooterGithub, FooterTwitter } from '../components'
+import { FooterSocial } from '../components'
 
 const Wrapper = styled.footer`
   position: relative;
@@ -49,10 +49,7 @@ const Footer = () => (
       </span>
     </Text>
     <Text>
-      <FooterGithub user={config.github} />
-    </Text>
-    <Text>
-      <FooterTwitter user={config.twitter} />
+      <FooterSocial config={config} />
     </Text>
   </Wrapper>
 );

@@ -131,7 +131,7 @@ const Post = ({
           <TagsBlock list={tags || []} />
         </Container>
         <SideBar itemScope="itemscope" itemtype="http://schema.org/WPSideBar">
-          <TwitterShare post={data} />
+          <TwitterShare post={data} location={location} />
           {childConvertHtml &&
             <div className="displayIfPc"
               dangerouslySetInnerHTML={{ __html: childConvertHtml.listOfContents }}

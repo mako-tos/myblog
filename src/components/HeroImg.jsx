@@ -12,12 +12,13 @@ const WrapperPicture = styled.picture`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     max-width: none;
+    min-width: 100vw;
     width: auto;
     height: 100%;
   }
 `;
 
-const HeroImg = ({src, title}) => {
+const HeroImg = ({src, alt}) => {
   const url = src
   const sizes = "100vw";
   const quality = 80;
@@ -44,7 +45,7 @@ const HeroImg = ({src, title}) => {
           <img
             srcSet={srcSetOrigin}
             src={`${url}?fit=crop&w=2000&h=400&q=${quality}`}
-            alt={title}
+            alt={alt}
             loading="lazy"
             sizes={sizes}
           />

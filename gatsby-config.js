@@ -20,6 +20,7 @@ module.exports = {
     ...config,
   },
   plugins: [
+    'gatsby-plugin-preact',
     {
       resolve: 'gatsby-plugin-emotion',
       options: {

@@ -15,10 +15,10 @@ const About = center => (
       <h3>
         このサイトは私
         <a target="_blank" href={`https://twitter.com/${config.twitter}`}>
-          <FontAwesomeIcon icon={faTwitter} />
+          <FontAwesomeIcon icon={faTwitter} width="16" height="16" />
         </a>
         <a target="_blank" href={`https://github.com/${config.github}`}>
-          <FontAwesomeIcon icon={faGithub} />
+          <FontAwesomeIcon icon={faGithub} width="16" height="16" />
         </a>
         mako-tos が管理運営しているページです
       </h3>

@@ -2,7 +2,6 @@ require('dotenv').config();
 const proxy = require('http-proxy-middleware');
 const config = require('./config/site');
 const { createPath } = require('./src/functions');
-const path = require(`path`);
 
 module.exports = {
   developMiddleware: app => {
@@ -195,17 +194,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-tagmanager`,
       options: {
-        trackingId: process.env.GOOGLE_ANALYTICS,
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: false,
-        exclude: ['/draft/**'],
-        // Delays sending pageview hits on route update (in milliseconds)
-        pageTransitionDelay: 100,
-        // Defers execution of google analytics script after page load
-        defer: true,
-      },
+        id: process.env.GOOGLE_TAG_MANAGER,
+        includeInDevelopment: true
+      }
     },
     {
       resolve: 'gatsby-plugin-no-javascript',

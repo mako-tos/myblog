@@ -50,7 +50,7 @@ const Post = ({
 }) => {
   const { next, prev } = pageContext;
   const {
-    childMicrocmsBlogHeadImage,
+    fluid,
     title,
     tags,
     createdAt,
@@ -69,7 +69,7 @@ const Post = ({
       <SEO
         title={title}
         description={description}
-        banner={childMicrocmsBlogHeadImage}
+        banner={fluid}
         pathname={location.pathname}
         article
       />
@@ -77,7 +77,7 @@ const Post = ({
         title={title}
         updatedAt={updatedAt}
         createdAt={createdAt}
-        fluid={childMicrocmsBlogHeadImage}
+        fluid={fluid}
       />
       <Holly>
         <Container>
@@ -118,7 +118,7 @@ const Post = ({
                 {title}
               </span>
               <span itemProp="image">
-                {childMicrocmsBlogHeadImage && childMicrocmsBlogHeadImage.src}
+                {fluid && fluid.src}
               </span>
             </div>
             {childConvertHtml &&
@@ -175,7 +175,7 @@ Post.propTypes = {
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    childMicrocmsBlogHeadImage: PropTypes.object.isRequired,
+    fluid: PropTypes.object.isRequired,
     tags: PropTypes.array,
   }),
   location: PropTypes.object.isRequired,

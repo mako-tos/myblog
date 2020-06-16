@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { PostPage } from 'components';
 
 const getRelationPosts = ({ slug, tags }, allPosts, maxCount) => {
-  const postList = allPosts.filter(post => post.slug !== slug);
+  const postList = allPosts.filter(post => post.slug !== slug || post.createdAt !== post.createdAt);
   const scoreList = [];
   postList.forEach((post, index) => {
     scoreList.push({
@@ -14,7 +14,7 @@ const getRelationPosts = ({ slug, tags }, allPosts, maxCount) => {
       slug: post.slug,
       title: post.title,
       tagSlugs: post.tags.map(tag => tag.slug),
-      childMicrocmsBlogHeadImage: post.childMicrocmsBlogHeadImage,
+      fluid: post.fluid,
     });
   });
   tags.forEach(tag => {
@@ -69,7 +69,7 @@ Post.propTypes = {
         tags: PropTypes.array,
         createdAt: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
-        childMicrocmsBlogHeadImage: PropTypes.object,
+        fluid: PropTypes.object,
       })
     ),
   }).isRequired,
@@ -81,7 +81,7 @@ Post.propTypes = {
       slug: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       updatedAt: PropTypes.string.isRequired,
-      childMicrocmsBlogHeadImage: PropTypes.object,
+      fluid: PropTypes.object,
       tags: PropTypes.array,
     }),
   }),
@@ -103,16 +103,8 @@ export const query = graphql`
       slug
       createdAt(formatString: "YYYY-MM-DD")
       updatedAt(formatString: "YYYY-MM-DD")
-      childMicrocmsBlogHeadImage {
-        aspectRatio
-        presentationHeight
-        presentationWidth
-        sizes
-        src
-        srcSet
-        srcSetWebp
-        srcWebp
-        type
+      fluid(quality: 80, fixedHeight: 400){
+        ...FluidWithWebp
       }
       tags {
         slug

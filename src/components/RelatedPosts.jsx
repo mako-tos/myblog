@@ -89,7 +89,7 @@ const RelatedPosts = ({ posts }) => (
     <RelatedPostList>
       {posts.map((post, index) => {
         const sizedFluid = {
-          ...post.childMicrocmsBlogHeadImage,
+          ...post.fluid,
           sizes: '(max-width: 1000px) 90vw, 350px',
         };
 
@@ -121,7 +121,7 @@ RelatedPosts.propTypes = {
       title: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
-      childMicrocmsBlogHeadImage: PropTypes.object.isRequired,
+      fluid: PropTypes.object.isRequired,
     })
   ),
 };

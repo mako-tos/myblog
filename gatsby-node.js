@@ -5,6 +5,15 @@ const { createPath } = require('./src/functions/');
 const { paginate } = require(`gatsby-awesome-pagination`);
 
 const query = `
+fragment FluidWithWebp on Fluid {
+  aspectRatio
+  src
+  srcSet
+  srcSetType
+  srcWebp
+  srcSetWebp
+  sizes
+}
 query {
   allMicrocmsBlog(sort: { fields: [createdAt], order: DESC }) {
     edges {
@@ -15,16 +24,8 @@ query {
           slug
           title
         }
-        childMicrocmsBlogHeadImage {
-          aspectRatio
-          presentationHeight
-          presentationWidth
-          sizes
-          src
-          srcSet
-          srcSetWebp
-          srcWebp
-          type
+        fluid(quality: 90) {
+          ...FluidWithWebp
         }
         slug
         title
@@ -118,37 +119,3 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   });
 };
-
-if (config.github) {
-  /**
-   * Load Github repository data
-   */
-  exports.sourceNodes = async ({
-    actions,
-    createNodeId,
-    createContentDigest,
-  }) => {
-    const { createNode } = actions;
-    // Data can come from anywhere, but for now create it manually
-    const res = await fetch(
-      `https://api.github.com/users/${config.github}/repos`
-    );
-    const json = await res.json();
-    json.forEach(repo => {
-      const nodeContent = JSON.stringify(repo);
-      const nodeMeta = {
-        id: createNodeId(`github-repos-${repo.name}`),
-        parent: null,
-        children: [],
-        internal: {
-          type: `GithubRepos`,
-          mediaType: `text/html`,
-          content: nodeContent,
-          contentDigest: createContentDigest(repo),
-        },
-      };
-      const node = Object.assign({}, repo, nodeMeta);
-      createNode(node);
-    });
-  };
-}

@@ -16,7 +16,7 @@ const Blog = ({ data, pageContext }) => {
       <Pagination context={pageContext} />
       {edges.map(({ node }) => {
         const {
-          childMicrocmsBlogHeadImage,
+          fluid,
           title,
           tags,
           createdAt,
@@ -32,7 +32,7 @@ const Blog = ({ data, pageContext }) => {
         return (
           <BlogList
             key={path}
-            fluid={childMicrocmsBlogHeadImage}
+            fluid={fluid}
             path={path}
             title={title}
             createdAt={createdAt}
@@ -55,7 +55,7 @@ Blog.propTypes = {
       edges: PropTypes.arrayOf(
         PropTypes.shape({
           node: PropTypes.shape({
-            childMicrocmsBlogHeadImage: PropTypes.object.isRequired,
+            fluid: PropTypes.object.isRequired,
             slug: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             createdAt: PropTypes.string.isRequired,
@@ -87,17 +87,9 @@ export const query = graphql`
             slug
             title
           }
-          childMicrocmsBlogHeadImage {
-            aspectRatio
-            presentationHeight
-            presentationWidth
-            sizes
-            src
-            srcSet
-            srcSetWebp
-            srcWebp
-            type
-          }  
+          fluid(quality: 80) {
+            ...FluidWithWebp
+          }
           digest
           body
           childConvertHtml {

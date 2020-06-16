@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
   width: 100%;
-  margin: -1.5rem auto 2.5rem;
+  margin: 1rem auto 2.5rem;
   max-width: ${props => props.theme.breakpoints.m};
   padding: 0 1.5rem;
   display: flex;

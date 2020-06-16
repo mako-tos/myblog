@@ -1896,10 +1896,10 @@
   resolved "https://registry.yarnpkg.com/@kwsites/exec-p/-/exec-p-0.4.0.tgz#ab3765d482849ba6e825721077c248cf9f3323b7"
   integrity sha512-44DWNv5gDR9EwrCTVQ4ZC99yPqVS0VCWrYIBl45qNR8XQy+4lbl0IQG8kBDf6NHwj4Ib4c2z1Fq1IUJOCbkZcw==
 
-"@mako-tos/gatsby-images-microcms@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-images-microcms/-/gatsby-images-microcms-0.0.6.tgz#685cba5fe0179428a105e0dc0d4029d7a6f71957"
-  integrity sha512-qS81w4tQt3er5mTp8rBrK9Xh+bA1/LHXDX8QcxnqjH+TGwTlsnMRfVjXfLXUjYNPkDNYq69j9v3Eo5Zn/eSKEg==
+"@mako-tos/gatsby-images-microcms@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mako-tos/gatsby-images-microcms/-/gatsby-images-microcms-0.1.0.tgz#8597a52111832ff43d8fce7c2e9eb81820740aa6"
+  integrity sha512-PvTwGuGtVvzT6650F+KVXGiYEBfceqPS79HflVH90cJVFN8JPRvgDIYGC36rc9Gjwun8UmD3ZpDWU/dNPbnmLg==
   dependencies:
     camelcase "^5.3.1"
     node-fetch "^2.6.0"
